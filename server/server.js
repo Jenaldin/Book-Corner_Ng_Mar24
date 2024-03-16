@@ -4,22 +4,25 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const handlebars = require('express-handlebars');
 const routes = require('./routes');
 const path = require('path');
 
 const dbUri = process.env.DB_URI || 'mongodb://127.0.0.1:27017/book-corner';
 const dbPort = process.env.DB_PORT || '3000';
 
-//const { authMiddleware } = require('./middlewares/authMiddleware') //THIS IS FOR THE NAVIGATION TO WORK
-
 const app = express();
 app.use(express.static(path.resolve(__basedir, 'static')));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-
-//app.use(authMiddleware); //THIS IS FOR THE NAVIGATION TO WORK
-
 app.use(cors({ origin: 'http://localhost:4200' }));
+
+app.engine('hbs', handlebars.engine({
+   extname: 'hbs',
+}));
+app.set('view engine', 'hbs');
+app.set('views', path.resolve('src/views'));
+
 app.use(routes);
 
 mongoose.connect(dbUri);
