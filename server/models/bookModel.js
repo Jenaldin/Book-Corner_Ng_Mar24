@@ -36,12 +36,22 @@ const bookSchema = new mongoose.Schema({
       type: Number,
       required: [true, 'Length in pages is required']
    },
+   averageRating: {
+      type: Number,
+      min: 1,
+      max: 5,
+      default: 0
+   },
    createdDate: {
       type: Date,
    },
    owner: {
       type: mongoose.Types.ObjectId,
       ref: 'User'
+   },
+   isRented: {
+      type: Boolean,
+      default: false
    },
    rentedBy: {
       type: mongoose.Types.ObjectId,
@@ -60,10 +70,10 @@ const bookSchema = new mongoose.Schema({
          default: Date.now
       }
    }],
-   isRented: {
-      type: Boolean,
-      default: false
-   }
+   comments: [{
+      type: mongoose.Types.ObjectId,
+      ref: 'Comment'
+   }]
 });
 
 bookSchema.pre('save', function () {
