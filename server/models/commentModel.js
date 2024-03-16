@@ -21,6 +21,10 @@ const commentSchema = new mongoose.Schema({
       type: Date,
       default: Date.now
    },
+   book: {
+      type: mongoose.Types.ObjectId,
+      ref: 'Book',
+   }
 });
 
 const Comment = mongoose.model('Comment', commentSchema);

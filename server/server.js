@@ -18,11 +18,11 @@ app.use(cors({ origin: 'http://localhost:4200' }));
 app.use(express.static('public'));
 app.use(routes);
 
-app.engine('hbs', handlebars.engine({
-   extname: 'hbs',
-}));
-app.set('view engine', 'hbs');
-app.set('views', path.resolve('server/views'));
+// app.engine('hbs', handlebars.engine({
+//    extname: 'hbs',
+// }));
+// app.set('view engine', 'hbs');
+// app.set('views', path.resolve('server/views'));
 
 mongoose.connect(dbUri);
 mongoose.connection.on('connected', () => console.log('DB is Connected!'));
