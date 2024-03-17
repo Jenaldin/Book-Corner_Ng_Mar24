@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const handlebars = require('express-handlebars');
+const apiRouter = require('./router');
 const routes = require('./routes');
 const path = require('path');
 
@@ -16,6 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors({ origin: 'http://localhost:4200' }));
 app.use(express.static('public'));
+app.use('/api', apiRouter);
 app.use(routes);
 
 // app.engine('hbs', handlebars.engine({
