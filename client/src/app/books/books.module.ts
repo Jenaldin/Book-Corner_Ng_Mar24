@@ -16,6 +16,12 @@ import { EditBookComponent } from './edit-book/edit-book.component';
   ],
   imports: [
     CommonModule
-  ]
+  ],
+  // exports: [
+  //   CatalogComponent,
+  //   ViewBookComponent,
+  //   AddBookComponent,
+  //   EditBookComponent
+  // ]
 })
 export class BooksModule { }
