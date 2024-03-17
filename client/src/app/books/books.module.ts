@@ -4,6 +4,7 @@ import { CatalogComponent } from './catalog/catalog.component';
 import { ViewBookComponent } from './view-book/view-book.component';
 import { AddBookComponent } from './add-book/add-book.component';
 import { EditBookComponent } from './edit-book/edit-book.component';
+import { BooksRoutingModule } from './books-routing.module';
 
 
 
@@ -15,13 +16,10 @@ import { EditBookComponent } from './edit-book/edit-book.component';
     EditBookComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    BooksRoutingModule,
   ],
-  // exports: [
-  //   CatalogComponent,
-  //   ViewBookComponent,
-  //   AddBookComponent,
-  //   EditBookComponent
-  // ]
+  exports: [
+  ]
 })
 export class BooksModule { }
