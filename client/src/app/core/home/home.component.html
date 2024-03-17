@@ -2,18 +2,20 @@
    <div class="grid-item">
       <h1 class="h1-title">Welcome, book lover!</h1>
       <h3 class="h3-title">This is The Book Corner, where a group of friendly neighbors share their love of books by
-         lending each other
-         books!</h3>
+         lending each other books!</h3>
       <img src="../../../assets/img/lib_flowers.jpg" alt="flowers and books" class="responsive-image">
    </div>
    <div class="grid-item">
       <p class="p-text">We do not take money, as we do this as a way to get know our neighbors better and build a
-         stronger community, with
-         the bonus of meeting likeminded people and enjoying new books and worlds to explore.</p>
-      <p class="p-text">You are free to explore our Book Catalog and take a look around, but if you want to join us,
-         please Register.
-         This way you will be able to share which parts of your home library you are willing to share and also pick a
-         book or two from the other users to read. Per mutual agreement, the books are lent for a 3-month period, but
+         stronger community, with the bonus of meeting likeminded people and enjoying new books and worlds to explore.
+      </p>
+      <p class="p-text">You are free to explore our <a [routerLink]="['/catalog']">Book Catalog</a> and take a look
+         around, but if you want to join us,
+         please <a [routerLink]="['/register']">Register</a>. Or, in case you are already one of us, welcome back and
+         please <a [routerLink]="['/register']">Login</a>.</p>
+      <p class="p-text">By registering or logging in you will be able to share which parts of your home library you are
+         willing to share and also pick a book or two from our users' libraries to read. Per mutual agreement, the books
+         are lent for a 3-month period, but
          depending on their length, you could contact the Book Owner via e-mail to extend that time.</p>
       <p class="p-text">Below you can find the latest 5 additions to our library. We hope to pique your interest and for
          you to become
@@ -21,8 +23,12 @@
    </div>
    <div class="grid-item">
       <img src="../../../assets/img/books.avif" alt="book rows" class="responsive-image">
-      <p class="p-text">In case you have questions about this App and who made it, feel free to take a look at the About
-         page, where you will find the information of the App creator</p>
+      <p class="p-text">In case you have questions about this App and who made it, feel free to take a look at the
+         <a [routerLink]="['/about']">About page</a>, where you will find the information of the App creator.
+      </p>
+      <p class="p-text">In case you need technical support, the <a [routerLink]="['/about']">About page</a> is also the
+         place to find contacts to report issues, ask questions or just share some feedback.
+      </p>
    </div>
 </div>
 <div>
