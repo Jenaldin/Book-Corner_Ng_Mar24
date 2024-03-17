@@ -7,8 +7,6 @@ export interface Book {
    coverUrl: string;
    bookLang: string;
    description: string;
-   yearPublished: number;
-   pagesLong: number;
    averageRating: number;
    createdDate: string;
    owner: User;

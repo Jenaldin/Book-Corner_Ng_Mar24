@@ -11,7 +11,19 @@ export class ApiService {
 
   getBooks() {
     const { apiUrl } = environment;
-    return this.http.get<Book[]>(`${apiUrl}/books`)
+    return this.http.get<Book[]>(`${apiUrl}/catalog`)
+  };
+
+  getBook(id: string) {
+    const { apiUrl } = environment;
+    return this.http.get<Book>(`${apiUrl}/catalog/${id}`);
+  };
+
+  addBook(title: string, genre: string, coverUrl: string, bookLang: string, description: string, owner: string) {
+    const { apiUrl } = environment;
+    const payload = { title, genre, coverUrl, bookLang, description, owner};
+
+    return this.http.post<Book>(`${apiUrl}/catalog`, payload);
   }
 
 }

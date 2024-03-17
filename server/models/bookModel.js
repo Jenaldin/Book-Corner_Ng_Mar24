@@ -28,14 +28,6 @@ const bookSchema = new mongoose.Schema({
       maxlength: [2000, 'Description/Resume maximal length is 2000 symbols'],
       required: [true, 'Description/Resume is required']
    },
-   yearPublished: {
-      type: Number,
-      required: [true, 'Year of publishing is required']
-   },
-   pagesLong:{
-      type: Number,
-      required: [true, 'Length in pages is required']
-   },
    averageRating: {
       type: Number,
       min: 1,
