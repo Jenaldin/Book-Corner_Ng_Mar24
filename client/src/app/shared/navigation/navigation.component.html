@@ -2,24 +2,30 @@
    fxLayoutAlign="center center">
    <button mat-raised-button class="mat-raised-button" fxFlex="50%" fxFlex.lt-sm="100%" [routerLink]="['/']">
       <mat-icon>home</mat-icon>Home</button>
-
    <button mat-raised-button class="mat-raised-button" fxFlex="50%" fxFlex.lt-sm="100%" [routerLink]="['/catalog']">
       <mat-icon>book</mat-icon>Book Catalog</button>
    <button mat-raised-button class="mat-raised-button" fxFlex="50%" fxFlex.lt-sm="100%" [routerLink]="['/search']">
       <mat-icon>search</mat-icon>Search</button>
+   <!-- GUEST ONLY START -->
+   <ng-container *ngIf="!authUserService.isLoggedIn()">
    <button mat-raised-button class="mat-raised-button" fxFlex="50%" fxFlex.lt-sm="100%" color="accent"
       [routerLink]="['/login']">
       <mat-icon>transit_enterexit</mat-icon>Login</button>
    <button mat-raised-button class="mat-raised-button" fxFlex="50%" fxFlex.lt-sm="100%" color="accent"
       [routerLink]="['/register']">
       <mat-icon>account_circle</mat-icon>Register</button>
-   <!-- Add more buttons as needed -->
+   </ng-container>
+   <!-- GUEST ONLY END -->
+   <!-- LOGGED IN ONLY START -->
+   <ng-container *ngIf="authUserService.isLoggedIn()">
    <button mat-raised-button class="mat-raised-button" fxFlex="50%" fxFlex.lt-sm="100%" color="accent"
       [routerLink]="['/logout']">
       <mat-icon>exit_to_app</mat-icon>Logout</button>
    <button mat-raised-button class="mat-raised-button" fxFlex="50%" fxFlex.lt-sm="100%" color="accent"
       [routerLink]="['/profile']">
       <mat-icon>color_lens</mat-icon>Profile</button>
+   </ng-container>
+   <!-- LOGGED IN ONLY END -->
    <button mat-raised-button class="mat-raised-button" fxFlex="50%" fxFlex.lt-sm="100%" [routerLink]="['/about']">
       <mat-icon> bubble_chart</mat-icon>About the App</button>
 </div>
