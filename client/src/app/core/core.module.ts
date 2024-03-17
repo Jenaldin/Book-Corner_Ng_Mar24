@@ -16,6 +16,12 @@ import { SearchComponent } from './search/search.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    HomeComponent,
+    AboutComponent,
+    ErrorComponent,
+    SearchComponent
   ]
 })
 export class CoreModule { }
