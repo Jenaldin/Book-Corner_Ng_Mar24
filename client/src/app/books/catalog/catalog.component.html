@@ -1,7 +1,17 @@
 <div class="center-div" *ngIf="isLoading">
    <mat-spinner></mat-spinner>
 </div>
-<mat-paginator [length]="totalBooks" [pageSize]="12" (page)="pageChanged($event)"></mat-paginator>
+
+<div class="header">
+   <p>The Book Corner Catalog</p>
+</div>
+<div class="header">
+   <button mat-raised-button color="accent" [routerLink]="['/add-book']"><mat-icon>add_circle_outline</mat-icon>Add New
+   Book!</button>
+</div>
+
+<mat-paginator class="pagin-font" [length]="totalBooks" [pageSize]="12" (page)="pageChanged($event)"></mat-paginator>
+<hr>
 <mat-grid-list cols="3" rowHeight="1:0.7" *ngIf="!isLoading">
    <mat-grid-tile class="catalog-grid-tile" *ngFor="let book of books">
       <mat-card>
@@ -19,7 +29,8 @@
             <p>{{book.description}}</p>
          </mat-card-content>
          <mat-card-actions>
-            <button mat-raised-button color="accent" [routerLink]="['/catalog', book._id]"><mat-icon>chevron_right</mat-icon>Details</button>
+            <button mat-raised-button color="primary"
+               [routerLink]="['/catalog', book._id]"><mat-icon>chevron_right</mat-icon>Details</button>
          </mat-card-actions>
       </mat-card>
    </mat-grid-tile>

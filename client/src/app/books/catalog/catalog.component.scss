@@ -5,6 +5,19 @@
    height: 100vh;
 }
 
+.header{
+   margin-top: 30px;
+   font-weight: bold;
+   font-size: 30px;
+   display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagin-font{
+   font-size: 15px;
+}
+
 .catalog-grid-tile {
    margin: 5px;
  }
