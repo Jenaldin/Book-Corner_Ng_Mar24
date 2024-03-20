@@ -7,3 +7,5 @@ exports.getBooks = (startPage, endPage) => bookModel
    .populate('owner', 'username');
 
 exports.getTotalBooks = () => bookModel.countDocuments();
+
+exports.getBook = (bookId) => bookModel.findById(bookId).populate('owner', 'username');
