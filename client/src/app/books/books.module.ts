@@ -6,7 +6,7 @@ import { AddBookComponent } from './add-book/add-book.component';
 import { EditBookComponent } from './edit-book/edit-book.component';
 import { BooksRoutingModule } from './books-routing.module';
 
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -16,6 +16,7 @@ import { BooksRoutingModule } from './books-routing.module';
     EditBookComponent
   ],
   imports: [
+    MatProgressSpinnerModule,
     CommonModule,
     BooksRoutingModule,
   ],

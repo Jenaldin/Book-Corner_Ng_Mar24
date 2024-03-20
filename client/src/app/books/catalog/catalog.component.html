@@ -1,1 +1,12 @@
-<p>catalog works!</p>
+<h3>catalog works!</h3>
+
+<div *ngIf="isLoading">
+   <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="!isLoading" >
+   <div *ngFor="let book of books">
+      <h4>{{book.title}}</h4>
+      <hr>
+   </div>
+</div>
