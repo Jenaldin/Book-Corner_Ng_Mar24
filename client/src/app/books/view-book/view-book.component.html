@@ -1,23 +1,66 @@
 <div class="center-div" *ngIf="isLoading">
    <mat-spinner></mat-spinner>
 </div>
-<div class="center-div" *ngIf="!isLoading">
+<div class="top-div" *ngIf="!isLoading">
    <mat-card>
       <mat-card-header>
          <mat-card-title-group>
-            <mat-card-title>{{book.title}}</mat-card-title>
-            <mat-card-subtitle>by {{book.author}}</mat-card-subtitle>
-            <img mat-card-lg-image src="" alt="book cover">
+            <mat-card-title>
+               <h2 class="title">{{book.title}}</h2>
+            </mat-card-title>
+            <mat-card-subtitle>
+               <div class="sub-title">by {{book.author}}</div>
+            </mat-card-subtitle>
+            <mat-card-subtitle>
+               <hr>
+            </mat-card-subtitle>
+            <mat-card-subtitle>
+               <div class="stars">
+                  <div class="sub-title">Rating: </div>
+                  <div *ngFor="let star of (book.averageRating ? getStars(book.averageRating).full : [])">
+                     <mat-icon>star</mat-icon>
+                  </div>
+                  <div *ngFor="let star of (book.averageRating ? getStars(book.averageRating).half : [])">
+                     <mat-icon>star_half</mat-icon>
+                  </div>
+                  <div *ngFor="let star of (book.averageRating ? getStars(book.averageRating).empty : [])">
+                     <mat-icon>star_border</mat-icon>
+                  </div>
+               </div>
+            </mat-card-subtitle>
+            <mat-card-subtitle>
+               <div class="sub-title">Genre: {{book.genre}}</div>
+            </mat-card-subtitle>
+            <mat-card-subtitle>
+               <div class="sub-title" *ngIf="book.isRented; else bookIsFree">Status: Unavailable </div>
+            </mat-card-subtitle>
+            <mat-card-subtitle><ng-template #bookIsFree>
+                  <div class="sub-title">Status: Available</div>
+               </ng-template></mat-card-subtitle>
+            <mat-card-subtitle *ngIf="!book.isRented"><button mat-raised-button
+                  color="primary"><mat-icon>bookmark</mat-icon>Request Book</button></mat-card-subtitle>
+            <img mat-card-xl-image src="{{book.coverUrl}}" alt="book cover">
          </mat-card-title-group>
       </mat-card-header>
       <mat-card-content>
-         <p class="label">Book Owner:</p>
-         <p>{{book.owner.username}}</p>
-         <p class="label">Description by the Book Owner:</p>
+         <div class="label">This Book is in:</div>
+         <p>{{book.bookLang}}</p>
+         <div class="label">Description:</div>
          <p>{{book.description}}</p>
+         <div class="label">Book Owner:</div>
+         <p>{{book.owner.username}}</p>
       </mat-card-content>
       <mat-card-actions>
-         <button mat-button class="btn-bckgr" [routerLink]="['/catalog', book._id, 'edit-book']">EDIT</button>
+         <button mat-raised-button class="mat-raised-button" color="primary"><mat-icon>view_list</mat-icon>View Book
+            Comments</button>
+         <button mat-raised-button class="mat-raised-button" color="accent"
+            [routerLink]="['/catalog', book._id, 'edit-book']"><mat-icon>edit</mat-icon>Edit</button>
+         <button mat-raised-button class="mat-raised-button" color="warn"> <mat-icon>delete</mat-icon>Delete</button>
       </mat-card-actions>
+      <mat-card-footer>
+         <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </mat-card-footer>
    </mat-card>
 </div>
+
+<app-all-comments></app-all-comments>

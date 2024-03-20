@@ -8,6 +8,7 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { BooksModule } from './books/books.module';
 import { UsersModule } from './users/users.module';
+import { CommentsModule } from './comments/comments.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { UsersModule } from './users/users.module';
     SharedModule,
     BooksModule,
     UsersModule,
+    CommentsModule,
     HttpClientModule,
     BrowserModule,
     AppRoutingModule

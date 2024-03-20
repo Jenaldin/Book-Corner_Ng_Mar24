@@ -19,7 +19,7 @@
             <p>{{book.description}}</p>
          </mat-card-content>
          <mat-card-actions>
-            <button mat-button class="btn-bckgr" [routerLink]="['/catalog', book._id]">DETAILS</button>
+            <button mat-raised-button color="accent" [routerLink]="['/catalog', book._id]"><mat-icon>chevron_right</mat-icon>Details</button>
          </mat-card-actions>
       </mat-card>
    </mat-grid-tile>

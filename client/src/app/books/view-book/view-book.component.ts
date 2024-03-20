@@ -12,7 +12,7 @@ export class ViewBookComponent implements OnInit {
   book = {} as Book;
   isLoading: boolean = true;
 
-  constructor(private bookApi: BookService, private activeRoute: ActivatedRoute) {};
+  constructor(private bookApi: BookService, private activeRoute: ActivatedRoute) { };
 
   ngOnInit(): void {
     this.activeRoute.params.subscribe((data) => {
@@ -20,9 +20,25 @@ export class ViewBookComponent implements OnInit {
 
       this.bookApi.getBook(id).subscribe((book) => {
         this.book = book;
+
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 1000);
       });
     });
-  }
+  };
+
+  getStars(rating: number) {
+    let fullStars = Math.floor(rating);
+    let halfStars = Math.ceil(rating - fullStars);
+    let emptyStars = 5 - fullStars - halfStars;
+
+    return {
+        full: Array(fullStars).fill('star'),
+        half: Array(halfStars).fill('star_half'),
+        empty: Array(emptyStars).fill('star_border')
+    };
+}
 
   // ngOnInit(): void {
   //   this.loadBook
