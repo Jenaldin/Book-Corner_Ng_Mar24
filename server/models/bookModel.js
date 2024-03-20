@@ -6,6 +6,11 @@ const bookSchema = new mongoose.Schema({
       minlength: [2, 'Title minimal length is 2 symbols'],
       required: [true, 'Title is required'],
    },
+   author: {
+      type: String,
+      minlength: [2, 'Author`s name minimal length is 2 symbols'],
+      required: [true, 'Author`s name is required. If the book does not have author, use Unknown'],
+   },
    genre:{
       type: String,
       minlength: [3, 'Genre minimal length is 3 symbols'],
