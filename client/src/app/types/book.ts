@@ -2,7 +2,7 @@ import { User } from "./user";
 import { Comment } from "./comment";
 
 export interface Book {
-   _id: string;
+   _id?: string;
    title: string;
    genre: string;
    coverUrl: string;
@@ -14,10 +14,10 @@ export interface Book {
    isRented?: boolean;
    rentedBy?: User;
    rentedOn?: Date;
-   leaseRequests: {
-      user: User;
+   leaseRequests?: {
+      user?: User;
       requestedOn?: Date
    }[];
-   comments: Comment[];
-   __v: number;
+   comments?: Comment[];
+   __v?: number;
 }
