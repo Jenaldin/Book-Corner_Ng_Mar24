@@ -6,7 +6,7 @@ import { ErrorComponent } from './error/error.component';
 import { SearchComponent } from './search/search.component';
 import { RouterModule } from '@angular/router';
 
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -16,6 +16,7 @@ import { RouterModule } from '@angular/router';
     SearchComponent
   ],
   imports: [
+    MatProgressSpinnerModule,
     CommonModule,
     RouterModule
   ],
