@@ -6,7 +6,11 @@ import { AddBookComponent } from './add-book/add-book.component';
 import { EditBookComponent } from './edit-book/edit-book.component';
 import { BooksRoutingModule } from './books-routing.module';
 
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -17,6 +21,10 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
   ],
   imports: [
     MatProgressSpinnerModule,
+    MatGridListModule,
+    MatPaginatorModule,
+    MatCardModule,
+    MatButtonModule,
     CommonModule,
     BooksRoutingModule,
   ],
