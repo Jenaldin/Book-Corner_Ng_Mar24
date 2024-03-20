@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthUserService } from 'src/app/user.service';
+import { AuthUserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-navigation',
