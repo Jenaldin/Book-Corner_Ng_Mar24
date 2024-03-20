@@ -30,7 +30,7 @@ export class ApiService {
     const { apiUrl } = environment;
     const payload = { title, genre, coverUrl, bookLang, description, owner };
 
-    return this.http.put<Book>(`${apiUrl}/catalog/${id}`, payload);
+    return this.http.post<Book>(`${apiUrl}/catalog/${id}`, payload);
   }
 
 }
