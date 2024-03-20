@@ -12,7 +12,20 @@ const commentSchema = new mongoose.Schema({
       min: [1, 'Rating minimal value is 1'],
       max: [5, 'Rating maximal value is 5'],
       required: false,
+      default: 0,
    },
+   helpfulYes: {
+      type: Number,
+      default: 0,
+   },
+   helpfulNo: {
+      type: Number,
+      default: 0,
+   },
+   votedHelpful: [{
+      type: mongoose.Types.ObjectId,
+      ref: 'User',
+   }],
    user: {
       type: mongoose.Types.ObjectId,
       ref: 'User',
