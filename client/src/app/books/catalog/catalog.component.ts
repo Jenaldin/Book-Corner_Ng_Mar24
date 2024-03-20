@@ -22,9 +22,6 @@ export class CatalogComponent implements OnInit{
     this.bookApi.getBooks().subscribe((books) => {
       this.books = books;
 
-      console.log(`Result from first part` + this.bookApi.getBooks());
-      console.log(books);
-
       setTimeout(() => {
         this.isLoading = false;
       }, 1000);
