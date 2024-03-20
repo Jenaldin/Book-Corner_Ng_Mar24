@@ -4,9 +4,6 @@ import { UserService } from 'src/app/services/user.service';
 import { Book } from 'src/app/types/book';
 
 import { PageEvent } from '@angular/material/paginator';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-catalog',

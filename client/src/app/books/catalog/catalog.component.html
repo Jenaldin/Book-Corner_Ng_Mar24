@@ -3,7 +3,7 @@
 </div>
 <mat-paginator [length]="totalBooks" [pageSize]="12" (page)="pageChanged($event)"></mat-paginator>
 <mat-grid-list cols="3" rowHeight="1:0.7" *ngIf="!isLoading">
-   <mat-grid-tile class="catalog-grid" *ngFor="let book of books">
+   <mat-grid-tile class="catalog-grid-tile" *ngFor="let book of books">
       <mat-card>
          <mat-card-header>
             <mat-card-title-group>
@@ -19,7 +19,7 @@
             <p>{{book.description}}</p>
          </mat-card-content>
          <mat-card-actions>
-            <button mat-button class="btn-bckgr">DETAILS</button>
+            <button mat-button class="btn-bckgr" [routerLink]="['/catalog', book._id]">DETAILS</button>
          </mat-card-actions>
       </mat-card>
    </mat-grid-tile>
