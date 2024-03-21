@@ -5,40 +5,71 @@
 <div class="grid-container">
    <div class="grid-item">
       <h1 class="h1-title">Welcome, book lover!</h1>
-      <h3 class="h3-title">This is The Book Corner, where a group of friendly neighbors share their love of books by
+      <br>
+      <br>
+      <h3 class="h3-title">This is The Book Corner, where a group of friendly neighbors share their love of reading by
          lending each other books!</h3>
+      <br>
+      <br>
       <img src="../../../assets/img/lib_flowers.jpg" alt="flowers and books" class="responsive-image">
    </div>
    <div class="grid-item">
-      <p class="p-text">We do not take money, as we do this as a way to get know our neighbors better and build a
-         stronger community, with the bonus of meeting likeminded people and enjoying new books and worlds to explore.
+      <br>
+      <br>
+      <br>
+      <p class="p-text">We do not take money, as we do not wish to. We do this as a way to get know our neighbors better
+         and build a
+         stronger community. The bonus is meeting likeminded people and enjoying new worlds to explore, without thinking
+         about where to put some more shelves, he-he.
       </p>
       <p class="p-text">You are free to explore our <a [routerLink]="['/catalog']">Book Catalog</a> and take a look
-         around, but if you want to join us,
-         please <a [routerLink]="['/register']">Register</a>. Or, in case you are already one of us, welcome back and
-         please <a [routerLink]="['/register']">Login</a>.</p>
-      <p class="p-text">By registering or logging in you will be able to share which parts of your home library you are
-         willing to share and also pick a book or two from our users' libraries to read. Per mutual agreement, the books
+         around. If you wish to join us,
+         go and quickly <a [routerLink]="['/register']">Register</a>. Or, in case you are already one of us, welcome
+         back and
+         <a [routerLink]="['/register']">Login</a> ahead.
+      </p>
+      <p class="p-text">By registering or logging in you will be able to share the full experience, for example to tell
+         us which books from your home library you are
+         willing to lend to someone or pick a book or two yourself. Per mutual agreement, the books
          are lent for a 3-month period, but
-         depending on their length, you could contact the Book Owner via e-mail to extend that time.</p>
-      <p class="p-text">Below you can find the latest 5 additions to our library. We hope to pique your interest and for
-         you to become
-         a part of the community. Enjoy!</p>
+         depending on their length, you could contact the Book Owner via e-mail to extend that deadline. We
+         try to be polite, with dignity and honor and keep building the trust in The Book Corner initiative.</p>
+
    </div>
    <div class="grid-item">
-      <img src="../../../assets/img/books.avif" alt="book rows" class="responsive-image">
+      <br>
+      <br>
+      <br>
       <p class="p-text">In case you have questions about this App and who made it, feel free to take a look at the
          <a [routerLink]="['/about']">About page</a>, where you will find the information of the App creator.
       </p>
       <p class="p-text">In case you need technical support, the <a [routerLink]="['/about']">About page</a> is also the
          place to find contacts to report issues, ask questions or just share some feedback.
       </p>
+      <p class="p-text">Below you can find the latest 5 additions to our library. We hope to pique your interest and for
+         you to become
+         a part of the community.</p>
+      <h3 class="h3-title">Enjoy!</h3>
+      <br>
+      <p class="p-text"><strong>P.S.:</strong> Keep in
+         mind, we do have a pet dragon to deal any evildoers of any kind...</p>
+   </div>
+   <div class="grid-item">
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <img src="../../../assets/img/books.avif" alt="book rows" class="responsive-image">
    </div>
 </div>
 <div>
-   <h1 class="h1-second-title" position="center">Latest in The Book Corner</h1>
-   
-   <mat-grid-list cols="5" rowHeight="1:1" *ngIf="!isLoading">
+   <p class="h1-second-title" position="center">Latest in The Book Corner</p>
+   <mat-grid-list cols="5" rowHeight="1:1">
       <mat-grid-tile *ngFor="let book of books">
          <mat-card class="card-more-margin">
             <mat-card-header>
