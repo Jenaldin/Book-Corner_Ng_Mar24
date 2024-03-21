@@ -42,4 +42,9 @@ export class BookService {
 
     return this.http.put<Book>(`${apiUrl}/catalog/${id}`, payload);
   };
+
+  deleteBook(id: string) {
+    const { apiUrl } = environment;
+    return this.http.delete(`${apiUrl}/catalog/${id}`);
+  };
 }

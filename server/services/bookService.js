@@ -22,4 +22,10 @@ exports.addNewBook = async (payloadData, ownerId) => {
       owner: ownerId,
    })
    return createdBook;
-}
+};
+
+exports.editBook = async () => {
+
+};
+
+exports.deleteBook = (bookId) => bookModel.findByIdAndDelete(bookId);

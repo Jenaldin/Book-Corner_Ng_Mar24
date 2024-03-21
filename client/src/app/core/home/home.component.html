@@ -17,7 +17,7 @@
       <br>
       <br>
       <br>
-      <p class="p-text">We do not take money, as we do not wish to. We do this as a way to get know our neighbors better
+      <p class="p-text">We do not take money, as we do not wish to. We do this as a way to get to know our neighbors better
          and build a
          stronger community. The bonus is meeting likeminded people and enjoying new worlds to explore, without thinking
          about where to put some more shelves, he-he.
@@ -94,7 +94,8 @@
                </mat-card-title-group>
             </mat-card-header>
             <mat-card-content>
-               <p>{{book.description}}</p>
+               <div class="label"><strong>Book Owner:</strong></div>
+               <p>{{book.owner.username}}</p>
             </mat-card-content>
             <mat-card-actions>
                <button mat-raised-button color="primary"

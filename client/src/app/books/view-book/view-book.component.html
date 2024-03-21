@@ -55,7 +55,8 @@
             Comments</button>
          <button mat-raised-button class="mat-raised-button" color="accent"
             [routerLink]="['/catalog', book._id, 'edit-book']"><mat-icon>edit</mat-icon>Edit</button>
-         <button mat-raised-button class="mat-raised-button" color="warn"> <mat-icon>delete</mat-icon>Delete</button>
+         <button mat-raised-button class="mat-raised-button" color="warn" (click)="book._id && onDelete(book._id)">
+            <mat-icon>delete</mat-icon>Delete</button>
       </mat-card-actions>
       <mat-card-footer>
          <mat-progress-bar mode="indeterminate"></mat-progress-bar>

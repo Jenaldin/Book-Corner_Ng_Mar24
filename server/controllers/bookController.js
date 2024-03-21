@@ -32,8 +32,22 @@ const newBook = async (req, res) => {
    } catch (err) {
       res.json({ message: `Failed to add book. Error:` + err })
    }
-}
+};
 
+const updateBook = async (req, res) => {
+
+};
+
+const removeBook = async (req, res) => {
+   const { bookId } = req.params;
+
+   try {
+      await bookService.deleteBook(bookId);
+      res.json({ message: 'Book deleted successfully' });
+   } catch (err) {
+      res.status(500).json({ message: `Failed to delete book. Error: ${err}` });
+   }
+};
 
 module.exports = {
    getBooks,
@@ -41,4 +55,6 @@ module.exports = {
    getLatestBooks,
    getBook,
    newBook,
+   updateBook,
+   removeBook,
 }
