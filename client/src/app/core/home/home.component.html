@@ -36,6 +36,40 @@
    </div>
 </div>
 <div>
-   <h1 class="h1-second-title" position="center">The Book Corner</h1>
-   <!-- Your carousel here -->
+   <h1 class="h1-second-title" position="center">Latest in The Book Corner</h1>
+   
+   <mat-grid-list cols="5" rowHeight="1:1" *ngIf="!isLoading">
+      <mat-grid-tile *ngFor="let book of books">
+         <mat-card class="card-more-margin">
+            <mat-card-header>
+               <mat-card-title-group>
+                  <mat-card-title>{{book.title}}</mat-card-title>
+                  <mat-card-subtitle>by {{book.author}}</mat-card-subtitle>
+                  <mat-card-subtitle>
+                     <div class="stars">
+                        <div>Rating: </div>
+                        <div *ngFor="let star of (book.averageRating ? getStars(book.averageRating).full : [])">
+                           <mat-icon>star</mat-icon>
+                        </div>
+                        <div *ngFor="let star of (book.averageRating ? getStars(book.averageRating).half : [])">
+                           <mat-icon>star_half</mat-icon>
+                        </div>
+                        <div *ngFor="let star of (book.averageRating ? getStars(book.averageRating).empty : [])">
+                           <mat-icon>star_border</mat-icon>
+                        </div>
+                     </div>
+                  </mat-card-subtitle>
+                  <img mat-card-md-image src="{{book.coverUrl}}" alt="book cover">
+               </mat-card-title-group>
+            </mat-card-header>
+            <mat-card-content>
+               <p>{{book.description}}</p>
+            </mat-card-content>
+            <mat-card-actions>
+               <button mat-raised-button color="primary"
+                  [routerLink]="['/catalog', book._id]"><mat-icon>chevron_right</mat-icon>Details</button>
+            </mat-card-actions>
+         </mat-card>
+      </mat-grid-tile>
+   </mat-grid-list>
 </div>

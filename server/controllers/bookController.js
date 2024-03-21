@@ -10,16 +10,22 @@ const getBooks = async (req, res) => {
 const getTotalBooks = async (req, res) => {
    const items = await bookService.getTotalBooks();
    res.send(items.toString());
-}
+};
+
+const getLatestBooks = async (req, res) => {
+   const items = await bookService.getLatestBooks().lean();
+   res.send(items);
+};
 
 const getBook = async (req, res) => {
    const item = await bookService.getBook(req.params.bookId).lean();
    res.send(item)
-}
+};
 
 
 module.exports = {
    getBooks,
    getTotalBooks,
+   getLatestBooks,
    getBook,
 }

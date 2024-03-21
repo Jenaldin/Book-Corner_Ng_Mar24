@@ -19,6 +19,11 @@ export class BookService {
     return this.http.get<number>(`${apiUrl}/catalog/total`)
   }
 
+  getLatestBooks(){
+    const { apiUrl } = environment;
+    return this.http.get<Book[]>(`${apiUrl}/catalog/latest`)
+  }
+
   getBook(id: string) {
     const { apiUrl } = environment;
     return this.http.get<Book>(`${apiUrl}/catalog/${id}`);

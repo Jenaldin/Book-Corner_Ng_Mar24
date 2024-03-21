@@ -1,4 +1,4 @@
-const {bookModel, userModel} = require('../models/index');
+const { bookModel, userModel } = require('../models/index');
 
 exports.getBooks = (startPage, endPage) => bookModel
    .find()
@@ -7,5 +7,11 @@ exports.getBooks = (startPage, endPage) => bookModel
    .populate('owner', 'username');
 
 exports.getTotalBooks = () => bookModel.countDocuments();
+
+exports.getLatestBooks = () => bookModel
+   .find()
+   .sort({ createdDate: -1 })
+   .limit(5)
+   .populate('owner', 'username');
 
 exports.getBook = (bookId) => bookModel.findById(bookId).populate('owner', 'username');
