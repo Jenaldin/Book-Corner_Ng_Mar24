@@ -75,10 +75,20 @@ export class AddBookComponent implements OnInit {
           this.router.navigate(['/catalog']);
         },
         error: (error) => {
+          let errorMessage = 'An error occurred while adding the book. Please try again.';
 
-          this.snackBar.open(`An error occurred while adding the book. Please try again. Error message: ${error}`, 'Close', {
+          if (error.status === 400) {
+            errorMessage += ' There was a problem with the data you entered.';
+          } else if (error.status === 500) {
+            errorMessage += ' There was a problem with the server.';
+          }
+
+          errorMessage += ` Error message from server: ${error.error}`;
+
+          this.snackBar.open(errorMessage, 'Close', {
             duration: 20000,
           });
+
         }
       });
     }

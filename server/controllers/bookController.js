@@ -2,25 +2,61 @@ const bookService = require('../services/bookService');
 const { getErrorMessage } = require('../utils/errorUtil');
 
 const getBooks = async (req, res) => {
-   const start = Number(req.query.startPage);
-   const end = Number(req.query.endPage);
-   const items = await bookService.getBooks().lean();
-   res.send(items);
+   try {
+      const start = Number(req.query.startPage);
+      const end = Number(req.query.endPage);
+      const items = await bookService.getBooks().lean();
+      res.send(items);
+   } catch (err) {
+      const error = getErrorMessage(err);
+      if (err.name === 'ValidationError') {
+        res.status(400).send(error);
+      } else {
+        res.status(500).send(error);
+      }
+   }
 };
 
 const getTotalBooks = async (req, res) => {
-   const items = await bookService.getTotalBooks();
-   res.send(items.toString());
+   try {
+      const items = await bookService.getTotalBooks();
+      res.send(items.toString());
+   } catch (err) {
+      const error = getErrorMessage(err);
+      if (err.name === 'ValidationError') {
+        res.status(400).send(error);
+      } else {
+        res.status(500).send(error);
+      }
+   }
 };
 
 const getLatestBooks = async (req, res) => {
-   const items = await bookService.getLatestBooks().lean();
-   res.send(items);
+   try {
+      const items = await bookService.getLatestBooks().lean();
+      res.send(items);
+   } catch (err) {
+      const error = getErrorMessage(err);
+      if (err.name === 'ValidationError') {
+        res.status(400).send(error);
+      } else {
+        res.status(500).send(error);
+      }
+   }
 };
 
 const getBook = async (req, res) => {
-   const item = await bookService.getBook(req.params.bookId).lean();
-   res.send(item);
+   try {
+      const item = await bookService.getBook(req.params.bookId).lean();
+      res.send(item);
+   } catch (err) {
+      const error = getErrorMessage(err);
+      if (err.name === 'ValidationError') {
+        res.status(400).send(error);
+      } else {
+        res.status(500).send(error);
+      }
+   }
 };
 
 const newBook = async (req, res) => {
@@ -31,30 +67,43 @@ const newBook = async (req, res) => {
       await bookService.addNewBook(payloadData, ownerId);
       res.json({ message: 'Book added successfully' });
    } catch (err) {
-      res.json({ message: `Failed to add book. Error:` + err })
+      const error = getErrorMessage(err);
+      if (err.name === 'ValidationError') {
+        res.status(400).send(error);
+      } else {
+        res.status(500).send(error);
+      }
    }
 };
 
 const updateBook = async (req, res) => {
    const payloadData = req.body;
    const { bookId } = req.params;
-
    try {
       await bookService.editBook(bookId, payloadData);
       res.json({ message: 'Book updated successfully' });
    } catch (err) {
-      res.json({ message: `Failed to update book. Error:`,  error: getErrorMessage(err) });
+      const error = getErrorMessage(err);
+      if (err.name === 'ValidationError') {
+        res.status(400).send(error);
+      } else {
+        res.status(500).send(error);
+      }
    }
 };
 
 const removeBook = async (req, res) => {
    const { bookId } = req.params;
-
    try {
       await bookService.deleteBook(bookId);
       res.json({ message: 'Book deleted successfully' });
    } catch (err) {
-      res.status(500).json({ message: `Failed to delete book. Error: ${err}` });
+      const error = getErrorMessage(err);
+      if (err.name === 'ValidationError') {
+        res.status(400).send(error);
+      } else {
+        res.status(500).send(error);
+      }
    }
 };
 
