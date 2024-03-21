@@ -16,7 +16,7 @@
             </mat-card-subtitle>
             <mat-card-subtitle>
                <div class="stars">
-                  <div class="sub-title">Rating: </div>
+                  <div class="sub-title">Rating: {{book.averageRating}} </div>
                   <div *ngFor="let star of (book.averageRating ? getStars(book.averageRating).full : [])">
                      <mat-icon>star</mat-icon>
                   </div>
