@@ -19,8 +19,20 @@ const getLatestBooks = async (req, res) => {
 
 const getBook = async (req, res) => {
    const item = await bookService.getBook(req.params.bookId).lean();
-   res.send(item)
+   res.send(item);
 };
+
+const newBook = async (req, res) => {
+   const payloadData = req.body;
+   const ownerId = '65f6472be5ccc32c2bc27804';
+   //const ownerId = req.user.id;
+   try {
+      await bookService.addNewBook(payloadData, ownerId);
+      res.json({ message: 'Book added successfully' });
+   } catch (err) {
+      res.json({ message: `Failed to add book. Error:` + err })
+   }
+}
 
 
 module.exports = {
@@ -28,4 +40,5 @@ module.exports = {
    getTotalBooks,
    getLatestBooks,
    getBook,
+   newBook,
 }

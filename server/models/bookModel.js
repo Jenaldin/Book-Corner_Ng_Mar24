@@ -9,7 +9,7 @@ const bookSchema = new mongoose.Schema({
    author: {
       type: String,
       minlength: [2, 'Author`s name minimal length is 2 symbols'],
-      required: [true, 'Author`s name is required. If the book does not have author, use Unknown'],
+      required: [true, 'Author`s name is required'],
    },
    genre:{
       type: String,
@@ -35,9 +35,9 @@ const bookSchema = new mongoose.Schema({
    },
    averageRating: {
       type: Number,
-      min: 1,
+      min: 0,
       max: 5,
-      default: 0
+      default: 0,
    },
    createdDate: {
       type: Date,

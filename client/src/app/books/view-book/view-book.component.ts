@@ -39,19 +39,4 @@ export class ViewBookComponent implements OnInit {
         empty: Array(emptyStars).fill('star_border')
     };
 }
-
-  // ngOnInit(): void {
-  //   this.loadBook
-  // }
-
-  // loadBook(id: string): void {
-  //   this.isLoading = true;
-  //   this.bookApi.getBook(id).subscribe((book) => {
-  //     this.book = book;
-  //     setTimeout(() => {
-  //       this.isLoading = false;
-  //     }, 1000);
-  //   });
-  // }
-
 }

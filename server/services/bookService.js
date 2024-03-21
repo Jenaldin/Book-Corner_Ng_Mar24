@@ -15,3 +15,11 @@ exports.getLatestBooks = () => bookModel
    .populate('owner', 'username');
 
 exports.getBook = (bookId) => bookModel.findById(bookId).populate('owner', 'username');
+
+exports.addNewBook = async (payloadData, ownerId) => {
+   const createdBook = await bookModel.create({
+      ...payloadData,
+      owner: ownerId,
+   })
+   return createdBook;
+}

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BookService } from 'src/app/services/book.service';
-import { Book } from 'src/app/types/book';
+
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-book',
@@ -10,7 +11,6 @@ import { Book } from 'src/app/types/book';
   styleUrls: ['./add-book.component.scss']
 })
 
-//REACTIVE
 export class AddBookComponent implements OnInit {
   isLoading: boolean = true;
 
@@ -42,7 +42,13 @@ export class AddBookComponent implements OnInit {
     description: ['', [Validators.required, Validators.minLength(100), Validators.maxLength(2000)]],
   });
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private bookApi: BookService,
+    private activeRoute: ActivatedRoute,
+    private snackBar: MatSnackBar,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -51,6 +57,30 @@ export class AddBookComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.bookForm.value);
+    if (this.bookForm.valid) {
+      const title = this.bookForm.value.title || '';
+      const author = this.bookForm.value.author || '';
+      const genre = this.bookForm.value.genre || '';
+      const coverUrl = this.bookForm.value.coverUrl || '';
+      const bookLang = this.bookForm.value.bookLang || '';
+      const description = this.bookForm.value.description || '';
+
+      this.bookApi.addBook(title, author, genre, coverUrl, bookLang, description).subscribe({
+        next: (response) => {
+
+          this.snackBar.open('Book added successfully!', 'Close', {
+            duration: 20000,
+          });
+          this.bookForm.reset();
+          this.router.navigate(['/catalog']);
+        },
+        error: (error) => {
+
+          this.snackBar.open(`An error occurred while adding the book. Please try again. Error message: ${error}`, 'Close', {
+            duration: 20000,
+          });
+        }
+      });
+    }
   }
 }

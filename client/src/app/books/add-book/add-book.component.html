@@ -57,6 +57,10 @@
                   <mat-label>Cover URL</mat-label>
                   <input matInput formControlName="coverUrl"
                      matTooltip="Please provide links to official book covers only.">
+                  <mat-error *ngIf="bookForm.get('coverUrl')?.errors?.['required']">Cover URL is required.</mat-error>
+                  <mat-error *ngIf="bookForm.get('coverUrl')?.errors?.['pattern']">
+                     Please provide a valid URL ending with .jpg, .jpeg, .png, or .gif
+                  </mat-error>
                </mat-form-field>
             </div>
 

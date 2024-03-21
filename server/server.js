@@ -14,6 +14,7 @@ const dbPort = process.env.DB_PORT || '3000';
 
 const app = express();
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 app.use(cookieParser());
 app.use(cors({ origin: 'http://localhost:4200' }));
 app.use(express.static('public'));

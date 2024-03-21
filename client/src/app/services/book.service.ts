@@ -29,16 +29,16 @@ export class BookService {
     return this.http.get<Book>(`${apiUrl}/catalog/${id}`);
   };
 
-  addBook(title: string, genre: string, coverUrl: string, bookLang: string, description: string, owner: string) {
+  addBook(title: string, author: string, genre: string, coverUrl: string, bookLang: string, description: string) {
     const { apiUrl } = environment;
-    const payload = { title, genre, coverUrl, bookLang, description, owner };
+    const payload = { title, author, genre, coverUrl, bookLang, description}; 
 
     return this.http.post<Book>(`${apiUrl}/catalog`, payload);
   };
 
-  editBook(id: string, title: string, genre: string, coverUrl: string, bookLang: string, description: string, owner: string) {
+  editBook(id: string, title: string, author: string, genre: string, coverUrl: string, bookLang: string, description: string) {
     const { apiUrl } = environment;
-    const payload = { title, genre, coverUrl, bookLang, description, owner };
+    const payload = { title, author, genre, coverUrl, bookLang, description };
 
     return this.http.put<Book>(`${apiUrl}/catalog/${id}`, payload);
   };
