@@ -41,13 +41,18 @@ export class EditBookComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    const bookId = this.activeRoute.snapshot.paramMap.get('bookId');
 
-    const bookId = this.activeRoute.snapshot.paramMap.get('id');
-
-    this.bookApi.getBook(bookId).subscribe((data: any) => {
-      this.book = data;
-      this.originalBook = { ...data };
-    });
+    if (bookId) {
+      this.bookApi.getBook(bookId).subscribe((data: any) => {
+        this.book = data;
+        this.originalBook = { ...data };
+      });
+    } else {
+      this.snackBar.open(`Looks like this book does not exist! Try another one.`, 'Close', {
+        duration: 20000,
+      });
+    };
 
     setTimeout(() => {
       this.isLoading = false;
@@ -55,24 +60,39 @@ export class EditBookComponent implements OnInit {
   }
 
   onSubmit(formValue: any): void {
-    // Call the service to update the book
-    this.bookApi.editBook(formValue.id, formValue.title, formValue.author, formValue.genre, formValue.coverUrl, formValue.bookLang, formValue.description);
+    const bookId = this.activeRoute.snapshot.paramMap.get('bookId');
+    const updatedFields = this.getUpdatedFields(this.originalBook, formValue);
+
+    if (bookId) {
+      this.bookApi.editBook(bookId, updatedFields).subscribe({
+        next: (response) => {
+
+          this.snackBar.open('Book updated successfully!', 'Close', {
+            duration: 20000,
+          });
+          this.router.navigate(['/catalog']);
+        },
+        error: (error) => {
+          this.snackBar.open(`An error occurred while updating the book.
+          Please try again. Error message: ${error}`, 'Close', {
+            duration: 20000,
+          });
+        }
+      });
+    } else {
+      this.snackBar.open(`Looks like this book does not exist! Try another one.`, 'Close', {
+        duration: 20000,
+      });
+    };
   }
 
-  
-  // onSubmit(formValue: any): void {
-  //   const updatedFields = this.getUpdatedFields(this.originalBook, formValue);
-  //   // Call the service to update the book with only the changed fields
-  //   this.bookService.editBook(bookId, updatedFields);
-  // }
-
-  // getUpdatedFields(original: any, updated: any) {
-  //   const updatedFields: any = {};
-  //   for (const key in original) {
-  //     if (original[key] !== updated[key]) {
-  //       updatedFields[key] = updated[key];
-  //     }
-  //   }
-  //   return updatedFields;
-  // }
+  getUpdatedFields(original: any, updated: any) {
+    const updatedFields: any = {};
+    for (const key in original) {
+      if (updated.hasOwnProperty(key) && original[key] !== updated[key]) {
+        updatedFields[key] = updated[key];
+      }
+    }
+    return updatedFields;
+  }
 }

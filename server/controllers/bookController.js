@@ -1,4 +1,5 @@
 const bookService = require('../services/bookService');
+const { getErrorMessage } = require('../utils/errorUtil');
 
 const getBooks = async (req, res) => {
    const start = Number(req.query.startPage);
@@ -35,7 +36,15 @@ const newBook = async (req, res) => {
 };
 
 const updateBook = async (req, res) => {
+   const payloadData = req.body;
+   const { bookId } = req.params;
 
+   try {
+      await bookService.editBook(bookId, payloadData);
+      res.json({ message: 'Book updated successfully' });
+   } catch (err) {
+      res.json({ message: `Failed to update book. Error:`,  error: getErrorMessage(err) });
+   }
 };
 
 const removeBook = async (req, res) => {

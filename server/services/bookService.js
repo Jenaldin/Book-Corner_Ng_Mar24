@@ -24,8 +24,6 @@ exports.addNewBook = async (payloadData, ownerId) => {
    return createdBook;
 };
 
-exports.editBook = async () => {
-
-};
+exports.editBook = async (bookId, payloadData) => bookModel.findByIdAndUpdate(bookId, payloadData, {runValidators: true});
 
 exports.deleteBook = (bookId) => bookModel.findByIdAndDelete(bookId);

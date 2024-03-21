@@ -1,7 +1,7 @@
 <div class="center-div" *ngIf="isLoading">
    <mat-spinner></mat-spinner>
 </div>
-<div class="top-div" *ngIf="!isLoading">
+<div class="top-div" *ngIf="!isLoading && book">
    <mat-card>
       <mat-card-header>
          <mat-card-title-group>

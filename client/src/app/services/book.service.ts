@@ -36,12 +36,10 @@ export class BookService {
     return this.http.post<Book>(`${apiUrl}/catalog`, payload);
   };
 
-  editBook(id: string, title: string, author: string, genre: string, coverUrl: string, bookLang: string, description: string) {
+  editBook(id: string, updatedFields: any) {
     const { apiUrl } = environment;
-    const payload = { title, author, genre, coverUrl, bookLang, description };
-
-    return this.http.put<Book>(`${apiUrl}/catalog/${id}`, payload);
-  };
+    return this.http.put<Book>(`${apiUrl}/catalog/${id}`, updatedFields);
+  }
 
   deleteBook(id: string) {
     const { apiUrl } = environment;
