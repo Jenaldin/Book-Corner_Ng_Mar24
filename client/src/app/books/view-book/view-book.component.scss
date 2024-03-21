@@ -1,16 +1,4 @@
-.center-div {
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   height: 100vh;
-}
-
-.top-div {
-   margin: 30px;
-   display: flex;
-   justify-content: center;
-   height: auto;
-}
+@import './../books.module.scss';
 
 .label{
    font-weight: bold;
@@ -27,9 +15,4 @@
 
 .mat-raised-button {
    margin: 20px;
-}
-
-.stars {
-   display: flex;
-   align-items: center;
 }
