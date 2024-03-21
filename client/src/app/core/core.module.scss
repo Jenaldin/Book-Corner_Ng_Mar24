@@ -1,3 +1,10 @@
+.center-div {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100vh;
+}
+
 .grid-container {
    display: grid;
    grid-template-columns: repeat(auto-fill, minmax(200px, auto));

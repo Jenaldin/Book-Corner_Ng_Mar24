@@ -1,10 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-error',
   templateUrl: './error.component.html',
   styleUrls: ['./error.component.scss']
 })
-export class ErrorComponent {
+export class ErrorComponent implements OnInit{
+  isLoading: boolean = true;
 
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 1000);
+  }
 }
