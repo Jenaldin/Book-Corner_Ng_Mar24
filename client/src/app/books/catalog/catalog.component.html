@@ -20,12 +20,36 @@
             <mat-card-title-group>
                <mat-card-title>{{book.title}}</mat-card-title>
                <mat-card-subtitle>by {{book.author}}</mat-card-subtitle>
+               <mat-card-subtitle>
+                  <hr>
+               </mat-card-subtitle>
+               <mat-card-subtitle>
+                  <div class="stars">
+                     <div class="sub-title">Rating: </div>
+                     <div *ngFor="let star of (book.averageRating ? getStars(book.averageRating).full : [])">
+                        <mat-icon>star</mat-icon>
+                     </div>
+                     <div *ngFor="let star of (book.averageRating ? getStars(book.averageRating).half : [])">
+                        <mat-icon>star_half</mat-icon>
+                     </div>
+                     <div *ngFor="let star of (book.averageRating ? getStars(book.averageRating).empty : [])">
+                        <mat-icon>star_border</mat-icon>
+                     </div>
+                  </div>
+               </mat-card-subtitle>
+               <mat-card-subtitle>
+                  <div class="sub-title">Genre: {{book.genre}}</div>
+               </mat-card-subtitle>
+               <mat-card-subtitle>
+                  <div class="sub-title" *ngIf="book.isRented; else bookIsFree">Status: Unavailable </div>
+               </mat-card-subtitle>
+               <mat-card-subtitle><ng-template #bookIsFree>
+                     <div class="sub-title">Status: Available</div>
+                  </ng-template></mat-card-subtitle>
                <img mat-card-lg-image src="{{book.coverUrl}}" alt="book cover">
             </mat-card-title-group>
          </mat-card-header>
          <mat-card-content>
-            <p class="label">Book Owner:</p>
-            <p>{{book.owner.username}}</p>
             <p class="label">Description by the Book Owner:</p>
             <p>{{book.description}}</p>
          </mat-card-content>

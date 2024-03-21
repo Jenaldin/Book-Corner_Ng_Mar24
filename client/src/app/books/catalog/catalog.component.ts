@@ -43,4 +43,16 @@ export class CatalogComponent implements OnInit {
     const end = start + event.pageSize;
     this.loadBooks(start, end);
   }
+
+  getStars(rating: number) {
+    let fullStars = Math.floor(rating);
+    let halfStars = Math.ceil(rating - fullStars);
+    let emptyStars = 5 - fullStars - halfStars;
+
+    return {
+        full: Array(fullStars).fill('star'),
+        half: Array(halfStars).fill('star_half'),
+        empty: Array(emptyStars).fill('star_border')
+    };
+  }
 }
