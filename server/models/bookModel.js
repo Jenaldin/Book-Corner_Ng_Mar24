@@ -18,7 +18,7 @@ const bookSchema = new mongoose.Schema({
    },
    coverUrl: {
       type: String,
-      match: [/^https?:\/\//, 'Invalid cover link'],
+      match: [/^https:\/\/.+(\.jpg|\.jpeg|\.png|\.gif)$/, 'Invalid cover link'],
       required: [true, 'Cover is required']
    },
    bookLang: {
