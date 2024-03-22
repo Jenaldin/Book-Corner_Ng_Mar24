@@ -4,10 +4,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-const handlebars = require('express-handlebars');
 const apiRouter = require('./router');
 const routes = require('./routes');
-const path = require('path');
 
 const dbUri = process.env.DB_URI || 'mongodb://127.0.0.1:27017/book-corner';
 const dbPort = process.env.DB_PORT || '3000';
@@ -21,11 +19,6 @@ app.use(express.static('public'));
 app.use('/api', apiRouter);
 app.use(routes);
 
-// app.engine('hbs', handlebars.engine({
-//    extname: 'hbs',
-// }));
-// app.set('view engine', 'hbs');
-// app.set('views', path.resolve('server/views'));
 
 mongoose.connect(dbUri);
 mongoose.connection.on('connected', () => console.log('DB is Connected!'));

@@ -9,9 +9,9 @@ import { Book } from '../types/book';
 export class BookService {
   constructor(private http: HttpClient) { }
 
-  getBooks(startPage: number, endPage: number) {
+  getBooks(start: number, end: number) {
     const { apiUrl } = environment;
-    return this.http.get<Book[]>(`${apiUrl}/catalog?start=${startPage}&end=${endPage}`);
+    return this.http.get<Book[]>(`${apiUrl}/catalog?start=${start}&end=${end}`);
   }
 
   getTotalBooks(){

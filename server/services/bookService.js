@@ -1,9 +1,9 @@
 const { bookModel, userModel } = require('../models/index');
 
-exports.getBooks = (startPage, endPage) => bookModel
+exports.getBooks = (pageNumber, pageSize) => bookModel
    .find()
-   .skip(startPage)
-   .limit(endPage - startPage)
+   .skip(pageNumber)
+   .limit(pageSize)
    .populate('owner', 'username');
 
 exports.getTotalBooks = () => bookModel.countDocuments();

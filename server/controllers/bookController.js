@@ -3,9 +3,9 @@ const { getErrorMessage } = require('../utils/errorUtil');
 
 const getBooks = async (req, res) => {
    try {
-      const start = Number(req.query.startPage);
-      const end = Number(req.query.endPage);
-      const items = await bookService.getBooks().lean();
+      let pageNumber = Number(req.query.start);
+      const pageSize = Number(req.query.end);
+      const items = await bookService.getBooks(pageNumber, pageSize).lean();
       res.send(items);
    } catch (err) {
       const error = getErrorMessage(err);

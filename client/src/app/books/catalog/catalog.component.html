@@ -8,13 +8,12 @@
    </div>
    <div class="header">
       <button mat-raised-button color="accent" [routerLink]="['/add-book']"><mat-icon>add_circle_outline</mat-icon> Add
-         New
-         Book!</button>
+         New Book!</button>
    </div>
-
-   <mat-paginator class="pagin-font" [length]="totalBooks" [pageSize]="6" (page)="pageChanged($event)"></mat-paginator>
-   <hr>
 </div>
+<mat-paginator class="pagin-font" [length]="totalBooks" [pageSize]="6" [pageIndex]="currentPage"
+   (page)="pageChanged($event)"></mat-paginator>
+<hr>
 
 <mat-grid-list cols="3" rowHeight="1:0.7" *ngIf="!isLoading">
    <mat-grid-tile class="catalog-grid-tile" *ngFor="let book of books">
