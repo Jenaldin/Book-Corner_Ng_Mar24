@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
-import { ErrorComponent } from './error/error.component';
+import { Error404Component } from './error404/error404.component';
 import { SearchComponent } from './search/search.component';
 import { RouterModule } from '@angular/router';
 
@@ -17,7 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
   declarations: [
     HomeComponent,
     AboutComponent,
-    ErrorComponent,
+    Error404Component,
     SearchComponent
   ],
   imports: [
@@ -32,7 +32,7 @@ import { MatIconModule } from '@angular/material/icon';
   exports: [
     HomeComponent,
     AboutComponent,
-    ErrorComponent,
+    Error404Component,
     SearchComponent
   ]
 })

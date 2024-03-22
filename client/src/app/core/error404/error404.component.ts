@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-error',
-  templateUrl: './error.component.html',
-  styleUrls: ['./error.component.scss']
+  selector: 'app-error404',
+  templateUrl: './error404.component.html',
+  styleUrls: ['./error404.component.scss']
 })
-export class ErrorComponent implements OnInit{
+export class Error404Component implements OnInit{
   isLoading: boolean = true;
 
   ngOnInit(): void {
