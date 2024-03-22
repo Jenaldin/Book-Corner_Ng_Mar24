@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema({
    },
    avatar: {
       type: String,
-      match: [/^https?:\/\//, 'Invalid avatar link'],
+      match: [/^https:\/\//, 'Invalid avatar link'],
       default: 'http://localhost:3000/images/defaultAvatar.PNG'
    },
    aboutMe: {
