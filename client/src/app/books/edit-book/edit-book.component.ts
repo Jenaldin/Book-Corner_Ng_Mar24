@@ -44,19 +44,35 @@ export class EditBookComponent implements OnInit {
     const bookId = this.activeRoute.snapshot.paramMap.get('bookId');
 
     if (bookId) {
-      this.bookApi.getBook(bookId).subscribe((data: any) => {
-        this.book = data;
-        this.originalBook = { ...data };
+       this.bookApi.getBook(bookId).subscribe({
+        next: (data: any) => {
+          this.book = data;
+          this.originalBook = { ...data };
+          setTimeout(() => {
+            this.isLoading = false;
+          }, 1000);
+        },
+        error: (error) => {
+          let errorMessage = 'An error occurred while fetching the book. Please try again.';
+
+          if (error.status === 400) {
+            errorMessage += ' There was a problem with the data you entered.';
+          } else if (error.status === 500) {
+            errorMessage += ' There was a problem with the server.';
+          }
+
+          errorMessage += ` Error message from server: ${error.error}`;
+
+          this.snackBar.open(errorMessage, 'Close', {
+            duration: 20000,
+          });
+        }
       });
     } else {
       this.snackBar.open(`Looks like this book does not exist! Try another one.`, 'Close', {
         duration: 20000,
       });
     };
-
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 1000);
   }
 
   onSubmit(formValue: any): void {
@@ -66,15 +82,23 @@ export class EditBookComponent implements OnInit {
     if (bookId) {
       this.bookApi.editBook(bookId, updatedFields).subscribe({
         next: (response) => {
-
           this.snackBar.open('Book updated successfully!', 'Close', {
             duration: 20000,
           });
           this.router.navigate(['/catalog']);
         },
         error: (error) => {
-          this.snackBar.open(`An error occurred while updating the book.
-          Please try again. Error message: ${error}`, 'Close', {
+          let errorMessage = 'An error occurred while updating the book. Please try again.';
+
+          if (error.status === 400) {
+            errorMessage += ' There was a problem with the data you entered.';
+          } else if (error.status === 500) {
+            errorMessage += ' There was a problem with the server.';
+          }
+
+          errorMessage += ` Error message from server: ${error.error}`;
+
+          this.snackBar.open(errorMessage, 'Close', {
             duration: 20000,
           });
         }

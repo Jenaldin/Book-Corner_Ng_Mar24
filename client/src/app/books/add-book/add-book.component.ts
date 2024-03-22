@@ -88,7 +88,6 @@ export class AddBookComponent implements OnInit {
           this.snackBar.open(errorMessage, 'Close', {
             duration: 20000,
           });
-
         }
       });
     }

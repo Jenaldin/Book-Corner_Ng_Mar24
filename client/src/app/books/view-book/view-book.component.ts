@@ -25,12 +25,28 @@ export class ViewBookComponent implements OnInit {
     this.activeRoute.params.subscribe((data) => {
       const id = data['bookId'];
 
-      this.bookApi.getBook(id).subscribe((book) => {
-        this.book = book;
+      this.bookApi.getBook(id).subscribe({
+        next: (book) => {
+          this.book = book;
+          setTimeout(() => {
+            this.isLoading = false;
+          }, 1000);
+        },
+        error: (error) => {
+          let errorMessage = 'An error occurred while fetching the book. Please try again.';
 
-        setTimeout(() => {
-          this.isLoading = false;
-        }, 1000);
+          if (error.status === 400) {
+            errorMessage += ' There was a problem with the data you entered.';
+          } else if (error.status === 500) {
+            errorMessage += ' There was a problem with the server.';
+          }
+
+          errorMessage += ` Error message from server: ${error.error}`;
+
+          this.snackBar.open(errorMessage, 'Close', {
+            duration: 20000,
+          });
+        }
       });
     });
   };
@@ -45,8 +61,17 @@ export class ViewBookComponent implements OnInit {
         this.router.navigate(['/catalog']);
       },
       error: (error) => {
-        this.snackBar.open(`An error occurred while deleting the book.
-        Please try again. Error message: ${error}`, 'Close', {
+        let errorMessage = 'An error occurred while deleting the book. Please try again.';
+
+        if (error.status === 400) {
+          errorMessage += ' There was a problem with the data you entered.';
+        } else if (error.status === 500) {
+          errorMessage += ' There was a problem with the server.';
+        }
+
+        errorMessage += ` Error message from server: ${error.error}`;
+
+        this.snackBar.open(errorMessage, 'Close', {
           duration: 20000,
         });
       }
