@@ -9,10 +9,11 @@ const getBooks = async (req, res) => {
       res.send(items);
    } catch (err) {
       const error = getErrorMessage(err);
+      const errMsg = err.message;
       if (err.name === 'ValidationError') {
-        res.status(400).send(error);
+        res.status(400).json({ message: errMsg});
       } else {
-        res.status(500).send(error);
+        res.status(500).json({ message: errMsg});
       }
    }
 };
@@ -23,10 +24,11 @@ const getTotalBooks = async (req, res) => {
       res.send(items.toString());
    } catch (err) {
       const error = getErrorMessage(err);
+      const errMsg = err.message;
       if (err.name === 'ValidationError') {
-        res.status(400).send(error);
+        res.status(400).json({ message: errMsg});
       } else {
-        res.status(500).send(error);
+        res.status(500).json({ message: errMsg});
       }
    }
 };
@@ -37,10 +39,11 @@ const getLatestBooks = async (req, res) => {
       res.send(items);
    } catch (err) {
       const error = getErrorMessage(err);
+      const errMsg = err.message;
       if (err.name === 'ValidationError') {
-        res.status(400).send(error);
+        res.status(400).json({ message: errMsg});
       } else {
-        res.status(500).send(error);
+        res.status(500).json({ message: errMsg});
       }
    }
 };
@@ -51,27 +54,28 @@ const getBook = async (req, res) => {
       res.send(item);
    } catch (err) {
       const error = getErrorMessage(err);
+      const errMsg = err.message;
       if (err.name === 'ValidationError') {
-        res.status(400).send(error);
+        res.status(400).json({ message: errMsg});
       } else {
-        res.status(500).send(error);
+        res.status(500).json({ message: errMsg});
       }
    }
 };
 
 const newBook = async (req, res) => {
    const payloadData = req.body;
-   const ownerId = '65f6472be5ccc32c2bc27804';
-   //const ownerId = req.user.id;
+   const ownerId = req.user.id;
    try {
       await bookService.addNewBook(payloadData, ownerId);
       res.json({ message: 'Book added successfully' });
    } catch (err) {
       const error = getErrorMessage(err);
+      const errMsg = err.message;
       if (err.name === 'ValidationError') {
-        res.status(400).send(error);
+        res.status(400).json({ message: errMsg});
       } else {
-        res.status(500).send(error);
+        res.status(500).json({ message: errMsg});
       }
    }
 };
@@ -84,10 +88,11 @@ const updateBook = async (req, res) => {
       res.json({ message: 'Book updated successfully' });
    } catch (err) {
       const error = getErrorMessage(err);
+      const errMsg = err.message;
       if (err.name === 'ValidationError') {
-        res.status(400).send(error);
+        res.status(400).json({ message: errMsg});
       } else {
-        res.status(500).send(error);
+        res.status(500).json({ message: errMsg});
       }
    }
 };
@@ -99,10 +104,11 @@ const removeBook = async (req, res) => {
       res.json({ message: 'Book deleted successfully' });
    } catch (err) {
       const error = getErrorMessage(err);
+      const errMsg = err.message;
       if (err.name === 'ValidationError') {
-        res.status(400).send(error);
+        res.status(400).json({ message: errMsg});
       } else {
-        res.status(500).send(error);
+        res.status(500).json({ message: errMsg});
       }
    }
 };

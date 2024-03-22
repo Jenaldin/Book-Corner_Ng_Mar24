@@ -41,7 +41,7 @@ export class ViewBookComponent implements OnInit {
             errorMessage += ' There was a problem with the server.';
           }
 
-          errorMessage += ` Error message from server: ${error.error}`;
+          errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
 
           this.snackBar.open(errorMessage, 'Close', {
             duration: 20000,
@@ -69,7 +69,7 @@ export class ViewBookComponent implements OnInit {
           errorMessage += ' There was a problem with the server.';
         }
 
-        errorMessage += ` Error message from server: ${error.error}`;
+        errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
 
         this.snackBar.open(errorMessage, 'Close', {
           duration: 20000,
