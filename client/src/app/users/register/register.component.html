@@ -2,5 +2,117 @@
    <mat-spinner></mat-spinner>
 </div>
 <div class="top-div" *ngIf="!isLoading">
-   <h1>register works!</h1>
+   <mat-card>
+      <mat-card-header>
+         <mat-card-title-group>
+            <mat-card-title>
+               <h2 class="title"><mat-icon>account_circle</mat-icon> Welcome new reader, Register below!</h2>
+            </mat-card-title>
+            <mat-card-subtitle>
+               <p>Not a new reader? Please use the <a [routerLink]="['/login']">Login page</a> instead!</p>
+               <br>
+            </mat-card-subtitle>
+         </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content>
+         <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <div class="label">
+               <mat-form-field class="mat-form-field" appearance="fill">
+                  <mat-label>Enter your First Name</mat-label>
+                  <input matInput formControlName="firstName">
+                  <mat-error *ngIf="registerForm.get('firstName')?.errors?.['required']">First Name is required.</mat-error>
+                  <mat-error *ngIf="registerForm.get('firstName')?.errors?.['minlength']">First Name must be at least 2
+                     characters long.</mat-error>
+                  <mat-error *ngIf="registerForm.get('firstName')?.errors?.['pattern']">
+                     Please use only letters, or a hyphen if your first name is hyphenated.
+                  </mat-error>
+               </mat-form-field>
+            </div>
+
+            <div class="label">
+               <mat-form-field class="mat-form-field" appearance="fill">
+                  <mat-label>Enter your Last Name</mat-label>
+                  <input matInput formControlName="lastName">
+                  <mat-error *ngIf="registerForm.get('lastName')?.errors?.['required']">Last Name is required.</mat-error>
+                  <mat-error *ngIf="registerForm.get('lastName')?.errors?.['minlength']">Last Name must be at least 2
+                     characters long.</mat-error>
+                  <mat-error *ngIf="registerForm.get('lastName')?.errors?.['pattern']">
+                     Please use only letters, or a hyphen if your last name is hyphenated.
+                  </mat-error>
+               </mat-form-field>
+            </div>
+
+            <div class="label">
+               <mat-form-field class="mat-form-field" appearance="fill">
+                  <mat-label>Enter your Username</mat-label>
+                  <input matInput formControlName="username">
+                  <mat-error *ngIf="registerForm.get('username')?.errors?.['required']">Username is required.</mat-error>
+                  <mat-error *ngIf="registerForm.get('username')?.errors?.['minlength']">Username must be at least 2
+                     characters long.</mat-error>
+                  <mat-error *ngIf="registerForm.get('username')?.errors?.['maxlength']">Username must be no more than 20
+                     characters long.</mat-error>
+               </mat-form-field>
+            </div>
+
+            <div class="label">
+               <mat-form-field class="mat-form-field" appearance="fill">
+                  <mat-label>Enter your E-mail</mat-label>
+                  <input matInput formControlName="email">
+                  <mat-error *ngIf="registerForm.get('email')?.errors?.['required']">E-mail is required.</mat-error>
+                  <mat-error *ngIf="registerForm.get('email')?.errors?.['minlength']">E-mail must be at least 10
+                     characters long.</mat-error>
+               </mat-form-field>
+            </div>
+
+            <div class="label">
+               <mat-form-field class="mat-form-field" appearance="fill">
+                  <mat-label>Enter your Password</mat-label>
+                  <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                   </button>
+                  <mat-error *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</mat-error>
+                  <mat-error *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be between 6 and 24
+                     characters long.</mat-error>
+                  <mat-error *ngIf="registerForm.get('password')?.errors?.['maxlength']">Password must be between 6 and 24
+                     characters long.</mat-error>
+               </mat-form-field>
+            </div>
+
+            <div class="label">
+               <mat-form-field class="mat-form-field" appearance="fill">
+                  <mat-label>Repeat Password</mat-label>
+                  <input matInput [type]="hideRe ? 'password' : 'text'" formControlName="rePassword">
+                  <button mat-icon-button matSuffix (click)="hideRe = !hideRe" [attr.aria-label]="'Hide repeat password'" [attr.aria-pressed]="hideRe">
+                    <mat-icon>{{hideRe ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                  <mat-error *ngIf="registerForm.get('rePassword')?.errors?.['required']">Repeat Password is
+                     required.</mat-error>
+                  <mat-error *ngIf="registerForm.get('rePassword')?.errors?.['minlength']">Repeat Password must be between 6
+                     and 24 characters long.</mat-error>
+                  <mat-error *ngIf="registerForm.get('rePassword')?.errors?.['maxlength']">Repeat Password must be between 6
+                     and 24 characters long.</mat-error>
+               </mat-form-field>
+            </div>
+
+            <div class="label">
+               <mat-form-field class="mat-form-field" appearance="fill">
+                  <mat-label>Enter your Avatar URL</mat-label>
+                  <input matInput formControlName="avatar">
+                  <mat-error *ngIf="registerForm.get('avatar')?.errors?.['pattern']">
+                     Please provide a valid URL ending with .jpg, .jpeg, .png, or .gif
+                  </mat-error>
+               </mat-form-field>
+            </div>
+
+            <mat-card-actions>
+               <button mat-raised-button color="primary" type="submit"
+                  [disabled]="registerForm.invalid"><mat-icon>send</mat-icon>Register</button>
+            </mat-card-actions>
+         </form>
+      </mat-card-content>
+      <mat-card-footer>
+         <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </mat-card-footer>
+   </mat-card>
 </div>
