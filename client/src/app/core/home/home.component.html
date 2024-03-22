@@ -4,6 +4,7 @@
 
 <div class="grid-container">
    <div class="grid-item">
+      <br>
       <h1 class="h1-title">Welcome, book lover!</h1>
       <br>
       <br>
@@ -11,11 +12,9 @@
          lending each other books!</h3>
       <br>
       <br>
-      <img src="../../../assets/img/lib_flowers.jpg" alt="flowers and books" class="responsive-image">
+      <img src="../../../assets/img/lib_flowers.jpg" alt="books" class="responsive-image">
    </div>
    <div class="grid-item">
-      <br>
-      <br>
       <br>
       <p class="p-text">We do not take money, as we do not wish to. We do this as a way to get to know our neighbors better
          and build a
@@ -38,8 +37,6 @@
    </div>
    <div class="grid-item">
       <br>
-      <br>
-      <br>
       <p class="p-text">In case you have questions about this App and who made it, feel free to take a look at the
          <a [routerLink]="['/about']">About page</a>, where you will find the information of the App creator.
       </p>
@@ -49,22 +46,15 @@
       <p class="p-text">Below you can find the latest 5 additions to our library. We hope to pique your interest and for
          you to become
          a part of the community.</p>
+         <br>
       <h3 class="h3-title">Enjoy!</h3>
-      <br>
       <p class="p-text"><strong>P.S.:</strong> Keep in
-         mind, we do have a pet dragon to deal any evildoers of any kind...</p>
+         mind, we do have a pet dragon to deal evildoers of any kind...</p>
    </div>
    <div class="grid-item">
       <br>
       <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <img src="../../../assets/img/books.avif" alt="book rows" class="responsive-image">
+      <img src="../../../assets/img/dragon.jpg" alt="dragon" class="responsive-image">
    </div>
 </div>
 <div>
@@ -96,6 +86,11 @@
             <mat-card-content>
                <div class="label"><strong>Book Owner:</strong></div>
                <p>{{book.owner.username}}</p>
+               <br>
+            </mat-card-content>
+            <mat-card-content>
+               <div class="label"><strong>Description / Resume by the Book Owner:</strong></div>
+               <p style="max-width: 550px;">{{book.description.substring(0, 75)}}...</p>
             </mat-card-content>
             <mat-card-actions>
                <button mat-raised-button color="primary"
