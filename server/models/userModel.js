@@ -26,13 +26,17 @@ const userSchema = new mongoose.Schema({
    },
    password: {
       type: String,
-      minlength: [6, 'Password should be at least 5 characters'],
+      minlength: [6, 'Password should be at least 6 characters'],
+      maxlength: [18, 'Password should be no more than 12 characters'],
       required: [true, 'Password is required'],
    },
    avatar: {
       type: String,
       match: [/^https?:\/\//, 'Invalid avatar link'],
       default: 'http://localhost:3000/images/defaultAvatar.PNG'
+   },
+   aboutMe: {
+      type: String,
    },
    booksOwned: [{
       type: mongoose.Types.ObjectId,

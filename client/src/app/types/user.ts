@@ -8,6 +8,7 @@ export interface User {
    email: string;
    password: string;
    avatar?: string;
+   aboutMe?: string;
    booksOwned?: Book[];
    booksLeased?: Book[];
    booksRented?: Book[];
