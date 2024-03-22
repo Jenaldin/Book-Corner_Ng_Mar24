@@ -5,6 +5,8 @@ import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UsersRoutingModule } from './users-routing.module';
 
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 @NgModule({
   declarations: [
     RegisterComponent,
@@ -12,6 +14,7 @@ import { UsersRoutingModule } from './users-routing.module';
     ProfileComponent
   ],
   imports: [
+    MatProgressSpinnerModule,
     CommonModule,
     UsersRoutingModule
   ],
