@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -7,6 +11,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit{
   isLoading: boolean = true;
+  hide = true;
+  
+  constructor(
+    private userApi: UserService,
+    private activeRoute: ActivatedRoute,
+    private snackBar: MatSnackBar,
+    private router: Router,
+  ) { }
   
   ngOnInit(): void {
     setTimeout(() => {
@@ -14,4 +26,33 @@ export class LoginComponent implements OnInit{
     }, 1000);
   }
 
+  onLogin(formLogin: NgForm) {
+    if (formLogin.invalid) {
+      return;
+    }
+  
+    const username = formLogin.value.username;
+    const password = formLogin.value.password;
+
+    this.userApi.login(username, password).subscribe({
+      next: (response) => {
+        this.snackBar.open('Your Login was successful, welcome!', 'Close', {
+          duration: 20000,
+        });
+        this.router.navigate(['/']);
+      },
+      error: (error) => {
+        let errorMessage = 'An error occurred while registration. Please try again.';
+        if (error.status === 400) {
+          errorMessage += ' There was a problem with the data you entered.';
+        } else if (error.status === 500) {
+          errorMessage += ' There was a problem with the server.';
+        }
+        errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
+        this.snackBar.open(errorMessage, 'Close', {
+          duration: 20000,
+        });
+      }
+    })
+  }
 }

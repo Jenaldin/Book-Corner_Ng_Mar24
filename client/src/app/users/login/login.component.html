@@ -15,7 +15,7 @@
          </mat-card-title-group>
       </mat-card-header>
       <mat-card-content>
-         <form #formLogin="ngForm" (ngSubmit)="onLogin(formLogin.value)">
+         <form #formLogin="ngForm" (ngSubmit)="onLogin(formLogin)">
             <div class="label">
                <mat-form-field class="mat-form-field" appearance="fill">
                   <mat-label>Enter your Username</mat-label>
@@ -39,7 +39,7 @@
 
             <mat-card-actions>
                <button mat-raised-button color="primary" type="submit"
-                  [disabled]="!!formLogin.valid"><mat-icon>send</mat-icon>Login</button>
+                  [disabled]="!formLogin.valid"><mat-icon>send</mat-icon>Login</button>
             </mat-card-actions>
          </form>
       </mat-card-content>
