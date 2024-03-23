@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { CatalogComponent } from './catalog/catalog.component';
 import { ViewBookComponent } from './view-book/view-book.component';
 import { AddBookComponent } from './add-book/add-book.component';
 import { EditBookComponent } from './edit-book/edit-book.component';
+import { AuthActive } from '../guards/auth.activate';
 
 const routes: Routes = [
    {
@@ -14,14 +16,15 @@ const routes: Routes = [
             path: ':bookId',
             children: [
                { path: '', pathMatch: 'full', component: ViewBookComponent },
-               { path: 'edit-book', component: EditBookComponent }
+               { path: 'edit-book', component: EditBookComponent, canActivate: [AuthActive], }
             ]
          }
       ]
    },
    {
       path: 'add-book',
-      component: AddBookComponent
+      component: AddBookComponent,
+      canActivate: [AuthActive],
    },
 ];
 
