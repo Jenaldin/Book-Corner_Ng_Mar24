@@ -9,11 +9,13 @@ const routes = require('./routes');
 
 const dbUri = process.env.DB_URI || 'mongodb://127.0.0.1:27017/book-corner';
 const dbPort = process.env.DB_PORT || '3000';
+const { authMiddleware } = require('./middlewares/authMiddleware');
 
 const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
+app.use(authMiddleware);
 app.use(cors({ origin: 'http://localhost:4200', credentials: true }));
 app.use(express.static('public'));
 app.use('/api', apiRouter);

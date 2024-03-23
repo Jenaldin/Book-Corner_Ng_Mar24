@@ -3,6 +3,7 @@ const secret = process.env.SECRET || 'fiuwehfiuherfnjvppev10978434yhx1489357m309
 
 exports.authMiddleware = async (req, res, next) => {
    const token = req.cookies['auth'];
+
    if (!token) {
      return next();
    };
@@ -11,7 +12,6 @@ exports.authMiddleware = async (req, res, next) => {
      const decodedToken = await jwt.verify(token, secret);
      req.user = decodedToken;
      res.locals.isAuthenticated = true;
-     res.locals.user = decodedToken;
      next();
    } catch (err) {
      res.clearCookie('auth');
