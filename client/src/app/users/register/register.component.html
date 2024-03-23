@@ -6,7 +6,7 @@
       <mat-card-header>
          <mat-card-title-group>
             <mat-card-title>
-               <h2 class="title"><mat-icon>account_circle</mat-icon> Welcome new reader, Register below!</h2>
+               <h2 class="title"><mat-icon>account_circle</mat-icon> Welcome, new reader, register below!</h2>
             </mat-card-title>
             <mat-card-subtitle>
                <p>Not a new reader? Please use the <a [routerLink]="['/login']">Login page</a> instead!</p>
@@ -54,8 +54,6 @@
                      characters long.</mat-error>
                   <mat-error *ngIf="registerForm.get('username')?.errors?.['maxlength']">Username must be no more than
                      20 characters long.</mat-error>
-                  <!-- <mat-error *ngIf="registerForm.get('username')?.errors?.['usernameTaken']">Username is already
-                     taken.</mat-error> -->
                </mat-form-field>
             </div>
 

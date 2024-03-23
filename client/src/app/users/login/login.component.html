@@ -2,6 +2,49 @@
    <mat-spinner></mat-spinner>
 </div>
 <div class="top-div" *ngIf="!isLoading">
-   <h1>login works!</h1>
-</div>
+   <mat-card>
+      <mat-card-header>
+         <mat-card-title-group>
+            <mat-card-title>
+               <h2 class="title"><mat-icon>transit_enterexit</mat-icon> Welcome back, reader, login below!</h2>
+            </mat-card-title>
+            <mat-card-subtitle>
+               <p>Not a registered reader? Please use the <a [routerLink]="['/register']">Register page</a> instead!</p>
+               <br>
+            </mat-card-subtitle>
+         </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content>
+         <form #formLogin="ngForm" (ngSubmit)="onLogin(formLogin.value)">
+            <div class="label">
+               <mat-form-field class="mat-form-field" appearance="fill">
+                  <mat-label>Enter your Username</mat-label>
+                  <input matInput name="username" ngModel required #usernameField="ngModel">
+                  <mat-error *ngIf="usernameField.errors?.['required']">Username is required.</mat-error>
+               </mat-form-field>
+            </div>
 
+            <div class="label">
+               <mat-form-field class="mat-form-field" appearance="fill">
+                  <mat-label>Enter your Password</mat-label>
+                  <input matInput [type]="hide ? 'password' : 'text'" name="password" ngModel required
+                     #passwordField="ngModel">
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                     [attr.aria-pressed]="hide">
+                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                  <mat-error *ngIf="passwordField.errors?.['required']">Password is required.</mat-error>
+               </mat-form-field>
+            </div>
+
+            <mat-card-actions>
+               <button mat-raised-button color="primary" type="submit"
+                  [disabled]="!!formLogin.valid"><mat-icon>send</mat-icon>Login</button>
+            </mat-card-actions>
+         </form>
+      </mat-card-content>
+      <mat-card-footer>
+         <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </mat-card-footer>
+   </mat-card>
+</div>
