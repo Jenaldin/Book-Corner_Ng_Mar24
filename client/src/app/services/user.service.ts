@@ -2,7 +2,8 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Subscription, tap } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
-import { User, UserAuth } from '../types/user';
+import { UserAuth } from '../types/user';
+import { Router } from '@angular/router';
 
 @Injectable({
    providedIn: 'root'
@@ -16,7 +17,7 @@ export class UserService implements OnDestroy {
    KEY = '[auth]';
    userSubscription: Subscription;
 
-   constructor(private http: HttpClient) {
+   constructor(private http: HttpClient, private router: Router) {
       const storedUser = sessionStorage.getItem(this.KEY);
       if (storedUser) {
          this.user$$.next(JSON.parse(storedUser));
@@ -38,15 +39,10 @@ export class UserService implements OnDestroy {
       return this.http.post<UserAuth>(`${apiUrl}/register`, {
          firstName, lastName, username, email, password, rePassword, avatar,
       }, {withCredentials: true})
-         .pipe(tap((user) => {
-            console.log("User after tap from Register: " + user);
-            
+         .pipe(tap((user) => {         
             this.user$$.next(user);
             sessionStorage.setItem(this.KEY, JSON.stringify(user));
-            console.log("Key in session storage Reg: " + this.KEY);
-            console.log("User in session storage Reg: " + JSON.stringify(user));
-            
-            
+            console.log(this.KEY);          
          }))
    };
 
@@ -54,11 +50,8 @@ export class UserService implements OnDestroy {
       const { apiUrl } = environment;
       return this.http.post<UserAuth>(`${apiUrl}/login`, { username, password }, {withCredentials: true})
          .pipe(tap((user) => {
-            console.log("User after tap from Login: " + user);
             this.user$$.next(user);
             sessionStorage.setItem(this.KEY, JSON.stringify(user));
-            console.log("Key in session storage Log: " + this.KEY);
-            console.log("User in session storage Log: " + JSON.stringify(user));
          }))
    };
 
