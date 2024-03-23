@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const validator = require('validator');
 
 const bookSchema = new mongoose.Schema({
    title: {
@@ -13,12 +14,16 @@ const bookSchema = new mongoose.Schema({
    },
    genre:{
       type: String,
-      minlength: [3, 'Genre minimal length is 3 symbols'],
       required: [true, 'Genre is required'],
    },
    coverUrl: {
       type: String,
-      match: [/^https:\/\/.+(\.jpg|\.jpeg|\.png|\.gif)$/, 'Invalid cover link'],
+      validate: {
+         validator: function (value) {
+            return validator.isURL(value) && /^https:\/\/.+\.(jpg|jpeg|png|gif)$/i.test(value);
+         },
+         message: 'Invalid cover link',
+      },
       required: [true, 'Cover is required']
    },
    bookLang: {

@@ -37,7 +37,7 @@ export class AddBookComponent implements OnInit {
     title: ['', [Validators.required, Validators.minLength(2)]],
     author: ['', [Validators.required, Validators.minLength(2)]],
     genre: ['', Validators.required],
-    coverUrl: ['', [Validators.required, Validators.pattern('https://.+\.(jpg|jpeg|png|gif)')]],
+    coverUrl: ['', [Validators.required, Validators.pattern(/https:\/\/.+\.(jpg|jpeg|png|gif)/i)]],
     bookLang: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
     description: ['', [Validators.required, Validators.minLength(100), Validators.maxLength(2000)]],
   });
