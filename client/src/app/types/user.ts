@@ -14,3 +14,13 @@ export interface User {
    booksRented?: Book[];
    __v?: number;
 }
+
+export interface UserAuth {
+   _id?: string;
+   firstName: string;
+   lastName: string;
+   username: string;
+   email: string;
+   password: string;
+   __v?: number;
+}

@@ -15,7 +15,7 @@ exports.register = async (userData) => {
 
    const createdUser = await userModel.create(userData);
    const token = await generateToken(createdUser);
-   return token;
+   return {token, username: createdUser.username, id: createdUser._id};
 };
 
 exports.login = async ({ username, password }) => {
@@ -30,5 +30,5 @@ exports.login = async ({ username, password }) => {
    };
 
    const token = await generateToken(user);
-   return token;
+   return {token, username: user.username, id: user._id};
 };

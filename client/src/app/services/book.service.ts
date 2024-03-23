@@ -33,16 +33,16 @@ export class BookService {
     const { apiUrl } = environment;
     const payload = { title, author, genre, coverUrl, bookLang, description}; 
 
-    return this.http.post<Book>(`${apiUrl}/catalog`, payload);
+    return this.http.post<Book>(`${apiUrl}/catalog`, payload, {withCredentials: true});
   };
 
   editBook(id: string, updatedFields: any) {
     const { apiUrl } = environment;
-    return this.http.put<Book>(`${apiUrl}/catalog/${id}`, updatedFields);
+    return this.http.put<Book>(`${apiUrl}/catalog/${id}`, updatedFields, {withCredentials: true});
   }
 
   deleteBook(id: string) {
     const { apiUrl } = environment;
-    return this.http.delete(`${apiUrl}/catalog/${id}`);
+    return this.http.delete(`${apiUrl}/catalog/${id}`, {withCredentials: true});
   };
 }
