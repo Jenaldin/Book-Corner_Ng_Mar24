@@ -54,6 +54,9 @@
                      characters long.</mat-error>
                   <mat-error *ngIf="registerForm.get('username')?.errors?.['maxlength']">Username must be no more than
                      20 characters long.</mat-error>
+                  <mat-error *ngIf="registerForm.get('username')?.errors?.['pattern']">
+                     Please use only letters, numbers, hyphens and/or underscores.
+                  </mat-error>
                </mat-form-field>
             </div>
 
