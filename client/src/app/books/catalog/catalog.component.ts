@@ -15,9 +15,13 @@ export class CatalogComponent implements OnInit {
   books: Book[] | null = [];
   totalBooks: number = 0;
   isLoading: boolean = true;
-  currentPage:number = 0;
+  currentPage: number = 0;
 
   constructor(private bookApi: BookService, private userApi: UserService, private snackBar: MatSnackBar,) { };
+
+  get loggedIn(): boolean {
+    return this.userApi.isLoggedIn;
+  }
 
   ngOnInit(): void {
     this.loadBooks(0, 6);
@@ -25,11 +29,11 @@ export class CatalogComponent implements OnInit {
   }
 
   loadBooks(pageIndex: number, pageSize: number): void {
-        this.isLoading = true;
+    this.isLoading = true;
     this.bookApi.getBooks(pageIndex * pageSize, pageSize).subscribe({
       next: (books) => {
         this.books = books;
-        
+
         setTimeout(() => {
           this.isLoading = false;
         }, 1000);

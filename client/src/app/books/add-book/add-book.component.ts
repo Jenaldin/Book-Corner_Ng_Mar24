@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { BookService } from 'src/app/services/book.service';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -45,7 +45,6 @@ export class AddBookComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private bookApi: BookService,
-    private activeRoute: ActivatedRoute,
     private snackBar: MatSnackBar,
     private router: Router,
   ) { }

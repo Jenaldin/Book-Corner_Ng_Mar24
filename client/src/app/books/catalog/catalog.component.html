@@ -6,10 +6,13 @@
    <div class="header">
       <p>The Book Corner Catalog</p>
    </div>
-   <div class="header">
-      <button mat-raised-button color="accent" [routerLink]="['/add-book']"><mat-icon>add_circle_outline</mat-icon> Add
-         New Book!</button>
-   </div>
+   <ng-container *ngIf="loggedIn">
+      <div class="header">
+         <button mat-raised-button color="accent" [routerLink]="['/add-book']"><mat-icon>add_circle_outline</mat-icon>
+            Add
+            New Book!</button>
+      </div>
+   </ng-container>
 </div>
 <mat-paginator class="pagin-font" [length]="totalBooks" [pageSize]="6" [pageIndex]="currentPage"
    (page)="pageChanged($event)"></mat-paginator>

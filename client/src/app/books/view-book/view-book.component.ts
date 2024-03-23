@@ -4,6 +4,7 @@ import { BookService } from 'src/app/services/book.service';
 import { Book } from 'src/app/types/book';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-view-book',
@@ -15,11 +16,16 @@ export class ViewBookComponent implements OnInit {
   isLoading: boolean = true;
 
   constructor(
+    private userApi: UserService,
     private bookApi: BookService,
     private snackBar: MatSnackBar,
     private activeRoute: ActivatedRoute,
     private router: Router,
   ) { };
+
+  get loggedIn(): boolean {
+    return this.userApi.isLoggedIn;
+  }
 
   ngOnInit(): void {
     this.activeRoute.params.subscribe((data) => {

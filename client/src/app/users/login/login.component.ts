@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -13,12 +13,7 @@ export class LoginComponent implements OnInit{
   isLoading: boolean = true;
   hide = true;
   
-  constructor(
-    private userApi: UserService,
-    private activeRoute: ActivatedRoute,
-    private snackBar: MatSnackBar,
-    private router: Router,
-  ) { }
+  constructor( private userApi: UserService, private snackBar: MatSnackBar, private router: Router, ) { }
   
   ngOnInit(): void {
     setTimeout(() => {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -9,18 +9,14 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent {
-  constructor(public userApi: UserService, private router: Router, private activeRoute: ActivatedRoute,
-    private snackBar: MatSnackBar,) { }
+  constructor(private userApi: UserService, private router: Router, private snackBar: MatSnackBar,) { }
 
-  username() {
-    const userName = this.userApi.user?.username || '';
-    console.log(userName);
-    
-  };
-  
+  get loggedIn(): boolean {
+    return this.userApi.isLoggedIn;
+  }
 
-  get userId(): string {
-    return this.userApi.user?._id|| '';
+  get username(): string {
+    return this.userApi.user?.username || '';
   };
 
   logout() {

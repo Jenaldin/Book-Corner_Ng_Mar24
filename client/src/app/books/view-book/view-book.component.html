@@ -37,7 +37,7 @@
             <mat-card-subtitle><ng-template #bookIsFree>
                   <div class="sub-title">Status: Available</div>
                </ng-template></mat-card-subtitle>
-            <mat-card-subtitle *ngIf="!book.isRented"><button mat-raised-button
+            <mat-card-subtitle *ngIf="loggedIn && !book.isRented"><button mat-raised-button
                   color="primary"><mat-icon>bookmark</mat-icon>Request Book</button></mat-card-subtitle>
             <img mat-card-xl-image src="{{book.coverUrl}}" alt="book cover">
          </mat-card-title-group>
