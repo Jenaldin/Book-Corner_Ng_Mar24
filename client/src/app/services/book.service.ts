@@ -29,6 +29,11 @@ export class BookService {
     return this.http.get<Book>(`${apiUrl}/catalog/${id}`);
   };
 
+  searchBooks(title: string, author: string, genre: string, owner: string) {
+    const { apiUrl } = environment;
+    //return this.http.get<Book[]>(`${apiUrl}/catalog?start=${start}&end=${end}`);
+  }
+
   addBook(title: string, author: string, genre: string, coverUrl: string, bookLang: string, description: string) {
     const { apiUrl } = environment;
     const payload = { title, author, genre, coverUrl, bookLang, description}; 

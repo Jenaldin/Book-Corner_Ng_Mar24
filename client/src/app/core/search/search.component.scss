@@ -1,6 +1,24 @@
-.center-div {
+@import './../core.module.scss';
+
+.top-div {
+   margin: 30px;
    display: flex;
    justify-content: center;
+   height: auto;
+}
+
+.title {
+   font-size: larger;
+}
+
+.mat-card-content form {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
    align-items: center;
-   height: 100vh;
+}
+
+.label2 {
+   flex: 1 0 calc(25% - 10px);
+   margin: 5px;
 }
