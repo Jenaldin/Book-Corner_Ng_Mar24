@@ -13,9 +13,7 @@ export interface Book {
    createdDate?: Date;
    owner: User;
    isRented?: boolean;
-   rentedBy?: User;
-   rentedOn?: Date;
-   leaseRequests?: {
+   requestedBy?: {
       user?: User;
       requestedOn?: Date
    }[];

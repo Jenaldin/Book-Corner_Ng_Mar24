@@ -57,14 +57,10 @@ const userSchema = new mongoose.Schema({
       type: mongoose.Types.ObjectId,
       ref: 'Book',
    }],
-   booksLeased: [{
+   booksRequested: [{
       type: mongoose.Types.ObjectId,
       ref: 'Book',
    }],
-   booksRented: [{
-      type: mongoose.Types.ObjectId,
-      ref: 'Book',
-   }]
 });
 
 userSchema.pre('save', async function () {

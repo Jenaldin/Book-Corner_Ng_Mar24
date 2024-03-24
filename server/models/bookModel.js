@@ -55,14 +55,7 @@ const bookSchema = new mongoose.Schema({
       type: Boolean,
       default: false
    },
-   rentedBy: {
-      type: mongoose.Types.ObjectId,
-      ref: 'User'
-   },
-   rentedOn: {
-      type: Date
-   },
-   leaseRequests: [{
+   requestedBy: [{
       user: {
          type: mongoose.Types.ObjectId,
          ref: 'User'

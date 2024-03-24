@@ -10,8 +10,7 @@ export interface User {
    avatar?: string;
    aboutMe?: string;
    booksOwned?: Book[];
-   booksLeased?: Book[];
-   booksRented?: Book[];
+   booksRequested?: Book[];
    __v?: number;
 }
 
