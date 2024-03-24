@@ -19,6 +19,11 @@
 }
 
 .label2 {
-   flex: 1 0 calc(25% - 10px);
+   flex: 1 0 calc(20% - 10px);
+   margin: 5px;
+}
+
+button {
+   width: 100px;
    margin: 5px;
 }
