@@ -44,8 +44,7 @@ export class UserService implements OnDestroy {
       }, {withCredentials: true})
          .pipe(tap((user) => {         
             this.user$$.next(user);
-            sessionStorage.setItem(this.KEY, JSON.stringify(user));
-            console.log(this.KEY);          
+            sessionStorage.setItem(this.KEY, JSON.stringify(user));         
          }))
    };
 

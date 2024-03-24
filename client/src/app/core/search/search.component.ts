@@ -57,7 +57,7 @@ export class SearchComponent implements OnInit {
       this.bookApi.searchBooks(title, author, genre, owner).subscribe({
         next: (response) => {
           this.searchResults = response; 
-          console.log("Returned response: " + JSON.stringify(this.searchResults, null, 2));  
+ 
           if(this.searchResults.length === 0){
             this.snackBar.open('No Books to show at this time!', 'Close', {
               duration: 20000,

@@ -30,7 +30,6 @@ exports.search = async (title, author, genre, owner) => {
    if (owner) {
       const user = await userModel.findOne({ username: owner });
       if (!user) {
-         console.log("No user found");
         throw new Error('User not found');
       }
       let userIdString = user._id.toString();
