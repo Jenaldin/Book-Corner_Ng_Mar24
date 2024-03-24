@@ -36,7 +36,7 @@ export class UserService implements OnDestroy {
       password: string, rePassword: string, avatar: string
    ) {
       const { apiUrl } = environment;
-      return this.http.post<UserAuth>(`${apiUrl}/register`, {
+      return this.http.post<UserAuth>(`${apiUrl}/user/register`, {
          firstName, lastName, username, email, password, rePassword, avatar,
       }, {withCredentials: true})
          .pipe(tap((user) => {         
@@ -48,7 +48,7 @@ export class UserService implements OnDestroy {
 
    login(username: string, password: string) {
       const { apiUrl } = environment;
-      return this.http.post<UserAuth>(`${apiUrl}/login`, { username, password }, {withCredentials: true})
+      return this.http.post<UserAuth>(`${apiUrl}/user/login`, { username, password }, {withCredentials: true})
          .pipe(tap((user) => {
             this.user$$.next(user);
             sessionStorage.setItem(this.KEY, JSON.stringify(user));
@@ -57,7 +57,7 @@ export class UserService implements OnDestroy {
 
    logout() {
       const { apiUrl } = environment;
-      return this.http.post(`${apiUrl}/logout`, {}, {withCredentials: true}).pipe(tap(() => {
+      return this.http.post(`${apiUrl}/user/logout`, {}, {withCredentials: true}).pipe(tap(() => {
          this.user$$.next(undefined);
          sessionStorage.removeItem(this.KEY);
       }));
