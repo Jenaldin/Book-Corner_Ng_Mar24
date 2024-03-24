@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import { Book } from '../types/book';
@@ -24,15 +24,29 @@ export class BookService {
     return this.http.get<Book[]>(`${apiUrl}/catalog/latest`)
   }
 
+  searchBooks(title: string, author: string, genre: string, owner: string) {
+    const { apiUrl } = environment;
+    let params = new HttpParams()
+    if (title) {
+      params = params.set('title', title);
+    }
+    if (author) {
+      params = params.set('author', author);
+    }
+    if (genre) {
+      params = params.set('genre', genre);
+    }
+    if (owner) {
+      params = params.set('owner', owner);
+    }
+    
+  return this.http.get<Book[]>(`${apiUrl}/catalog/search`, { params });
+}
+
   getBook(id: string) {
     const { apiUrl } = environment;
     return this.http.get<Book>(`${apiUrl}/catalog/${id}`);
   };
-
-  searchBooks(title: string, author: string, genre: string, owner: string) {
-    const { apiUrl } = environment;
-    //return this.http.get<Book[]>(`${apiUrl}/catalog?start=${start}&end=${end}`);
-  }
 
   addBook(title: string, author: string, genre: string, coverUrl: string, bookLang: string, description: string) {
     const { apiUrl } = environment;

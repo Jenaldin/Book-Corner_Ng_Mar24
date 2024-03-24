@@ -48,13 +48,81 @@
             </div>
 
             <mat-card-actions>
-               <button mat-raised-button color="primary" type="submit"><mat-icon>send</mat-icon>Search</button>
+               <button mat-raised-button color="primary" type="submit"
+                  [disabled]="!searchBook.value.title && !searchBook.value.author && !searchBook.value.genre && !searchBook.value.owner"><mat-icon>send</mat-icon>Search</button>
             </mat-card-actions>
-
          </form>
       </mat-card-content>
       <mat-card-footer>
          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
       </mat-card-footer>
    </mat-card>
+</div>
+
+
+<div class="top-div" *ngIf="!isLoading">
+   <div *ngIf="searchResults.length > 0">
+      <p class="h1-second-title" position="center">The Books we found</p>
+      <br>
+      <hr>
+      <div class="results-container">
+         <div *ngFor="let book of searchResults">
+            <mat-card class="mat-card-content">
+               <mat-card-header>
+                  <mat-card-title-group>
+                     <mat-card-title>{{book.title}}</mat-card-title>
+                     <mat-card-subtitle>by {{book.author}}</mat-card-subtitle>
+                     <mat-card-subtitle>
+                        <hr>
+                     </mat-card-subtitle>
+                     <mat-card-subtitle>
+                        <div class="stars">
+                           <div class="sub-title">Rating: </div>
+                           <div *ngFor="let star of (book.averageRating ? getStars(book.averageRating).full : [])">
+                              <mat-icon>star</mat-icon>
+                           </div>
+                           <div *ngFor="let star of (book.averageRating ? getStars(book.averageRating).half : [])">
+                              <mat-icon>star_half</mat-icon>
+                           </div>
+                           <div *ngFor="let star of (book.averageRating ? getStars(book.averageRating).empty : [])">
+                              <mat-icon>star_border</mat-icon>
+                           </div>
+                        </div>
+                     </mat-card-subtitle>
+                     <mat-card-subtitle>
+                        <div class="sub-title">Genre: {{book.genre}}</div>
+                     </mat-card-subtitle>
+                     <mat-card-subtitle>
+                        <div class="sub-title" *ngIf="book.isRented; else bookIsFree">Status: Unavailable </div>
+                     </mat-card-subtitle>
+                     <mat-card-subtitle><ng-template #bookIsFree>
+                           <div class="sub-title">Status: Available</div>
+                        </ng-template></mat-card-subtitle>
+                     <img mat-card-lg-image src="{{book.coverUrl}}" alt="book cover">
+                  </mat-card-title-group>
+               </mat-card-header>
+               <mat-card-content>
+                  <p class="label">Description / Resume by the Book Owner:</p>
+                  <p style="max-width: 550px;">{{book.description.substring(0, 200)}}...</p>
+                  <br>
+               </mat-card-content>
+               <mat-card-actions>
+                  <button mat-raised-button color="primary"
+                     [routerLink]="['/catalog', book._id]"><mat-icon>book</mat-icon>Details</button>
+               </mat-card-actions>
+            </mat-card>
+         </div>
+      </div>
+
+   </div>
+
+   <div *ngIf="searchResults.length === 0">
+      <mat-card>
+         <mat-card-header>
+            <mat-card-title>
+               <h2 class="title">No Books to show at this time</h2>
+            </mat-card-title>
+         </mat-card-header>
+      </mat-card>
+   </div>
 </div>

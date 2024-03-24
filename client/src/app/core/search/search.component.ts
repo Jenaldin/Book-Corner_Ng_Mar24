@@ -3,6 +3,7 @@ import { FormBuilder, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { BookService } from 'src/app/services/book.service';
+import { Book } from 'src/app/types/book';
 
 @Component({
   selector: 'app-search',
@@ -45,6 +46,7 @@ export class SearchComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private bookApi: BookService, private snackBar: MatSnackBar, private router: Router) { }
 
+  searchResults: Book[] = [];
   onSubmit(): void {
     if (this.searchBook.valid) {
       const title = this.searchBook.value.title || '';
@@ -52,29 +54,48 @@ export class SearchComponent implements OnInit {
       const genre = this.searchBook.value.genre || '';
       const owner = this.searchBook.value.owner || '';
 
-      // this.bookApi.searchBooks(title, author, genre, owner).subscribe({
-      //   next: (response) => {
+      this.bookApi.searchBooks(title, author, genre, owner).subscribe({
+        next: (response) => {
+          this.searchResults = response; 
+          console.log("Returned response: " + JSON.stringify(this.searchResults, null, 2));  
+          if(this.searchResults.length === 0){
+            this.snackBar.open('No Books to show at this time!', 'Close', {
+              duration: 20000,
+            });
+          } else {
+            this.snackBar.open('Book(s) found successfully!', 'Close', {
+              duration: 20000,
+            });
+          }
+        },
+        error: (error) => {
+          let errorMessage = 'An error occurred while searching the book(s). Please try again.';
 
-      //     this.snackBar.open('Book added successfully!', 'Close', {
-      //       duration: 20000,
-      //     });
-      //   },
-      //   error: (error) => {
-      //     let errorMessage = 'An error occurred while adding the book. Please try again.';
+          if (error.status === 400) {
+            errorMessage += ' There was a problem with the data you entered.';
+          } else if (error.status === 500) {
+            errorMessage += ' There was a problem with the server.';
+          }
 
-      //     if (error.status === 400) {
-      //       errorMessage += ' There was a problem with the data you entered.';
-      //     } else if (error.status === 500) {
-      //       errorMessage += ' There was a problem with the server.';
-      //     }
+          errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
 
-      //     errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
-
-      //     this.snackBar.open(errorMessage, 'Close', {
-      //       duration: 20000,
-      //     });
-      //   }
-      // });
+          this.snackBar.open(errorMessage, 'Close', {
+            duration: 20000,
+          });
+        }
+      });
     }
+  }
+
+  getStars(rating: number) {
+    let fullStars = Math.floor(rating);
+    let halfStars = Math.ceil(rating - fullStars);
+    let emptyStars = 5 - fullStars - halfStars;
+
+    return {
+        full: Array(fullStars).fill('star'),
+        half: Array(halfStars).fill('star_half'),
+        empty: Array(emptyStars).fill('star_border')
+    };
   }
 }

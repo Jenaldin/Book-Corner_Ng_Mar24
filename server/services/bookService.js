@@ -14,6 +14,32 @@ exports.getLatestBooks = () => bookModel
    .limit(5)
    .populate('owner', 'username');
 
+exports.search = async (title, author, genre, owner) => {
+   let query = {};
+
+   if (title) {
+      query.title = new RegExp(title, 'i');
+   };
+   if (author) {
+      query.author = new RegExp(author, 'i');
+   };
+   if (genre) {
+      query.genre = genre;
+   };
+
+   if (owner) {
+      const user = await userModel.findOne({ username: owner });
+      if (!user) {
+         console.log("No user found");
+        throw new Error('User not found');
+      }
+      let userIdString = user._id.toString();
+      query.owner = userIdString;
+    }
+
+   return bookModel.find(query).populate('owner', 'username').lean();
+};
+
 exports.getBook = (bookId) => bookModel.findById(bookId).populate('owner', 'username');
 
 exports.addNewBook = async (payloadData, ownerId) => {

@@ -16,7 +16,7 @@ export interface User {
 }
 
 export interface UserAuth {
-   _id?: string;
+   _id: string;
    firstName: string;
    lastName: string;
    username: string;

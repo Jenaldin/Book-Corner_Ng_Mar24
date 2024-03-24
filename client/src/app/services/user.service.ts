@@ -22,7 +22,6 @@ export class UserService implements OnDestroy {
       if (storedUser) {
          this.user$$.next(JSON.parse(storedUser));
       }
-
       this.userSubscription = this.user$.subscribe((user) => {
          this.user = user;
       });
@@ -31,6 +30,10 @@ export class UserService implements OnDestroy {
    get isLoggedIn(): boolean {
       return !!this.user;
    };
+
+   get userId(): string | undefined {
+      return this.user ? this.user._id : undefined;
+    }
 
    register(firstName: string, lastName: string, username: string, email: string,
       password: string, rePassword: string, avatar: string
