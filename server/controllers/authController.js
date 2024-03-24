@@ -5,7 +5,7 @@ const registerUser = async (req, res) => {
    try {
       const result = await authService.register(userData);
       const { token, username, id } = result;
-      res.cookie('auth', token, {httpOnly: true});
+      res.cookie('auth', token, {maxAge: 3000 * 60 * 60, httpOnly: true});
       res.status(200).json({ message: 'Registration successful', username, id });
    } catch (err) {
       const errMsg = err.message;
@@ -22,7 +22,7 @@ const loginUser = async (req, res) => {
    try {
       const result = await authService.login(loginData);
       const { token, username, id } = result;
-      res.cookie('auth', token, {httpOnly: true});
+      res.cookie('auth', token, {maxAge: 3000 * 60 * 60,httpOnly: true});
       res.status(200).json({ message: 'Login successful', username, id });
    } catch (err) {
       const errMsg = err.message;
