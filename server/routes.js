@@ -6,7 +6,8 @@ router.get('/', (req, res) => {
 
 router.get('*', (req, res) => {
    res.status(404).send(`<div><h3>Not All Who Wonder Are Lost...</h3></div>
-   <div><h3>But in your case, you are lost, try the /api path, thanks!</h3></div>`);
+   <div><h3>But in your case, you are lost, try another path.</h3></div>
+   <div><h3>Or better, use app FE at http://localhost:4200, thanks!</h3></div>`);
  });
 
 module.exports = router;
