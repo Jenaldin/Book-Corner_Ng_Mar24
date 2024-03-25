@@ -14,8 +14,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class CatalogComponent implements OnInit {
   books: Book[] | null = [];
   totalBooks: number = 0;
-  isLoading: boolean = true;
   currentPage: number = 0;
+  isLoading: boolean = true;
+  hasResults: boolean = true;
+  
 
   constructor(private bookApi: BookService, private userApi: UserService, private snackBar: MatSnackBar,) { };
 
@@ -33,6 +35,11 @@ export class CatalogComponent implements OnInit {
     this.bookApi.getBooks(pageIndex * pageSize, pageSize).subscribe({
       next: (books) => {
         this.books = books;
+
+        if(this.books.length === 0){
+          console.log("Yes");
+          this.hasResults = false;
+        }
 
         setTimeout(() => {
           this.isLoading = false;

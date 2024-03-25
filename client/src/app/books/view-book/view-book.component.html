@@ -37,7 +37,7 @@
             <mat-card-subtitle><ng-template #bookIsFree>
                   <div class="sub-title">Status: Available</div>
                </ng-template></mat-card-subtitle>
-            <mat-card-subtitle *ngIf="(loggedIn===false) && (book.isRented===false) && (isOwner===false)"><button mat-raised-button color="primary"
+            <mat-card-subtitle *ngIf="(loggedIn===true) && (book.isRented===false) && (isOwner===false)"><button mat-raised-button color="primary"
                   (click)="book._id && requestBook(book._id)"><mat-icon>bookmark</mat-icon>Request this Book</button>
             </mat-card-subtitle>
             <img mat-card-xl-image src="{{book.coverUrl}}" alt="book cover">

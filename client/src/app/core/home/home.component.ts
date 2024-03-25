@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BookService } from 'src/app/services/book.service';
+import { UserService } from 'src/app/services/user.service';
 import { Book } from 'src/app/types/book';
 
 
@@ -11,9 +12,18 @@ import { Book } from 'src/app/types/book';
 })
 export class HomeComponent implements OnInit{
   isLoading: boolean = true;
+  hasResults: boolean = true;
   books: Book[] | null = [];
 
-  constructor(private bookApi: BookService) {};
+  constructor(private bookApi: BookService, private userApi: UserService) {};
+
+  get currentUser(): string | undefined {
+    return this.userApi.currentUsername;
+  };
+
+  get currentUserId(): string | undefined {
+    return this.userApi.currentUserId;
+  };
 
   ngOnInit(): void {
     this.loadLatest();
@@ -23,6 +33,12 @@ export class HomeComponent implements OnInit{
     this.isLoading = true;
     this.bookApi.getLatestBooks().subscribe((books) => {
       this.books = books;
+      
+      if(this.books.length === 0){
+        console.log("Yes");
+        this.hasResults = false;
+      }
+      
       setTimeout(() => {
         this.isLoading = false;
       }, 500);

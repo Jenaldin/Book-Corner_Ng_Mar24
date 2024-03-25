@@ -15,8 +15,8 @@ export class NavigationComponent {
     return this.userApi.isLoggedIn;
   }
 
-  get username(): string {
-    return this.userApi.user?.username || '';
+  get currentUser(): string | undefined {
+    return this.userApi.currentUsername;
   };
 
   logout() {

@@ -16,7 +16,8 @@
    </div>
    <div class="grid-item">
       <br>
-      <p class="p-text">We do not take money, as we do not wish to. We do this as a way to get to know our neighbors better
+      <p class="p-text">We do not take money, as we do not wish to. We do this as a way to get to know our neighbors
+         better
          and build a
          stronger community. The bonus is meeting likeminded people and enjoying new worlds to explore, without thinking
          about where to put some more shelves, he-he.
@@ -45,8 +46,8 @@
       <p class="p-text">Below you can find the latest 5 additions to our library. We hope to pique your interest and for
          you to become
          a part of the community.</p>
-         <br>
-      <h3 class="h3-title">Enjoy!</h3>
+      <br>
+      <h3 class="h3-title">Enjoy! </h3>
       <p class="p-text"><strong>P.S.:</strong> Keep in
          mind, we do have a pet dragon to deal evildoers of any kind...</p>
    </div>
@@ -58,44 +59,58 @@
 </div>
 <div>
    <p class="h1-second-title" position="center">Latest in The Book Corner</p>
-   <mat-grid-list cols="5" rowHeight="1:1">
-      <mat-grid-tile *ngFor="let book of books">
-         <mat-card class="card-more-margin">
-            <mat-card-header>
-               <mat-card-title-group>
-                  <mat-card-title>{{book.title}}</mat-card-title>
-                  <mat-card-subtitle>by {{book.author}}</mat-card-subtitle>
-                  <mat-card-subtitle>
-                     <div class="stars">
-                        <div>Rating: </div>
-                        <div *ngFor="let star of (book.averageRating ? getStars(book.averageRating).full : [])">
-                           <mat-icon>star</mat-icon>
+   <div *ngIf="this.hasResults">
+      <mat-grid-list cols="5" rowHeight="1:1">
+         <mat-grid-tile *ngFor="let book of books">
+            <mat-card class="card-more-margin">
+               <mat-card-header>
+                  <mat-card-title-group>
+                     <mat-card-title>{{book.title}}</mat-card-title>
+                     <mat-card-subtitle>by {{book.author}}</mat-card-subtitle>
+                     <mat-card-subtitle>
+                        <div class="stars">
+                           <div>Rating: </div>
+                           <div *ngFor="let star of (book.averageRating ? getStars(book.averageRating).full : [])">
+                              <mat-icon>star</mat-icon>
+                           </div>
+                           <div *ngFor="let star of (book.averageRating ? getStars(book.averageRating).half : [])">
+                              <mat-icon>star_half</mat-icon>
+                           </div>
+                           <div *ngFor="let star of (book.averageRating ? getStars(book.averageRating).empty : [])">
+                              <mat-icon>star_border</mat-icon>
+                           </div>
                         </div>
-                        <div *ngFor="let star of (book.averageRating ? getStars(book.averageRating).half : [])">
-                           <mat-icon>star_half</mat-icon>
-                        </div>
-                        <div *ngFor="let star of (book.averageRating ? getStars(book.averageRating).empty : [])">
-                           <mat-icon>star_border</mat-icon>
-                        </div>
-                     </div>
-                  </mat-card-subtitle>
-                  <img mat-card-md-image src="{{book.coverUrl}}" alt="book cover">
-               </mat-card-title-group>
-            </mat-card-header>
-            <mat-card-content>
-               <div class="label"><strong>Book Owner:</strong></div>
-               <p>{{book.owner.username}}</p>
-               <br>
-            </mat-card-content>
-            <mat-card-content>
-               <div class="label"><strong>Description / Resume by the Book Owner:</strong></div>
-               <p style="max-width: 550px;">{{book.description.substring(0, 75)}}...</p>
-            </mat-card-content>
-            <mat-card-actions>
-               <button mat-raised-button color="primary"
-                  [routerLink]="['/catalog', book._id]"><mat-icon>chevron_right</mat-icon>Details</button>
-            </mat-card-actions>
-         </mat-card>
-      </mat-grid-tile>
-   </mat-grid-list>
+                     </mat-card-subtitle>
+                     <img mat-card-md-image src="{{book.coverUrl}}" alt="book cover">
+                  </mat-card-title-group>
+               </mat-card-header>
+               <mat-card-content>
+                  <div class="label"><strong>Book Owner:</strong></div>
+                  <a [routerLink]="['/profile', book.owner._id]">
+                     <p>{{book.owner.username}}</p>
+                  </a>
+                  <br>
+               </mat-card-content>
+               <mat-card-content>
+                  <div class="label"><strong>Description / Resume by the Book Owner:</strong></div>
+                  <p style="max-width: 550px;">{{book.description.substring(0, 75)}}...</p>
+               </mat-card-content>
+               <mat-card-actions>
+                  <button mat-raised-button color="primary"
+                     [routerLink]="['/catalog', book._id]"><mat-icon>chevron_right</mat-icon>Details</button>
+               </mat-card-actions>
+            </mat-card>
+         </mat-grid-tile>
+      </mat-grid-list>
+   </div>
+
+   <div *ngIf="!this.hasResults">
+      <mat-card class="home-mat-card">
+         <mat-card-header>
+            <mat-card-title>
+               <h2 class="title">No Books to show at this time</h2>
+            </mat-card-title>
+         </mat-card-header>
+      </mat-card>
+   </div>
 </div>
