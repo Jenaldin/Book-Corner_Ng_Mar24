@@ -60,9 +60,10 @@ export class BookService {
     return this.http.put<Book>(`${apiUrl}/catalog/${id}`, updatedFields, {withCredentials: true});
   }
 
-  requestBook(id: string, userId: string) {
+  requestBook(id: string, userId: string, isRented: boolean) {
     const { apiUrl } = environment;
-    return this.http.put<Book>(`${apiUrl}/catalog/requestSub/${id}`, {userId}, {withCredentials: true});
+    const payload = {userId, isRented}
+    return this.http.put<Book>(`${apiUrl}/catalog/requestSub/${id}`, payload, {withCredentials: true});
   }
 
   deleteBook(id: string) {

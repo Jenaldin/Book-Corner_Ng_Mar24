@@ -56,11 +56,11 @@ exports.editBook = async (bookId, payloadData) => bookModel.findByIdAndUpdate(bo
 
 exports.deleteBook = (bookId) => bookModel.findByIdAndDelete(bookId);
 
-exports.requestBook = async (bookId, userId) => {
-   //await bookModel.findByIdAndUpdate(bookId, {$push: {requestedBy: {user: userId, requestedOn: Date.now}}});
+exports.requestBook = async (bookId, userId, isRented) => {
    const book = await bookModel.findById(bookId);
    book.requestedBy.push({ user: userId, requestedOn: Date.now() });
    await book.save();
 
-   await userModel.findByIdAndUpdate(userId, { $push: { booksRequested: bookId, isRented: true } });
+   await bookModel.findByIdAndUpdate(bookId, { isRented: isRented }, { runValidators: true });
+   await userModel.findByIdAndUpdate(userId, { $push: { booksRequested: bookId } });
 }

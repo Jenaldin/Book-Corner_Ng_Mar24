@@ -126,9 +126,13 @@ const removeBook = async (req, res) => {
 
 const requestSub = async (req, res) => {
    const { bookId } = req.params;
-   const { userId } = req.body
+   const { userId, isRented } = req.body;
+
+   console.log(bookId);
+   console.log(userId);
+   console.log(isRented);
    try {
-      await bookService.requestBook(bookId, userId);
+      await bookService.requestBook(bookId, userId, isRented);
       res.json({ message: 'Successfully requested book' });
    } catch (err) {
       const errMsg = err.message;
