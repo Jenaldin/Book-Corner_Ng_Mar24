@@ -20,6 +20,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     EditBookComponent
   ],
   imports: [
+    MatSlideToggleModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
     MatGridListModule,

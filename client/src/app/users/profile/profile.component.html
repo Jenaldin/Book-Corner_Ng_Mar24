@@ -7,8 +7,8 @@
          <mat-card-header>
             <mat-card-title-group>
                <mat-card-title>
-                  <h2 class="title"><mat-icon>color_lens</mat-icon> User Profile of {{currentUser}}</h2>
-                  <mat-slide-toggle [(ngModel)]="showEditMode">Open Edit Profile Mode</mat-slide-toggle>
+                  <h2 class="title"><mat-icon>color_lens</mat-icon> Welcome to your profile, {{currentUser}}!</h2>
+                  <mat-slide-toggle class="sub-title" [(ngModel)]="showEditMode">Open Edit Mode</mat-slide-toggle>
                   <hr>
                </mat-card-title>
                <mat-card-subtitle>
@@ -68,9 +68,14 @@
          <mat-card-header>
             <mat-card-title-group>
                <mat-card-title>
-                  <h2 class="title"><mat-icon>color_lens</mat-icon> Edit Your User Profile, {{currentUser}}</h2>
-                  <mat-slide-toggle [(ngModel)]="showEditMode">Exit Edit Profile Mode</mat-slide-toggle>
+                  <h2 class="title"><mat-icon>color_lens</mat-icon> Edit Your User information below, {{currentUser}}
+                  </h2>
+                  <mat-slide-toggle [(ngModel)]="showEditMode">Close Edit Mode</mat-slide-toggle>
                </mat-card-title>
+               <mat-card-subtitle>
+                  <div class="sub-title">If you need to change your Username or Password, please contact the Administrator.</div>
+                  <div class="sub-title">Thank you!</div>
+               </mat-card-subtitle>
             </mat-card-title-group>
          </mat-card-header>
          <mat-card-content>

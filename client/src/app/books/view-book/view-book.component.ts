@@ -14,6 +14,7 @@ import { UserService } from 'src/app/services/user.service';
 export class ViewBookComponent implements OnInit {
   book = {} as Book;
   isLoading: boolean = true;
+  isOwner: boolean = false;
 
   constructor(
     private userApi: UserService,
@@ -25,15 +26,27 @@ export class ViewBookComponent implements OnInit {
 
   get loggedIn(): boolean {
     return this.userApi.isLoggedIn;
-  }
+  };
+
+  get currentUser(): string | undefined {
+    return this.userApi.currentUsername;
+  };
+
+  get currentUserId(): string | undefined {
+    return this.userApi.currentUserId;
+  };
 
   ngOnInit(): void {
     this.activeRoute.params.subscribe((data) => {
       const id = data['bookId'];
-
       this.bookApi.getBook(id).subscribe({
         next: (book) => {
           this.book = book;
+
+          if(book.owner._id === this.currentUserId) {
+            this.isOwner = true;
+          }         
+
           setTimeout(() => {
             this.isLoading = false;
           }, 1000);
