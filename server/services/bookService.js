@@ -30,11 +30,11 @@ exports.search = async (title, author, genre, owner) => {
    if (owner) {
       const user = await userModel.findOne({ username: owner });
       if (!user) {
-        throw new Error('User not found');
+         throw new Error('User not found');
       }
       let userIdString = user._id.toString();
       query.owner = userIdString;
-    }
+   }
 
    return bookModel.find(query).populate('owner', 'username').lean();
 };
@@ -47,7 +47,7 @@ exports.addNewBook = async (payloadData, ownerId) => {
       owner: ownerId,
    })
 
-   await userModel.findByIdAndUpdate(ownerId, {$push: {booksOwned: createdBook._id}});
+   await userModel.findByIdAndUpdate(ownerId, { $push: { booksOwned: createdBook._id } });
 
    return createdBook;
 };
@@ -55,3 +55,12 @@ exports.addNewBook = async (payloadData, ownerId) => {
 exports.editBook = async (bookId, payloadData) => bookModel.findByIdAndUpdate(bookId, payloadData, { runValidators: true });
 
 exports.deleteBook = (bookId) => bookModel.findByIdAndDelete(bookId);
+
+exports.requestBook = async (bookId, userId) => {
+   //await bookModel.findByIdAndUpdate(bookId, {$push: {requestedBy: {user: userId, requestedOn: Date.now}}});
+   const book = await bookModel.findById(bookId);
+   book.requestedBy.push({ user: userId, requestedOn: Date.now() });
+   await book.save();
+
+   await userModel.findByIdAndUpdate(userId, { $push: { booksRequested: bookId, isRented: true } });
+}

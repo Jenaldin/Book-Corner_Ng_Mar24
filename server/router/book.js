@@ -13,6 +13,7 @@ router.get('/:bookId', bookController.getBook);
 router.post('/', isAuth, bookController.newBook);
 router.put('/:bookId', isAuth, bookController.updateBook);
 router.delete('/:bookId', isAuth, bookController.removeBook);
+router.put('/requestSub/:bookId', isAuth, bookController.requestSub);
 
 
 module.exports = router

@@ -43,9 +43,9 @@ export class ViewBookComponent implements OnInit {
         next: (book) => {
           this.book = book;
 
-          if(book.owner._id === this.currentUserId) {
+          if (book.owner._id === this.currentUserId) {
             this.isOwner = true;
-          }         
+          }
 
           setTimeout(() => {
             this.isLoading = false;
@@ -96,6 +96,36 @@ export class ViewBookComponent implements OnInit {
       }
     });
   };
+
+  requestBook(id: string): void {
+    const userId = this.currentUserId;
+    if (userId) {
+      this.bookApi.requestBook(id, userId).subscribe({
+        next: (response) => {
+
+          this.snackBar.open('Your request for the book is successful!', 'Close', {
+            duration: 20000,
+          });
+          this.router.navigate(['/catalog']);
+        },
+        error: (error) => {
+          let errorMessage = 'An error occurred while making your request for the book. Please try again.';
+
+          if (error.status === 400) {
+            errorMessage += ' There was a problem with the data you entered.';
+          } else if (error.status === 500) {
+            errorMessage += ' There was a problem with the server.';
+          }
+
+          errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
+
+          this.snackBar.open(errorMessage, 'Close', {
+            duration: 20000,
+          });
+        }
+      });
+    }
+  }
 
   getStars(rating: number) {
     let fullStars = Math.floor(rating);
