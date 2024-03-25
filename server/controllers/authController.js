@@ -48,10 +48,26 @@ const logoutUser = async (req, res) => {
    };
 };
 
-const getUser = async (req, res) => {
+const getMyUser = async (req, res) => {
    try {
-      const item = await authService.getUserInfo(req.params.userId);
+      const item = await authService.getMyInfo(req.params.userId);
       res.send(item);
+   } catch (err) {
+      const errMsg = err.message;
+      if (err.name === 'ValidationError') {
+        res.status(400).json({ message: errMsg});
+      } else {
+        res.status(500).json({ message: errMsg});
+      }
+   }
+};
+
+const editMyUser = async (req, res) => {
+   const payload = req.body;
+   const { userId } = req.params;
+   try {
+      await authService.editMyInfo(userId, payload);
+      res.json({ message: 'User info updated successfully' });
    } catch (err) {
       const errMsg = err.message;
       if (err.name === 'ValidationError') {
@@ -66,5 +82,6 @@ module.exports = {
    registerUser,
    loginUser,
    logoutUser,
-   getUser,
+   getMyUser,
+   editMyUser,
 }

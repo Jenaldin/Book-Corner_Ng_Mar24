@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
         validators: [matchPass('password', 'rePassword')],
       }
     ),
-    avatar: ['', Validators.pattern(/https:\/\/.+\.(jpg|jpeg|png|gif)/i)],
+    avatar: ['', [Validators.required, Validators.pattern(/https?:\/\/.+\.(jpg|jpeg|png|gif)/i)]],
   });
 
   get passGroup() {

@@ -7,8 +7,8 @@ export interface User {
    username: string;
    email: string;
    password: string;
-   avatar?: string;
-   aboutMe?: string;
+   avatar: string;
+   aboutMe: string;
    booksOwned?: Book[];
    booksRequested?: Book[];
    __v?: number;
@@ -28,8 +28,8 @@ export interface UserDetailed {
    lastName: string;
    username: string;
    email: string;
-   avatar?: string;
-   aboutMe?: string;
+   avatar: string;
+   aboutMe: string;
    booksOwned?: Book[];
    booksRequested?: Book[];
 }

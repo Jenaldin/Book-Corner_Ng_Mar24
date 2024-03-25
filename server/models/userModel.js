@@ -44,16 +44,16 @@ const userSchema = new mongoose.Schema({
       type: String,
       validate: {
          validator: function (value) {
-            return validator.isURL(value) && /^https:\/\/.+\.(jpg|jpeg|png|gif)$/i.test(value);
+            return validator.isURL(value) && /^https?:\/\/.+\.(jpg|jpeg|png|gif)$/i.test(value);
          },
          message: 'Invalid avatar link',
       },
-      default: 'http://localhost:3000/images/defaultAvatar.PNG'
+      required: [true, 'Avatar is required'],
    },
    aboutMe: {
       type: String,
-      minlength: [100, 'Description/Resume minimal length is 100 symbols'],
-      maxlength: [2000, 'Description/Resume maximal length is 2000 symbols'],
+      maxlength: [200, 'About me maximal length is 200 symbols'],
+      default: ' ',
    },
    booksOwned: [{
       type: mongoose.Types.ObjectId,

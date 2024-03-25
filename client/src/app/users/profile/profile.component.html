@@ -20,7 +20,7 @@
                <mat-card-subtitle>
                   <div class="sub-title">E-mail: {{user.email}}</div>
                </mat-card-subtitle>
-               <img mat-card-xl-image src="{{user.avatar}}" alt="book cover">
+               <img mat-card-xl-image src="{{user.avatar}}" alt="user avatar">
             </mat-card-title-group>
          </mat-card-header>
          <mat-card-content>
@@ -121,6 +121,7 @@
                   <mat-form-field class="mat-form-field2" appearance="fill">
                      <mat-label>Enter your Avatar URL</mat-label>
                      <input matInput formControlName="avatar">
+                     <mat-error *ngIf="editUserForm.get('avatar')?.errors?.['required']">Avatar is required.</mat-error>
                      <mat-error *ngIf="editUserForm.get('avatar')?.errors?.['pattern']">
                         Please provide a valid URL ending with .jpg, .jpeg, .png, or .gif
                      </mat-error>
@@ -128,13 +129,11 @@
                </div>
 
                <div class="label">
-                  <mat-form-field class="mat-form-field" appearance="fill">
+                  <mat-form-field class="mat-form-field2" appearance="fill">
                      <mat-label>Enter your "About Me"</mat-label>
                      <textarea matInput formControlName="aboutMe"></textarea>
-                     <mat-error *ngIf="editUserForm.get('aboutMe')?.errors?.['minlength']">About Me must be at
-                        least 100 characters long.</mat-error>
                      <mat-error *ngIf="editUserForm.get('aboutMe')?.errors?.['maxlength']">About Me must be no
-                        more than 2000 characters long.</mat-error>
+                        more than 200 characters long.</mat-error>
                   </mat-form-field>
                </div>
 

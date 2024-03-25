@@ -110,6 +110,8 @@
                <mat-form-field class="mat-form-field" appearance="fill">
                   <mat-label>Enter your Avatar URL</mat-label>
                   <input matInput formControlName="avatar">
+                  <mat-error *ngIf="passGroup?.get('avatar')?.errors?.['required']">Avatar is
+                     required.</mat-error>
                   <mat-error *ngIf="registerForm.get('avatar')?.errors?.['pattern']">
                      Please provide a valid URL ending with .jpg, .jpeg, .png, or .gif
                   </mat-error>
