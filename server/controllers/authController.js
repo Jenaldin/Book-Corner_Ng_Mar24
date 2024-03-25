@@ -49,10 +49,8 @@ const logoutUser = async (req, res) => {
 };
 
 const getUser = async (req, res) => {
-   console.log(req.params.userId);
    try {
       const item = await authService.getUserInfo(req.params.userId);
-      console.log(item);
       res.send(item);
    } catch (err) {
       const errMsg = err.message;

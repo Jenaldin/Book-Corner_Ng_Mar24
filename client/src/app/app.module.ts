@@ -15,7 +15,7 @@ import { CommentsModule } from './comments/comments.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     CoreModule,

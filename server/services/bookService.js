@@ -46,6 +46,9 @@ exports.addNewBook = async (payloadData, ownerId) => {
       ...payloadData,
       owner: ownerId,
    })
+
+   await userModel.findByIdAndUpdate(ownerId, {$push: {booksOwned: createdBook._id}});
+
    return createdBook;
 };
 
