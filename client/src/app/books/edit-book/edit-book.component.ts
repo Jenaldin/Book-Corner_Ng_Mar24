@@ -48,6 +48,7 @@ export class EditBookComponent implements OnInit {
         next: (data: any) => {
           this.book = data;
           this.originalBook = { ...data };
+          
           setTimeout(() => {
             this.isLoading = false;
           }, 1000);

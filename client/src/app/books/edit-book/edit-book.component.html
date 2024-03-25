@@ -16,7 +16,7 @@
                <p>Book Title:</p>
                <mat-form-field class="mat-form-field" appearance="fill">
                   <mat-label>Title</mat-label>
-                  <input matInput name="title" [(ngModel)]="book.title" required minlength="2" #titleField="ngModel"
+                  <input matInput [(ngModel)]="book.title" name="title"  required minlength="2" #titleField="ngModel"
                      matTooltip="Please add the official book title.">
                   <mat-error *ngIf="titleField.errors?.['required']">Title is required.</mat-error>
                   <mat-error *ngIf="titleField.errors?.['minlength']">Title must be at least 2 characters
@@ -52,6 +52,11 @@
                </mat-form-field>
             </div>
 
+            <div class="label">
+               <p>Book Status:</p>
+                  <mat-slide-toggle name="isRented" [(ngModel)]="book.isRented">   Is the Book Rented?</mat-slide-toggle>
+            </div>
+            <br>
             <div class="label">
                <p>Book Cover:</p>
                <mat-form-field class="mat-form-field" appearance="fill">
