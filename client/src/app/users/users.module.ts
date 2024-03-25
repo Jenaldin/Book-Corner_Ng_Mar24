@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UsersRoutingModule } from './users-routing.module';
 
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -25,6 +26,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     ProfileComponent
   ],
   imports: [
+    MatSlideToggleModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
     MatGridListModule,

@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Subscription, tap } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
-import { UserAuth } from '../types/user';
+import { UserAuth, UserDetailed } from '../types/user';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -12,6 +12,9 @@ import { Router } from '@angular/router';
 export class UserService implements OnDestroy {
    private user$$ = new BehaviorSubject<UserAuth | undefined>(undefined);
    private user$ = this.user$$.asObservable();
+
+   private id$$ = new BehaviorSubject<UserAuth | undefined>(undefined);
+   private id$ = this.user$$.asObservable();
 
    user: UserAuth | undefined;
    KEY = '[auth]';
@@ -31,9 +34,13 @@ export class UserService implements OnDestroy {
       return !!this.user;
    };
 
-   get userId(): string | undefined {
-      return this.user ? this.user._id : undefined;
-    }
+   get currentUsername(): string | undefined {
+      return this.user ? this.user.username : undefined;
+   }
+
+   get currentUserId(): string | undefined {
+      return this.user ? this.user.id : undefined;
+   }
 
    register(firstName: string, lastName: string, username: string, email: string,
       password: string, rePassword: string, avatar: string
@@ -41,16 +48,16 @@ export class UserService implements OnDestroy {
       const { apiUrl } = environment;
       return this.http.post<UserAuth>(`${apiUrl}/user/register`, {
          firstName, lastName, username, email, password, rePassword, avatar,
-      }, {withCredentials: true})
-         .pipe(tap((user) => {         
+      }, { withCredentials: true })
+         .pipe(tap((user) => {
             this.user$$.next(user);
-            sessionStorage.setItem(this.KEY, JSON.stringify(user));         
+            sessionStorage.setItem(this.KEY, JSON.stringify(user));
          }))
    };
 
    login(username: string, password: string) {
       const { apiUrl } = environment;
-      return this.http.post<UserAuth>(`${apiUrl}/user/login`, { username, password }, {withCredentials: true})
+      return this.http.post<UserAuth>(`${apiUrl}/user/login`, { username, password }, { withCredentials: true })
          .pipe(tap((user) => {
             this.user$$.next(user);
             sessionStorage.setItem(this.KEY, JSON.stringify(user));
@@ -59,15 +66,20 @@ export class UserService implements OnDestroy {
 
    logout() {
       const { apiUrl } = environment;
-      return this.http.post(`${apiUrl}/user/logout`, {}, {withCredentials: true}).pipe(tap(() => {
+      return this.http.post(`${apiUrl}/user/logout`, {}, { withCredentials: true }).pipe(tap(() => {
          this.user$$.next(undefined);
          sessionStorage.removeItem(this.KEY);
       }));
    };
 
-   getProfile() {
-
+   getUser(id: string) {
+      const { apiUrl } = environment;
+      return this.http.get<UserDetailed>(`${apiUrl}/user/profile/${id}`);
    };
+
+   getProfile(){
+
+   }
 
    editProfile() {
 

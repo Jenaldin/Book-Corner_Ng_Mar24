@@ -15,11 +15,21 @@ export interface User {
 }
 
 export interface UserAuth {
-   _id: string;
+   id: string;
    firstName: string;
    lastName: string;
    username: string;
    email: string;
    password: string;
-   __v?: number;
+}
+
+export interface UserDetailed {
+   firstName: string;
+   lastName: string;
+   username: string;
+   email: string;
+   avatar?: string;
+   aboutMe?: string;
+   booksOwned?: Book[];
+   booksRequested?: Book[];
 }

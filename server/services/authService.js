@@ -32,3 +32,5 @@ exports.login = async ({ username, password }) => {
    const token = await generateToken(user);
    return {token, username: user.username, id: user._id};
 };
+
+exports.getUserInfo = async (userId) => userModel.findById(userId).populate('booksOwned').populate('booksRequested');

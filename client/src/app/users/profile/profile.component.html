@@ -2,5 +2,127 @@
    <mat-spinner></mat-spinner>
 </div>
 <div class="top-div" *ngIf="!isLoading">
-   <h1>profile works!</h1>
+   <ng-container *ngIf="!showEditMode">
+      <mat-card>
+         <mat-card-header>
+            <mat-card-title-group>
+               <mat-card-title>
+                  <h2 class="title"><mat-icon>color_lens</mat-icon> User Profile of {{currentUser}}</h2>
+                  <mat-slide-toggle [(ngModel)]="showEditMode">Open Edit Profile Mode</mat-slide-toggle>
+                  <hr>
+               </mat-card-title>
+               <mat-card-subtitle>
+                  <div class="sub-title">Name: {{user.firstName}} {{user.lastName}}</div>
+               </mat-card-subtitle>
+               <mat-card-subtitle>
+                  <div class="sub-title">Username: {{user.username}}</div>
+               </mat-card-subtitle>
+               <mat-card-subtitle>
+                  <div class="sub-title">E-mail: {{user.email}}</div>
+               </mat-card-subtitle>
+               <img mat-card-xl-image src="{{user.avatar}}" alt="book cover">
+            </mat-card-title-group>
+         </mat-card-header>
+         <mat-card-content>
+            <div class="label">About Me:</div>
+            <p style="max-width: 650px;">{{user.aboutMe}}</p>
+            <div class="label">Books owned in The Book Corner:</div>
+            <p style="max-width: 650px;">{{user.booksOwned}}</p>
+            <div class="label">Books requested/read from The Book Corner:</div>
+            <p style="max-width: 650px;">{{user.booksRequested}}</p>
+         </mat-card-content>
+         <mat-card-actions>
+         </mat-card-actions>
+         <mat-card-footer>
+         </mat-card-footer>
+      </mat-card>
+   </ng-container>
+
+   <ng-container *ngIf="showEditMode">
+      <mat-card>
+         <mat-card-header>
+            <mat-card-title-group>
+               <mat-card-title>
+                  <h2 class="title"><mat-icon>color_lens</mat-icon> Edit Your User Profile, {{currentUser}}</h2>
+                  <mat-slide-toggle [(ngModel)]="showEditMode">Exit Edit Profile Mode</mat-slide-toggle>
+               </mat-card-title>
+            </mat-card-title-group>
+         </mat-card-header>
+         <mat-card-content>
+            <br>
+            <form [formGroup]="editUserForm" (ngSubmit)="onEditUser()">
+               <div class="label">
+                  <mat-form-field class="mat-form-field2" appearance="fill">
+                     <mat-label>Enter your First Name</mat-label>
+                     <input matInput formControlName="firstName">
+                     <mat-error *ngIf="editUserForm.get('firstName')?.errors?.['required']">First Name is
+                        required.</mat-error>
+                     <mat-error *ngIf="editUserForm.get('firstName')?.errors?.['minlength']">First Name must be at least
+                        2
+                        characters long.</mat-error>
+                     <mat-error *ngIf="editUserForm.get('firstName')?.errors?.['pattern']">
+                        Please use only letters, or a hyphen if your first name is hyphenated.
+                     </mat-error>
+                  </mat-form-field>
+               </div>
+
+               <div class="label">
+                  <mat-form-field class="mat-form-field2" appearance="fill">
+                     <mat-label>Enter your Last Name</mat-label>
+                     <input matInput formControlName="lastName">
+                     <mat-error *ngIf="editUserForm.get('lastName')?.errors?.['required']">Last Name is
+                        required.</mat-error>
+                     <mat-error *ngIf="editUserForm.get('lastName')?.errors?.['minlength']">Last Name must be at least 2
+                        characters long.</mat-error>
+                     <mat-error *ngIf="editUserForm.get('lastName')?.errors?.['pattern']">
+                        Please use only letters, or a hyphen if your last name is hyphenated.
+                     </mat-error>
+                  </mat-form-field>
+               </div>
+
+               <div class="label">
+                  <mat-form-field class="mat-form-field2" appearance="fill">
+                     <mat-label>Enter your E-mail</mat-label>
+                     <input matInput formControlName="email">
+                     <mat-error *ngIf="editUserForm.get('email')?.errors?.['required']">E-mail is required.</mat-error>
+                     <mat-error *ngIf="editUserForm.get('email')?.errors?.['minlength']">E-mail must be at least 10
+                        characters long.</mat-error>
+                     <mat-error *ngIf="editUserForm.get('email')?.errors?.['emailValid']">Invalid email
+                        address.</mat-error>
+                  </mat-form-field>
+               </div>
+
+               <div class="label">
+                  <mat-form-field class="mat-form-field2" appearance="fill">
+                     <mat-label>Enter your Avatar URL</mat-label>
+                     <input matInput formControlName="avatar">
+                     <mat-error *ngIf="editUserForm.get('avatar')?.errors?.['pattern']">
+                        Please provide a valid URL ending with .jpg, .jpeg, .png, or .gif
+                     </mat-error>
+                  </mat-form-field>
+               </div>
+
+               <div class="label">
+                  <mat-form-field class="mat-form-field" appearance="fill">
+                     <mat-label>Enter your "About Me"</mat-label>
+                     <textarea matInput formControlName="aboutMe"></textarea>
+                     <mat-error *ngIf="editUserForm.get('aboutMe')?.errors?.['minlength']">About Me must be at
+                        least 100 characters long.</mat-error>
+                     <mat-error *ngIf="editUserForm.get('aboutMe')?.errors?.['maxlength']">About Me must be no
+                        more than 2000 characters long.</mat-error>
+                  </mat-form-field>
+               </div>
+
+               <mat-card-actions>
+                  <button mat-raised-button color="primary" type="submit"
+                     [disabled]="editUserForm.invalid"><mat-icon>send</mat-icon>Save Changes</button>
+               </mat-card-actions>
+            </form>
+         </mat-card-content>
+         <mat-card-footer>
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+         </mat-card-footer>
+      </mat-card>
+   </ng-container>
+
 </div>

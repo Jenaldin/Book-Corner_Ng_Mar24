@@ -52,6 +52,8 @@ const userSchema = new mongoose.Schema({
    },
    aboutMe: {
       type: String,
+      minlength: [100, 'Description/Resume minimal length is 100 symbols'],
+      maxlength: [2000, 'Description/Resume maximal length is 2000 symbols'],
    },
    booksOwned: [{
       type: mongoose.Types.ObjectId,
