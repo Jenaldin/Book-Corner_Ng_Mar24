@@ -4,6 +4,7 @@ const router = require('express').Router();
 const authController = require('../controllers/authController');
 const { isGuest, isAuth } = require('../middlewares/authMiddleware');
 
+router.get('/profile/:userId', isAuth, authController.getUser);
 router.get('/my-profile/:userId', isAuth, authController.getMyUser);
 
 router.post('/register', isGuest, authController.registerUser);

@@ -1,0 +1,62 @@
+<div class="center-div" *ngIf="isLoading">
+   <mat-spinner></mat-spinner>
+</div>
+<div class="top-div" *ngIf="!isLoading">
+   <mat-card>
+      <mat-card-header>
+         <mat-card-title-group>
+            <mat-card-title>
+               <h2 class="title"><mat-icon>color_lens</mat-icon> Welcome to {{user.username}}'s profile!</h2>
+            </mat-card-title>
+            <mat-card-subtitle>
+               <div class="sub-title">Name: {{user.firstName}} {{user.lastName}}</div>
+            </mat-card-subtitle>
+            <mat-card-subtitle>
+               <div class="sub-title">Username: {{user.username}}</div>
+            </mat-card-subtitle>
+            <mat-card-subtitle>
+               <div class="sub-title">E-mail: {{user.email}}</div>
+            </mat-card-subtitle>
+            <img mat-card-xl-image src="{{user.avatar}}" alt="user avatar">
+         </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content>
+         <table class="table-profile-books">
+            <tr>
+               <td scope="col" style="margin: 10px;">
+                  <div class="label">About Me:</div>
+               </td>
+            </tr>
+            <tr>
+               <td>
+                  <p style="max-width: 650px;">{{user.aboutMe}}</p>
+               </td>
+            </tr>
+         </table>
+
+         <table class="table-profile-books">
+            <tr>
+               <td scope="col" style="margin: 10px;">
+                  <div class="label">Books owned in The Book Corner:</div>
+               </td>
+               <td scope="col" style="margin: 10px;">
+                  <div class="label">Books requested from The Book Corner:</div>
+               </td>
+            </tr>
+            <tr>
+               <td>
+                  <p *ngFor="let bookOwned of user.booksOwned"><mat-icon
+                        style="vertical-align: middle; font-size: 20px;">playlist_add</mat-icon><a
+                        [routerLink]="['/catalog', bookOwned._id]">{{bookOwned.title}}</a></p>
+               </td>
+               <td>
+                  <p *ngFor="let bookRequested of user.booksRequested"><mat-icon
+                        style="vertical-align: middle; font-size: 20px;">playlist_add_check</mat-icon><a
+                        [routerLink]="['/catalog', bookRequested._id]">{{bookRequested.title}}</a></p>
+               </td>
+            </tr>
+         </table>
+      </mat-card-content>
+   </mat-card>
+
+</div>

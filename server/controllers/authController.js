@@ -48,6 +48,20 @@ const logoutUser = async (req, res) => {
    };
 };
 
+const getUser = async (req, res) => {
+   try {
+      const item = await authService.getUserInfo(req.params.userId);
+      res.send(item);
+   } catch (err) {
+      const errMsg = err.message;
+      if (err.name === 'ValidationError') {
+        res.status(400).json({ message: errMsg});
+      } else {
+        res.status(500).json({ message: errMsg});
+      }
+   }
+}
+
 const getMyUser = async (req, res) => {
    try {
       const item = await authService.getMyInfo(req.params.userId);
@@ -82,6 +96,7 @@ module.exports = {
    registerUser,
    loginUser,
    logoutUser,
+   getUser,
    getMyUser,
    editMyUser,
 }
