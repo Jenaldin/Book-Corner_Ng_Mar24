@@ -32,14 +32,16 @@
                <div class="sub-title">Genre: {{book.genre}}</div>
             </mat-card-subtitle>
             <mat-card-subtitle>
-               <div class="sub-title" *ngIf="(book.isRented===false); else bookIsFree">Status: Unavailable </div>
+               <div class="sub-title" *ngIf="book.isRented===true">Status: Unavailable </div>
             </mat-card-subtitle>
-            <mat-card-subtitle><ng-template #bookIsFree>
-                  <div class="sub-title">Status: Available</div>
-               </ng-template></mat-card-subtitle>
-            <mat-card-subtitle *ngIf="(loggedIn===true) && (book.isRented===false) && (isOwner===false)"><button mat-raised-button color="primary"
-                  (click)="book._id && requestBook(book._id)"><mat-icon>bookmark</mat-icon>Request this Book</button>
-            </mat-card-subtitle>
+            <mat-card-subtitle>
+                  <div class="sub-title" *ngIf="book.isRented===false">Status: Available</div>
+               </mat-card-subtitle>
+         
+               <mat-card-subtitle *ngIf="!book.isRented && loggedIn && !isOwner"><button mat-raised-button color="primary"
+                     (click)="book._id && requestBook(book._id)"><mat-icon>bookmark</mat-icon>Request this Book</button>
+               </mat-card-subtitle>
+
             <img mat-card-xl-image src="{{book.coverUrl}}" alt="book cover">
          </mat-card-title-group>
       </mat-card-header>
@@ -49,19 +51,21 @@
          <div class="label">Description / Resume:</div>
          <p style="max-width: 650px;">{{book.description}}</p>
          <div class="label">Book Owner:</div>
-         <a [routerLink]="['/profile', book.owner._id]"><p>{{book.owner.username}}</p></a>
+         <a [routerLink]="['/profile', book.owner._id]">
+            <p>{{book.owner.username}}</p>
+         </a>
       </mat-card-content>
       <mat-card-actions>
          <button mat-raised-button class="mat-raised-button" color="primary" *ngIf="loggedIn===true"><mat-icon>
                forum</mat-icon>View User's Comments for the Book</button>
          <button mat-raised-button class="mat-raised-button" color="accent"
-            [routerLink]="['/catalog', book._id, 'edit-book']" *ngIf="isOwner===true"><mat-icon>edit</mat-icon>Edit</button>
+            [routerLink]="['/catalog', book._id, 'edit-book']"
+            *ngIf="isOwner===true"><mat-icon>edit</mat-icon>Edit</button>
          <button mat-raised-button class="mat-raised-button" color="warn" *ngIf="isOwner===true"
             (click)="book._id && onDelete(book._id)">
             <mat-icon>delete</mat-icon>Delete</button>
       </mat-card-actions>
       <mat-card-footer>
-
       </mat-card-footer>
    </mat-card>
 </div>

@@ -45,7 +45,7 @@ export class ViewBookComponent implements OnInit {
 
           if (book.owner._id === this.currentUserId) {
             this.isOwner = true;
-          }
+          }       
 
           setTimeout(() => {
             this.isLoading = false;
@@ -99,10 +99,10 @@ export class ViewBookComponent implements OnInit {
 
   requestBook(id: string): void {
     const userId = this.currentUserId;
+    const isRented = true;
     if (userId) {
-      this.bookApi.requestBook(id, userId).subscribe({
+      this.bookApi.requestBook(id, userId, isRented).subscribe({
         next: (response) => {
-
           this.snackBar.open('Your request for the book is successful!', 'Close', {
             duration: 20000,
           });
