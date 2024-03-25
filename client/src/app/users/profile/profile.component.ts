@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { emailValidator } from 'src/app/utils/email-valid';
 import { UserService } from 'src/app/services/user.service';
 import { UserDetailed } from 'src/app/types/user';
+import { Book } from 'src/app/types/book';
 
 @Component({
   selector: 'app-profile',
@@ -17,6 +18,8 @@ export class ProfileComponent implements OnInit {
   isLoading: boolean = true;
   showEditMode: boolean = false;
   user = {} as UserDetailed;
+  book = {} as Book;
+  titlesOwned = "";
 
   get currentUser(): string | undefined {
     return this.userApi.currentUsername;
@@ -54,11 +57,17 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     const userId = this.currentUserId;
+    
 
     if(userId){
       this.userApi.getUser(userId).subscribe({
         next: (user) => {
           this.user = user;
+
+          if(user.booksOwned){
+            this.titlesOwned = user.booksOwned.map(obj => obj.title).join(', ');
+          }
+
           setTimeout(() => {
             this.isLoading = false;
           }, 1000);

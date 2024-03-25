@@ -24,17 +24,42 @@
             </mat-card-title-group>
          </mat-card-header>
          <mat-card-content>
-            <div class="label">About Me:</div>
-            <p style="max-width: 650px;">{{user.aboutMe}}</p>
-            <div class="label">Books owned in The Book Corner:</div>
-            <p style="max-width: 650px;">{{user.booksOwned}}</p>
-            <div class="label">Books requested/read from The Book Corner:</div>
-            <p style="max-width: 650px;">{{user.booksRequested}}</p>
+            <table class="table-profile-books">
+               <tr>
+                  <td scope="col" style="margin: 10px;">
+                     <div class="label">About Me:</div>
+                  </td>
+               </tr>
+               <tr>
+                  <td>
+                     <p style="max-width: 650px;">{{user.aboutMe}}</p>
+                  </td>
+               </tr>
+            </table>
+
+            <table class="table-profile-books">
+               <tr>
+                  <td scope="col" style="margin: 10px;">
+                     <div class="label">Books owned in The Book Corner:</div>
+                  </td>
+                  <td scope="col" style="margin: 10px;">
+                     <div class="label">Books requested from The Book Corner:</div>
+                  </td>
+               </tr>
+               <tr>
+                  <td>
+                     <p *ngFor="let bookOwned of user.booksOwned"><mat-icon
+                           style="vertical-align: middle; font-size: 16px;">play_for_work</mat-icon><a
+                           [routerLink]="['/catalog', bookOwned._id]">{{bookOwned.title}}</a></p>
+                  </td>
+                  <td>
+                     <p *ngFor="let bookRequested of user.booksRequested"><mat-icon
+                           style="vertical-align: middle; font-size: 16px;">chevron_left</mat-icon><a
+                           [routerLink]="['/catalog', bookRequested._id]">{{bookRequested.title}}</a></p>
+                  </td>
+               </tr>
+            </table>
          </mat-card-content>
-         <mat-card-actions>
-         </mat-card-actions>
-         <mat-card-footer>
-         </mat-card-footer>
       </mat-card>
    </ng-container>
 
