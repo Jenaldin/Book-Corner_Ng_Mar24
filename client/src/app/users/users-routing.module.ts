@@ -10,7 +10,6 @@ import { ViewProfileComponent } from './view-profile/view-profile.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [GuestActive] },
   { path: 'register', component: RegisterComponent, canActivate: [GuestActive] },
-  //{path: 'profile', component: ProfileComponent, canActivate: [AuthActive]}
   {
     path: 'profile',
     children: [

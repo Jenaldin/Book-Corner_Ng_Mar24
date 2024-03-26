@@ -3,10 +3,12 @@ import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree, } fr
 import { Observable } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Injectable({ providedIn: 'root' })
 
 export class GuestActive implements CanActivate {
-   constructor(private userApi: UserService) { }
+   constructor(private userApi: UserService, private snackBar: MatSnackBar) { }
 
    canActivate(
       route: ActivatedRouteSnapshot,
@@ -16,6 +18,11 @@ export class GuestActive implements CanActivate {
       | UrlTree
       | Observable<boolean | UrlTree>
       | Promise<boolean | UrlTree> {
-      return !this.userApi.isLoggedIn;
+
+      if (this.userApi.isLoggedIn) {
+         this.snackBar.open(`You are already logged in, you can't use this path now. First logout.`, 'Close', { duration: 10000 });
+         return false;
+      }
+      return true;
    }
 }

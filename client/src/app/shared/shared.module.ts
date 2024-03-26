@@ -15,7 +15,8 @@ import { FooterComponent } from './footer/footer.component';
   declarations: [
     HeaderComponent,
     FooterComponent,
-    NavigationComponent
+    NavigationComponent,
+    
   ],
   imports: [
     MatButtonModule,
