@@ -56,7 +56,7 @@
          </a>
       </mat-card-content>
       <mat-card-actions>
-         <button mat-raised-button class="mat-raised-button" color="primary" *ngIf="loggedIn===true"><mat-icon>
+         <button mat-raised-button class="mat-raised-button" color="primary" *ngIf="loggedIn===true" (click)="onToggle()"><mat-icon>
                forum</mat-icon>View User's Comments for the Book</button>
          <button mat-raised-button class="mat-raised-button" color="accent"
             [routerLink]="['/catalog', book._id, 'edit-book']"
@@ -70,4 +70,4 @@
    </mat-card>
 </div>
 
-<app-all-comments></app-all-comments>
+<app-all-comments *ngIf="showComments"></app-all-comments>

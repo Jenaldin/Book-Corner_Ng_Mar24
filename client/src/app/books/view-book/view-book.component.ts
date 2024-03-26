@@ -15,6 +15,7 @@ export class ViewBookComponent implements OnInit {
   book = {} as Book;
   isLoading: boolean = true;
   isOwner: boolean = false;
+  showComments: boolean = false;
 
   constructor(
     private userApi: UserService,
@@ -137,5 +138,11 @@ export class ViewBookComponent implements OnInit {
       half: Array(halfStars).fill('star_half'),
       empty: Array(emptyStars).fill('star_border')
     };
+  }
+  
+  onToggle(): void {
+    this.showComments = !this.showComments
+    console.log(this.showComments);
+    
   }
 }
