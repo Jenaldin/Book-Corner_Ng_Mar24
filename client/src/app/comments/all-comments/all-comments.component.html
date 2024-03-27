@@ -1,1 +1,9 @@
-<h1 class="margin-top">all-comments works!</h1>
+<div class="center-div" *ngIf="isLoading">
+   <mat-spinner></mat-spinner>
+</div>
+
+<div class="center-div" *ngIf="!isLoading">
+   <h1 class="margin-top">all-comments works!</h1>
+</div>
+
+

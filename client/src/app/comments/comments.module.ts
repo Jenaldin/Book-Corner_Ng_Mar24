@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AddCommentComponent } from './add-comment/add-comment.component';
 import { EditCommentComponent } from './edit-comment/edit-comment.component';
 import { AllCommentsComponent } from './all-comments/all-comments.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { AllCommentsComponent } from './all-comments/all-comments.component';
     AllCommentsComponent
   ],
   imports: [
+    MatProgressSpinnerModule,
     CommonModule
   ],
   exports: [
