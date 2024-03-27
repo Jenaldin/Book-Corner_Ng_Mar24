@@ -47,7 +47,7 @@ const getLatestBooks = async (req, res) => {
 
 const getBook = async (req, res) => {
    try {
-      const item = await bookService.getBook(req.params.bookId).lean();
+      const item = await bookService.getBook(req.params.bookId);
       res.send(item);
    } catch (err) {
       const errMsg = err.message;
@@ -128,9 +128,6 @@ const requestSub = async (req, res) => {
    const { bookId } = req.params;
    const { userId, isRented } = req.body;
 
-   console.log(bookId);
-   console.log(userId);
-   console.log(isRented);
    try {
       await bookService.requestBook(bookId, userId, isRented);
       res.json({ message: 'Successfully requested book' });

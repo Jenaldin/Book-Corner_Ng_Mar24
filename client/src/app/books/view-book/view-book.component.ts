@@ -16,6 +16,7 @@ export class ViewBookComponent implements OnInit {
   isLoading: boolean = true;
   isOwner: boolean = false;
   showComments: boolean = false;
+  hasRented: boolean = false;
 
   constructor(
     private userApi: UserService,
@@ -46,7 +47,18 @@ export class ViewBookComponent implements OnInit {
 
           if (book.owner._id === this.currentUserId) {
             this.isOwner = true;
-          }       
+          }
+          
+          //const usersRented = book.requestedBy?.map(user => user.id);
+          const userFound = book.requestedBy?.some(u => u.user?._id === this.currentUserId);
+
+          console.log(book.requestedBy);
+          
+          
+                  
+          if(userFound===true){
+            this.hasRented = true
+          }
 
           setTimeout(() => {
             this.isLoading = false;
@@ -142,7 +154,5 @@ export class ViewBookComponent implements OnInit {
   
   onToggle(): void {
     this.showComments = !this.showComments
-    console.log(this.showComments);
-    
   }
 }

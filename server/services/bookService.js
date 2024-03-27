@@ -39,7 +39,7 @@ exports.search = async (title, author, genre, owner) => {
    return bookModel.find(query).populate('owner', 'username').lean();
 };
 
-exports.getBook = (bookId) => bookModel.findById(bookId).populate('owner', 'username');
+exports.getBook = async (bookId) => bookModel.findById(bookId).populate('owner', 'username').populate('requestedBy.user', 'username')
 
 exports.addNewBook = async (payloadData, ownerId) => {
    const createdBook = await bookModel.create({

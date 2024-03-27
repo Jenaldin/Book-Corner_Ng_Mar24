@@ -26,6 +26,10 @@ const commentSchema = new mongoose.Schema({
       type: mongoose.Types.ObjectId,
       ref: 'User',
    }],
+   gaveRating: [{
+      type: mongoose.Types.ObjectId,
+      ref: 'User',
+   }],
    user: {
       type: mongoose.Types.ObjectId,
       ref: 'User',

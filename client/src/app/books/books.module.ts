@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CatalogComponent } from './catalog/catalog.component';
@@ -50,6 +50,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     BooksRoutingModule,
   ],
   exports: [
-  ]
+  ],
+  providers:[DatePipe]
 })
 export class BooksModule { }

@@ -13,9 +13,6 @@ export class UserService implements OnDestroy {
    private user$$ = new BehaviorSubject<UserAuth | undefined>(undefined);
    private user$ = this.user$$.asObservable();
 
-   private id$$ = new BehaviorSubject<UserAuth | undefined>(undefined);
-   private id$ = this.user$$.asObservable();
-
    user: UserAuth | undefined;
    KEY = '[auth]';
    userSubscription: Subscription;
