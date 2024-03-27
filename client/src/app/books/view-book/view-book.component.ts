@@ -44,19 +44,12 @@ export class ViewBookComponent implements OnInit {
       this.bookApi.getBook(id).subscribe({
         next: (book) => {
           this.book = book;
-
           if (book.owner._id === this.currentUserId) {
             this.isOwner = true;
           }
           
-          //const usersRented = book.requestedBy?.map(user => user.id);
-          const userFound = book.requestedBy?.some(u => u.user?._id === this.currentUserId);
-
-          console.log(book.requestedBy);
-          
-          
-                  
-          if(userFound===true){
+          const userHasRented = book.requestedBy?.some(u => u.user?._id === this.currentUserId);
+          if(userHasRented === true){
             this.hasRented = true
           }
 
@@ -117,6 +110,35 @@ export class ViewBookComponent implements OnInit {
       this.bookApi.requestBook(id, userId, isRented).subscribe({
         next: (response) => {
           this.snackBar.open('Your request for the book is successful!', 'Close', {
+            duration: 20000,
+          });
+          this.router.navigate(['/catalog']);
+        },
+        error: (error) => {
+          let errorMessage = 'An error occurred while making your request for the book. Please try again.';
+
+          if (error.status === 400) {
+            errorMessage += ' There was a problem with the data you entered.';
+          } else if (error.status === 500) {
+            errorMessage += ' There was a problem with the server.';
+          }
+
+          errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
+
+          this.snackBar.open(errorMessage, 'Close', {
+            duration: 20000,
+          });
+        }
+      });
+    }
+  }
+
+  cancelRequest(id: string): void {
+    const userId = this.currentUserId;
+    if (userId) {
+      this.bookApi.cancelRequest(id, userId).subscribe({
+        next: (response) => {
+          this.snackBar.open('You cancelled your book request successfully!', 'Close', {
             duration: 20000,
           });
           this.router.navigate(['/catalog']);

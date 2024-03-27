@@ -38,14 +38,14 @@
                <div class="sub-title" *ngIf="book.isRented===false">Status: Available</div>
             </mat-card-subtitle>
 
-            <mat-card-subtitle style="margin: 10px" *ngIf="loggedIn && !isOwner"><button mat-raised-button
+            <mat-card-subtitle style="margin: 10px" *ngIf="!hasRented && loggedIn && !isOwner"><button mat-raised-button
                   color="primary" (click)="book._id && requestBook(book._id)"><mat-icon>bookmark</mat-icon>Request this
                   Book</button>
             </mat-card-subtitle>
 
             <mat-card-subtitle style="margin: 10px" *ngIf="book.isRented && hasRented && loggedIn && !isOwner"><button
                   mat-raised-button color="accent"
-                  (click)="book._id && requestBook(book._id)"><mat-icon>cancel</mat-icon>Cancel Your Book
+                  (click)="book._id && cancelRequest(book._id)"><mat-icon>cancel</mat-icon>Cancel Your Book
                   Request</button>
             </mat-card-subtitle>
 

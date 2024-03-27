@@ -66,6 +66,12 @@ export class BookService {
     return this.http.put<Book>(`${apiUrl}/catalog/requestSub/${id}`, payload, {withCredentials: true});
   }
 
+  cancelRequest(id: string, userId: string) {
+    const { apiUrl } = environment;
+    const payload = {userId};
+    return this.http.put<Book>(`${apiUrl}/catalog/cancelSub/${id}`, payload, {withCredentials: true});
+  }
+
   deleteBook(id: string) {
     const { apiUrl } = environment;
     return this.http.delete(`${apiUrl}/catalog/${id}`, {withCredentials: true});

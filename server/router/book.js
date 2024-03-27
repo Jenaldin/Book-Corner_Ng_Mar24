@@ -14,6 +14,6 @@ router.post('/', isAuth, bookController.newBook);
 router.put('/:bookId', isAuth, bookController.updateBook);
 router.delete('/:bookId', isAuth, bookController.removeBook);
 router.put('/requestSub/:bookId', isAuth, bookController.requestSub);
-
+router.put('/cancelSub/:bookId', isAuth, bookController.cancelSub);
 
 module.exports = router

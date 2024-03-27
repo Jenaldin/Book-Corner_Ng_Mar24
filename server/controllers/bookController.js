@@ -141,6 +141,23 @@ const requestSub = async (req, res) => {
    }
 }
 
+const cancelSub = async (req, res) => {
+   const { bookId } = req.params;
+   const { userId } = req.body;
+   try {
+      await bookService.cancelReqBook(bookId, userId);
+      res.json({ message: 'Successfully cancelled book request' });
+      console.log('Successfully cancelled book request');
+   } catch (err) {
+      const errMsg = err.message;
+      if (err.name === 'ValidationError') {
+         res.status(400).json({ message: errMsg });
+      } else {
+         res.status(500).json({ message: errMsg });
+      }
+   }
+}
+
 module.exports = {
    getBooks,
    getTotalBooks,
@@ -151,4 +168,5 @@ module.exports = {
    updateBook,
    removeBook,
    requestSub,
+   cancelSub
 }

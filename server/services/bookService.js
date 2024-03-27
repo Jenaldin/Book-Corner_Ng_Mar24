@@ -63,4 +63,9 @@ exports.requestBook = async (bookId, userId, isRented) => {
 
    await bookModel.findByIdAndUpdate(bookId, { isRented: isRented }, { runValidators: true });
    await userModel.findByIdAndUpdate(userId, { $push: { booksRequested: bookId } });
+};
+
+exports.cancelReqBook = async (bookId, userId) => {
+   await bookModel.updateOne({ _id: bookId }, { $pull: { requestedBy: { user: userId } } });
+   await userModel.updateOne({ _id: userId }, { $pull: { booksRequested: bookId } });
 }
