@@ -5,11 +5,13 @@ const bookSchema = new mongoose.Schema({
    title: {
       type: String,
       minlength: [2, 'Title minimal length is 2 symbols'],
+      maxlength: [256, 'Language the book is in maximal length is 30 symbols'],
       required: [true, 'Title is required'],
    },
    author: {
       type: String,
       minlength: [2, 'Author`s name minimal length is 2 symbols'],
+      maxlength: [256, 'Author`s name the book is in maximal length is 256 symbols'],
       required: [true, 'Author`s name is required'],
    },
    genre:{

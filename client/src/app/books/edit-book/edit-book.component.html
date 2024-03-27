@@ -1,114 +1,190 @@
 <div class="center-div" *ngIf="isLoading">
-   <mat-spinner></mat-spinner>
+  <mat-spinner></mat-spinner>
 </div>
 <div class="top-div" *ngIf="!isLoading && book">
-   <mat-card>
-      <mat-card-header>
-         <mat-card-title-group>
-            <mat-card-title>
-               <h2 class="title"><mat-icon>edit</mat-icon> Edit Your Book in The Book Corner!</h2>
-            </mat-card-title>
-         </mat-card-title-group>
-      </mat-card-header>
-      <mat-card-content>
-         <form #bookForm="ngForm" (ngSubmit)="onSubmit(bookForm.value)">
-            <div class="label">
-               <p>Book Title:</p>
-               <mat-form-field class="mat-form-field" appearance="fill">
-                  <mat-label>Title</mat-label>
-                  <input matInput [(ngModel)]="book.title" name="title"  required minlength="2" #titleField="ngModel"
-                     matTooltip="Please add the official book title.">
-                  <mat-error *ngIf="titleField.errors?.['required']">Title is required.</mat-error>
-                  <mat-error *ngIf="titleField.errors?.['minlength']">Title must be at least 2 characters
-                     long.</mat-error>
-               </mat-form-field>
-            </div>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title-group>
+        <mat-card-title>
+          <h2 class="title">
+            <mat-icon>edit</mat-icon> Edit Your Book in The Book Corner!
+          </h2>
+        </mat-card-title>
+      </mat-card-title-group>
+    </mat-card-header>
+    <mat-card-content>
+      <form #bookForm="ngForm" (ngSubmit)="onSubmit(bookForm.value)">
+        <div class="label">
+          <p>Book Title:</p>
+          <mat-form-field class="mat-form-field" appearance="fill">
+            <mat-label>Title</mat-label>
+            <input
+              matInput
+              [(ngModel)]="book.title"
+              name="title"
+              required
+              minlength="2"
+              maxlength="256"
+              #titleField="ngModel"
+              matTooltip="Please add the official book title."
+            />
+            <mat-error *ngIf="titleField.errors?.['required']"
+              >Title is required.</mat-error
+            >
+            <mat-error *ngIf="titleField.errors?.['minlength']"
+              >Title must be at least 2 characters long.</mat-error
+            >
+            <mat-error *ngIf="titleField.errors?.['maxlength']"
+              >Title must be no more than 256 characters long.</mat-error
+            >
+          </mat-form-field>
+        </div>
 
-            <div class="label">
-               <p>Book Author:</p>
-               <mat-form-field class="mat-form-field" appearance="fill">
-                  <mat-label>Author</mat-label>
-                  <input matInput name="author" [(ngModel)]="book.author" required minlength="2" #authorField="ngModel"
-                     matTooltip="Please add the official full name or pseudonym of the author. If the book does not have author, use Unknown">
-                  <mat-error *ngIf="authorField.errors?.['required']">Author is required.</mat-error>
-                  <mat-error *ngIf="authorField.errors?.['minlength']">Author must be at least 2 characters
-                     long.</mat-error>
-               </mat-form-field>
-            </div>
+        <div class="label">
+          <p>Book Author:</p>
+          <mat-form-field class="mat-form-field" appearance="fill">
+            <mat-label>Author</mat-label>
+            <input
+              matInput
+              name="author"
+              [(ngModel)]="book.author"
+              required
+              minlength="2"
+              maxlength="256"
+              pattern="^[a-zA-Z\u00C0-\u017F\'\,\u0400-\u04FF]+(\-[a-zA-Z\u00C0-\u017F\'\,\u0400-\u04FF]+)*$"
+              #authorField="ngModel"
+              matTooltip="Please add the official full name or pseudonym of the author. If the book does not have author, use Unknown"
+            />
+            <mat-error *ngIf="authorField.errors?.['required']"
+              >Author is required.</mat-error
+            >
+            <mat-error *ngIf="authorField.errors?.['minlength']"
+              >Author must be at least 2 characters long.</mat-error
+            >
+            <mat-error *ngIf="authorField.errors?.['maxlength']"
+              >Author must be no more than 256 characters long.</mat-error
+            >
+          </mat-form-field>
+        </div>
 
-            <div class="label">
-               <p>Book Genre:</p>
-               <mat-form-field class="mat-form-field" appearance="fill">
-                  <mat-label>Genre</mat-label>
-                  <mat-select name="genre" [(ngModel)]="book.genre" required #genreField="ngModel"
-                     matTooltip="Please select the main book genre. Use the description field to provide additional details.">
-                     <mat-error *ngIf="genreField.errors?.['required']">Genre is required.</mat-error>
-                     <mat-error *ngIf="genreField.errors?.['minlength']">Genre must be at least 3 characters
-                        long.</mat-error>
-                     <mat-option *ngFor="let genre of genres" [value]="genre">
-                        {{genre}}
-                     </mat-option>
-                  </mat-select>
-               </mat-form-field>
-            </div>
+        <div class="label">
+          <p>Book Genre:</p>
+          <mat-form-field class="mat-form-field" appearance="fill">
+            <mat-label>Genre</mat-label>
+            <mat-select
+              name="genre"
+              [(ngModel)]="book.genre"
+              required
+              #genreField="ngModel"
+              matTooltip="Please select the main book genre. Use the description field to provide additional details."
+            >
+              <mat-error *ngIf="genreField.errors?.['required']"
+                >Genre is required.</mat-error
+              >
+              <mat-option *ngFor="let genre of genres" [value]="genre">
+                {{ genre }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
 
-            <div class="label">
-               <p>Book Status:</p>
-                  <mat-slide-toggle name="isRented" [(ngModel)]="book.isRented">   Is the Book Rented?</mat-slide-toggle>
-            </div>
-            <br>
-            <div class="label">
-               <p>Book Cover:</p>
-               <mat-form-field class="mat-form-field" appearance="fill">
-                  <mat-label>Cover URL</mat-label>
-                  <input matInput name="coverUrl" [(ngModel)]="book.coverUrl" required
-                     pattern="^https:\/\/.+(\.jpg|\.jpeg|\.png|\.gif)$" #coverUrlField="ngModel"
-                     matTooltip="Please provide links to official book covers only.">
-                  <mat-error *ngIf="coverUrlField.errors?.['required']">Cover URL is required.</mat-error>
-                  <mat-error *ngIf="coverUrlField.errors?.['pattern']">
-                     Please provide a valid URL ending with .jpg, .jpeg, .png, or .gif</mat-error>
-               </mat-form-field>
+        <div class="label">
+          <p>Book Status:</p>
+          <mat-slide-toggle name="isRented" [(ngModel)]="book.isRented">
+            Is the Book Rented?</mat-slide-toggle
+          >
+        </div>
+        <br />
+        <div class="label">
+          <p>Book Cover:</p>
+          <mat-form-field class="mat-form-field" appearance="fill">
+            <mat-label>Cover URL</mat-label>
+            <input
+              matInput
+              name="coverUrl"
+              [(ngModel)]="book.coverUrl"
+              required
+              pattern="^https:\/\/.+(\.jpg|\.jpeg|\.png|\.gif)$"
+              #coverUrlField="ngModel"
+              matTooltip="Please provide links to official book covers only."
+            />
+            <mat-error *ngIf="coverUrlField.errors?.['required']"
+              >Cover URL is required.</mat-error
+            >
+            <mat-error *ngIf="coverUrlField.errors?.['pattern']">
+              Please provide a valid URL ending with .jpg, .jpeg, .png, or
+              .gif</mat-error
+            >
+          </mat-form-field>
+        </div>
 
-            </div>
+        <div class="label">
+          <p>Language the Book is in:</p>
+          <mat-form-field class="mat-form-field" appearance="fill">
+            <mat-label>Language</mat-label>
+            <input
+              matInput
+              name="bookLang"
+              [(ngModel)]="book.bookLang"
+              required
+              minlength="2"
+              maxlength="30"
+              #bookLangField="ngModel"
+              matTooltip="In case you have the book in more than one language, separate the options with a comma."
+            />
+            <mat-error *ngIf="bookLangField.errors?.['required']"
+              >Language is required.</mat-error
+            >
+            <mat-error *ngIf="bookLangField.errors?.['minlength']"
+              >Language must be at least 2 characters long.</mat-error
+            >
+            <mat-error *ngIf="bookLangField.errors?.['maxlength']"
+              >Language must be no more than 30 characters long.</mat-error
+            >
+          </mat-form-field>
+        </div>
 
-            <div class="label">
-               <p>Language the Book is in:</p>
-               <mat-form-field class="mat-form-field" appearance="fill">
-                  <mat-label>Language</mat-label>
-                  <input matInput name="bookLang" [(ngModel)]="book.bookLang" required minlength="2" maxlength="30"
-                     #bookLangField="ngModel"
-                     matTooltip="In case you have the book in more than one language, separate the options with a comma.">
-                  <mat-error *ngIf="bookLangField.errors?.['required']">Language is required.</mat-error>
-                  <mat-error *ngIf="bookLangField.errors?.['minlength']">Language must be at least 2 characters
-                     long.</mat-error>
-                  <mat-error *ngIf="bookLangField.errors?.['maxlength']">Language must be no more than 30
-                     characters long.</mat-error>
-               </mat-form-field>
-            </div>
-
-            <div class="label">
-               <p>Book Description / Resume:</p>
-               <mat-form-field class="mat-form-field" appearance="fill">
-                  <mat-label>Description / Resume</mat-label>
-                  <textarea matInput name="description" [(ngModel)]="book.description" required minlength="100"
-                     maxlength="2000" #descriptionField="ngModel"
-                     matTooltip="Please try to be informative and useful to other readers with your words"></textarea>
-                  <mat-error *ngIf="descriptionField.errors?.['required']">Description / Resume is
-                     required.</mat-error>
-                  <mat-error *ngIf="descriptionField.errors?.['minlength']">Description / Resume must be at
-                     least 100 characters long.</mat-error>
-                  <mat-error *ngIf="descriptionField.errors?.['maxlength']">Description / Resume must be no
-                     more than 2000 characters long.</mat-error>
-               </mat-form-field>
-            </div>
-            <mat-card-actions>
-               <button mat-raised-button color="primary" type="submit"
-                  [disabled]="!bookForm.valid"><mat-icon>send</mat-icon>Submit</button>
-            </mat-card-actions>
-         </form>
-      </mat-card-content>
-      <mat-card-footer>
-         <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-      </mat-card-footer>
-   </mat-card>
+        <div class="label">
+          <p>Book Description / Resume:</p>
+          <mat-form-field class="mat-form-field" appearance="fill">
+            <mat-label>Description / Resume</mat-label>
+            <textarea
+              matInput
+              name="description"
+              [(ngModel)]="book.description"
+              required
+              minlength="100"
+              maxlength="2000"
+              #descriptionField="ngModel"
+              matTooltip="Please try to be informative and useful to other readers with your words"
+            ></textarea>
+            <mat-error *ngIf="descriptionField.errors?.['required']"
+              >Description / Resume is required.</mat-error
+            >
+            <mat-error *ngIf="descriptionField.errors?.['minlength']"
+              >Description / Resume must be at least 100 characters
+              long.</mat-error
+            >
+            <mat-error *ngIf="descriptionField.errors?.['maxlength']"
+              >Description / Resume must be no more than 2000 characters
+              long.</mat-error
+            >
+          </mat-form-field>
+        </div>
+        <mat-card-actions>
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="!bookForm.valid"
+          >
+            <mat-icon>send</mat-icon>Submit
+          </button>
+        </mat-card-actions>
+      </form>
+    </mat-card-content>
+    <mat-card-footer>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </mat-card-footer>
+  </mat-card>
 </div>

@@ -35,8 +35,8 @@ export class AddBookComponent implements OnInit {
   ];
 
   bookForm = this.fb.group({
-    title: ['', [Validators.required, Validators.minLength(2)]],
-    author: ['', [Validators.required, Validators.minLength(2)]],
+    title: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(256)]],
+    author: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(256)]],
     genre: ['', Validators.required],
     coverUrl: ['', [Validators.required, Validators.pattern(/https:\/\/.+\.(jpg|jpeg|png|gif)/i)]],
     bookLang: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],

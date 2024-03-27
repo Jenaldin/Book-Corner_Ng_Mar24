@@ -24,6 +24,8 @@
                      required.</mat-error>
                   <mat-error *ngIf="registerForm.get('firstName')?.errors?.['minlength']">First Name must be at least 2
                      characters long.</mat-error>
+                     <mat-error *ngIf="registerForm.get('firstName')?.errors?.['maxlength']">First Name must be no more than
+                        30 characters long.</mat-error>
                   <mat-error *ngIf="registerForm.get('firstName')?.errors?.['pattern']">
                      Please use only letters, or a hyphen if your first name is hyphenated.
                   </mat-error>
@@ -38,6 +40,8 @@
                      required.</mat-error>
                   <mat-error *ngIf="registerForm.get('lastName')?.errors?.['minlength']">Last Name must be at least 2
                      characters long.</mat-error>
+                     <mat-error *ngIf="registerForm.get('lastName')?.errors?.['maxlength']">Last Name must be no more than
+                        50 characters long.</mat-error>
                   <mat-error *ngIf="registerForm.get('lastName')?.errors?.['pattern']">
                      Please use only letters, or a hyphen if your last name is hyphenated.
                   </mat-error>
@@ -55,7 +59,7 @@
                   <mat-error *ngIf="registerForm.get('username')?.errors?.['maxlength']">Username must be no more than
                      20 characters long.</mat-error>
                   <mat-error *ngIf="registerForm.get('username')?.errors?.['pattern']">
-                     Please use only letters, numbers, hyphens and/or underscores.
+                     Please use only latin letters, numbers, hyphens and/or underscores.
                   </mat-error>
                </mat-form-field>
             </div>
@@ -67,6 +71,8 @@
                   <mat-error *ngIf="registerForm.get('email')?.errors?.['required']">E-mail is required.</mat-error>
                   <mat-error *ngIf="registerForm.get('email')?.errors?.['minlength']">E-mail must be at least 10
                      characters long.</mat-error>
+                     <mat-error *ngIf="registerForm.get('email')?.errors?.['maxlength']">E-mail must be no more than
+                        50 characters long.</mat-error>
                   <mat-error *ngIf="registerForm.get('email')?.errors?.['emailValid']">Invalid email
                      address.</mat-error>
                </mat-form-field>

@@ -6,14 +6,16 @@ const saltRounds = Number(process.env.SALT) || 10;
 const userSchema = new mongoose.Schema({
    firstName: {
       type: String,
-      match: [/^[a-zA-Z]+(-[a-zA-Z]+)*$/, 'Invalid first name'],
+      match: [/^[a-zA-Z\u00C0-\u017F\'\u0400-\u04FF]+(\-[a-zA-Z\u00C0-\u017F\'\u0400-\u04FF]+)*$/, 'Invalid first name'],
       minlength: [2, 'First Name should be at least 2 characters'],
+      maxlength: [30, 'First Name should be no more than 30 characters'],
       required: [true, 'First Name is required'],
    },
    lastName: {
       type: String,
-      match: [/^[a-zA-Z]+(-[a-zA-Z]+)*$/, 'Invalid last name'],
+      match: [/^[a-zA-Z\u00C0-\u017F\'\u0400-\u04FF]+(\-[a-zA-Z\u00C0-\u017F\'\u0400-\u04FF]+)*$/, 'Invalid last name'],
       minlength: [2, 'Last Name should be at least 2 characters'],
+      maxlength: [50, 'Last Name should be no more than 50 characters'],
       required: [true, 'Last Name is required'],
    },
    username: {
@@ -26,7 +28,8 @@ const userSchema = new mongoose.Schema({
    },
    email: {
       type: String,
-      minlength: 10,
+      minlength: [10, 'Email should be at least 10 characters'],
+      maxlength: [50, 'Email should be no more than 50 characters'],
       lowercase: true,
       required: [true, 'Email is required'],
       validate: {
@@ -52,7 +55,7 @@ const userSchema = new mongoose.Schema({
    },
    aboutMe: {
       type: String,
-      maxlength: [200, 'About me maximal length is 200 symbols'],
+      maxlength: [2000, 'About me maximal length is 2000 symbols'],
       default: ' ',
    },
    booksOwned: [{

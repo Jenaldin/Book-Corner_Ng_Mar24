@@ -18,10 +18,10 @@ export class RegisterComponent implements OnInit {
   hideRe = true;
 
   registerForm = this.fb.group({
-    firstName: ['', [Validators.required, Validators.minLength(2), Validators.pattern('^[a-zA-Z]+(-[a-zA-Z]+)*$')]],
-    lastName: ['', [Validators.required, Validators.minLength(2), Validators.pattern('^[a-zA-Z]+(-[a-zA-Z]+)*$')]],
+    firstName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30), Validators.pattern('^[a-zA-Z\u00C0-\u017F\'\u0400-\u04FF]+(-[a-zA-Z\u00C0-\u017F\'\u0400-\u04FF]+)*$')]],
+    lastName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern('^[a-zA-Z\u00C0-\u017F\'\u0400-\u04FF]+(-[a-zA-Z\u00C0-\u017F\'\u0400-\u04FF]+)*$')]],
     username: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(20), Validators.pattern('^[a-zA-Z0-9_-]+$')]],
-    email: ['', [Validators.required, Validators.minLength(10), emailValidator()]],
+    email: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(50), emailValidator()]],
     passGroup: this.fb.group(
       {
         password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(24)]],

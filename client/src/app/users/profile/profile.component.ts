@@ -35,11 +35,11 @@ export class ProfileComponent implements OnInit {
   ) { };
 
   editUserForm = this.fb.group({
-    firstName: ['', [Validators.required, Validators.minLength(2), Validators.pattern('^[a-zA-Z]+(-[a-zA-Z]+)*$')]],
-    lastName: ['', [Validators.required, Validators.minLength(2), Validators.pattern('^[a-zA-Z]+(-[a-zA-Z]+)*$')]],
+    firstName: ['', [Validators.required, Validators.minLength(2), Validators.pattern('^[a-zA-Z\u00C0-\u017F\'\u0400-\u04FF]+(-[a-zA-Z\u00C0-\u017F\'\u0400-\u04FF]+)*$')]],
+    lastName: ['', [Validators.required, Validators.minLength(2), Validators.pattern('^[a-zA-Z\u00C0-\u017F\'\u0400-\u04FF]+(-[a-zA-Z\u00C0-\u017F\'\u0400-\u04FF]+)*$')]],
     email: ['', [Validators.required, Validators.minLength(10), emailValidator()]],
     avatar: ['', [Validators.required, Validators.pattern(/https?:\/\/.+\.(jpg|jpeg|png|gif)/i)]],
-    aboutMe: ['', [Validators.maxLength(200)]],
+    aboutMe: ['', [Validators.maxLength(2000)]],
   });
 
   ngOnInit(): void {
