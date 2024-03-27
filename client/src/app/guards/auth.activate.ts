@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree, } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree, } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -9,7 +9,7 @@ import { NavigationSnackComponent } from '../shared/navigation/navigation-snack.
 
 @Injectable({ providedIn: 'root' })
 export class AuthActive implements CanActivate {
-   constructor(private userApi: UserService, private snackBar: MatSnackBar) { }
+   constructor(private userApi: UserService, private snackBar: MatSnackBar, private router: Router) { }
 
    canActivate(
       route: ActivatedRouteSnapshot,
@@ -22,7 +22,7 @@ export class AuthActive implements CanActivate {
 
       if (!this.userApi.isLoggedIn) {
          this.snackBar.openFromComponent(NavigationSnackComponent, { duration: 10000 });
-         return false;
+         return this.router.createUrlTree(['/login']);
       }
       return true;
    }
