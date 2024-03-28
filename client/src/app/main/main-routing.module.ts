@@ -24,8 +24,8 @@ const routes: Routes = [
         component: SearchComponent,
       },
       {
-         path: '404',
-         component: NotFoundComponent
+        path: '404',
+        component: NotFoundComponent,
       },
     ],
   },

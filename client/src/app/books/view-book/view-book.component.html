@@ -61,14 +61,14 @@
          <p style="max-width: 650px;">{{book.description}}</p>
 
          <div class="label">Book Owner:</div>
-         <a [routerLink]="['/profile', book.owner._id]">
+         <a [routerLink]="['/users/profile', book.owner._id]">
             <p>{{book.owner.username}}</p>
          </a>
 
          <div class="label">Book Requested by:</div>
          <ng-container *ngFor="let item of book.requestedBy; let isLast=last">
             <span *ngIf="item.user">
-               <a [routerLink]="['/profile', item.user._id]">{{item.user.username}}</a> (on {{item.requestedOn | date:'dd MMMM yyyy'}})
+               <a [routerLink]="['/users/profile', item.user._id]">{{item.user.username}}</a> (on {{item.requestedOn | date:'dd MMMM yyyy'}})
             </span>
             <span *ngIf="!isLast">; </span>
          </ng-container>

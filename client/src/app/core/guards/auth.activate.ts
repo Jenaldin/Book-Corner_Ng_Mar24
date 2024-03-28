@@ -22,7 +22,7 @@ export class AuthActive implements CanActivate {
 
       if (!this.userApi.isLoggedIn) {
          this.snackBar.openFromComponent(NavigationSnackComponent, { duration: 10000 });
-         return this.router.createUrlTree(['/login']);
+         return this.router.createUrlTree(['/users/login']);
       }
       return true;
    }

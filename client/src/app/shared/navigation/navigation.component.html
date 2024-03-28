@@ -9,10 +9,10 @@
 
    <ng-container *ngIf="!loggedIn">
       <button mat-raised-button class="mat-raised-button" fxFlex="50%" fxFlex.lt-sm="100%" color="accent"
-         [routerLink]="['/login']">
+         [routerLink]="['/users/login']">
          <mat-icon>transit_enterexit</mat-icon>Login</button>
       <button mat-raised-button class="mat-raised-button" fxFlex="50%" fxFlex.lt-sm="100%" color="accent"
-         [routerLink]="['/register']">
+         [routerLink]="['/users/register']">
          <mat-icon>account_circle</mat-icon>Register</button>
    </ng-container>
 
@@ -21,7 +21,7 @@
       (click)="logout()">
          <mat-icon>exit_to_app</mat-icon>Logout</button>
       <button mat-raised-button class="mat-raised-button" fxFlex="50%" fxFlex.lt-sm="100%" color="accent"
-         [routerLink]="['/profile']">
+         [routerLink]="['/users/profile']">
          <mat-icon>whatshot</mat-icon>Hi, {{currentUser}}! (Profile)</button>
    </ng-container>
 
