@@ -10,10 +10,10 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'search', component: SearchComponent },
-
-  { path: '**', redirectTo: '/404' },
+  
+  { path: 'catalog', loadChildren: () => import('./books/books.module').then(m => m.BooksModule) },
   { path: '404', component: NotFoundComponent },
-
+  { path: '**', redirectTo: '/404' }
 ];
 
 @NgModule({

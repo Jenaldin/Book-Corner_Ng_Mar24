@@ -19,9 +19,9 @@ import { CommentsModule } from './comments/comments.module';
     AppComponent,
   ],
   imports: [
-    MainModule,
+    //MainModule,
     SharedModule,
-    BooksModule,
+    //BooksModule,
     UsersModule,
     CommentsModule,
     BrowserAnimationsModule,

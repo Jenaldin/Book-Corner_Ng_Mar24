@@ -8,29 +8,32 @@ import { EditBookComponent } from './edit-book/edit-book.component';
 import { AuthActive } from '../core/guards/auth.activate';
 
 const routes: Routes = [
-   {
-      path: 'catalog',
-      children: [
-         { path: '', pathMatch: 'full', component: CatalogComponent },
-         {
-            path: ':bookId',
-            children: [
-               { path: '', pathMatch: 'full', component: ViewBookComponent },
-               { path: 'edit-book', component: EditBookComponent, canActivate: [AuthActive], }
-            ]
-         }
-      ]
-   },
-   {
-      path: 'add-book',
-      component: AddBookComponent,
-      canActivate: [AuthActive],
-   },
+  {
+    path: '',
+    children: [
+      { path: '', pathMatch: 'full', component: CatalogComponent },
+      {
+        path: 'add-book',
+        component: AddBookComponent,
+        canActivate: [AuthActive],
+      },
+      {
+        path: ':bookId',
+        children: [
+          { path: '', pathMatch: 'full', component: ViewBookComponent },
+          {
+            path: 'edit-book',
+            component: EditBookComponent,
+            canActivate: [AuthActive],
+          },
+        ],
+      },
+    ],
+  },
 ];
 
-
 @NgModule({
-   imports: [RouterModule.forChild(routes)],
-   exports: [RouterModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
-export class BooksRoutingModule { }
+export class BooksRoutingModule {}
