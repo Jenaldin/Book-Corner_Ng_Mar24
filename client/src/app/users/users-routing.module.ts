@@ -4,18 +4,19 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthActive } from '../core/guards/auth.activate';
-import { GuestActive } from '../core/guards/guest.activate';
+import { guestActive } from '../core/guards/guest.activate';
 import { ViewProfileComponent } from './view-profile/view-profile.component';
 
 const routes: Routes = [
   {
     path: '',
     children: [
-      { path: 'login', component: LoginComponent, canActivate: [GuestActive] },
+      { path: '', pathMatch: 'full', redirectTo: '/users/profile' },
+      { path: 'login', component: LoginComponent, canActivate: [guestActive()] },
       {
         path: 'register',
         component: RegisterComponent,
-        canActivate: [GuestActive],
+        canActivate: [guestActive()],
       },
       {
         path: 'profile',
