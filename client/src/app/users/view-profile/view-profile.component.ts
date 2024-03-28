@@ -4,9 +4,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { emailValidator } from 'src/app/utils/email-valid';
-import { UserService } from 'src/app/services/user.service';
-import { UserDetailed } from 'src/app/types/user';
+import { emailValidator } from 'src/app/core/utils/email-valid';
+import { UserService } from 'src/app/core/services/user.service';
+import { UserDetailed } from 'src/app/core/types/user';
 
 @Component({
   selector: 'app-view-profile',

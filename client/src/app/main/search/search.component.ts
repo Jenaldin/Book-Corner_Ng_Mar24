@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { BookService } from 'src/app/services/book.service';
-import { Book } from 'src/app/types/book';
+import { BookService } from 'src/app/core/services/book.service';
+import { Book } from 'src/app/core/types/book';
 
 @Component({
   selector: 'app-search',

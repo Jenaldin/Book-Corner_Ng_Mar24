@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { UserService } from 'src/app/services/user.service';
-import { NavigationSnackComponent } from '../shared/navigation/navigation-snack.component';
+import { UserService } from 'src/app/core/services/user.service';
+import { NavigationSnackComponent } from '../../shared/navigation/navigation-snack.component';
 
 @Injectable({ providedIn: 'root' })
 export class AuthActive implements CanActivate {

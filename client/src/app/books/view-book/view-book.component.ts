@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BookService } from 'src/app/services/book.service';
-import { Book } from 'src/app/types/book';
+import { BookService } from 'src/app/core/services/book.service';
+import { Book } from 'src/app/core/types/book';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-view-book',

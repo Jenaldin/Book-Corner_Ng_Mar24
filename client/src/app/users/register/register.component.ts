@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from 'src/app/core/services/user.service';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { matchPass } from 'src/app/utils/pass-match';
-import { emailValidator } from 'src/app/utils/email-valid';
+import { matchPass } from 'src/app/core/utils/pass-match';
+import { emailValidator } from 'src/app/core/utils/email-valid';
 
 @Component({
   selector: 'app-register',

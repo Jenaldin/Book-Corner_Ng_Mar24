@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { BookService } from 'src/app/services/book.service';
-import { UserService } from 'src/app/services/user.service';
-import { Book } from 'src/app/types/book';
+import { BookService } from 'src/app/core/services/book.service';
+import { UserService } from 'src/app/core/services/user.service';
+import { Book } from 'src/app/core/types/book';
 
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';

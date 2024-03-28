@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
-import { AuthActive, } from '../guards/auth.activate';
-import { GuestActive } from '../guards/guest.activate';
+import { AuthActive, } from '../core/guards/auth.activate';
+import { GuestActive } from '../core/guards/guest.activate';
 import { ViewProfileComponent } from './view-profile/view-profile.component';
 
 const routes: Routes = [

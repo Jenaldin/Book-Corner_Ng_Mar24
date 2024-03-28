@@ -46,4 +46,4 @@ import { ReactiveFormsModule } from '@angular/forms';
     SearchComponent
   ]
 })
-export class CoreModule { }
+export class MainModule { }
