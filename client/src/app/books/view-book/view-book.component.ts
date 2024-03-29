@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+
+import { PageService } from 'src/app/core/services/page.service';
+import { UserService } from 'src/app/core/services/user.service';
 import { BookService } from 'src/app/core/services/book.service';
 import { Book } from 'src/app/core/types/book';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-view-book',
@@ -24,6 +26,7 @@ export class ViewBookComponent implements OnInit {
     private snackBar: MatSnackBar,
     private activeRoute: ActivatedRoute,
     private router: Router,
+    private pageService: PageService,
   ) { };
 
   get loggedIn(): boolean {
@@ -172,9 +175,14 @@ export class ViewBookComponent implements OnInit {
       half: Array(halfStars).fill('star_half'),
       empty: Array(emptyStars).fill('star_border')
     };
-  }
+  };
   
   onToggle(): void {
     this.showComments = !this.showComments
-  }
+  };
+
+  goBack() {
+    const page = this.activeRoute.snapshot.queryParamMap.get('page') || this.pageService.page;
+    this.router.navigate(['/catalog'], { queryParams: { page } });
+  };
 }

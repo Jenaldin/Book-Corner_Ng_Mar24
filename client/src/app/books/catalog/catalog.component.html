@@ -1,81 +1,119 @@
 <div class="center-div" *ngIf="isLoading">
-   <mat-spinner></mat-spinner>
+  <mat-spinner></mat-spinner>
 </div>
 
 <div *ngIf="!isLoading">
-   <div class="header">
-      <p>The Book Corner Catalog</p>
-   </div>
-   <ng-container *ngIf="loggedIn">
-      <div class="header">
-         <button mat-raised-button color="accent" [routerLink]="['/catalog/add-book']"><mat-icon>add_circle_outline</mat-icon>
-            Add
-            New Book!</button>
-      </div>
-   </ng-container>
+  <div class="header">
+    <p>The Book Corner Catalog</p>
+  </div>
+  <ng-container *ngIf="loggedIn">
+    <div class="header">
+      <button
+        mat-raised-button
+        color="accent"
+        [routerLink]="['/catalog/add-book']"
+      >
+        <mat-icon>add_circle_outline</mat-icon> Add New Book!
+      </button>
+    </div>
+  </ng-container>
 </div>
 
-<mat-paginator class="pagin-font" [length]="totalBooks" [pageSize]="6" [pageIndex]="currentPage"
-   (page)="pageChanged($event)"></mat-paginator>
-<hr>
+<mat-paginator
+  class="pagin-font"
+  [length]="totalBooks"
+  [pageSize]="6"
+  [pageIndex]="currentPage"
+  (page)="pageChanged($event)"
+></mat-paginator>
+<hr />
 
 <div *ngIf="this.hasResults">
-   <mat-grid-list cols="3" rowHeight="1:0.6" *ngIf="!isLoading">
-      <mat-grid-tile class="catalog-grid-tile" *ngFor="let book of books">
-         <mat-card>
-            <mat-card-header>
-               <mat-card-title-group>
-                  <mat-card-title>{{book.title}}</mat-card-title>
-                  <mat-card-subtitle>by {{book.author}}</mat-card-subtitle>
-                  <mat-card-subtitle>
-                     <hr>
-                  </mat-card-subtitle>
-                  <mat-card-subtitle>
-                     <div class="stars">
-                        <div class="sub-title">Rating: </div>
-                        <div *ngFor="let star of (book.averageRating ? getStars(book.averageRating).full : [])">
-                           <mat-icon>star</mat-icon>
-                        </div>
-                        <div *ngFor="let star of (book.averageRating ? getStars(book.averageRating).half : [])">
-                           <mat-icon>star_half</mat-icon>
-                        </div>
-                        <div *ngFor="let star of (book.averageRating ? getStars(book.averageRating).empty : [])">
-                           <mat-icon>star_border</mat-icon>
-                        </div>
-                     </div>
-                  </mat-card-subtitle>
-                  <mat-card-subtitle>
-                     <div class="sub-title">Genre: {{book.genre}}</div>
-                  </mat-card-subtitle>
-                  <mat-card-subtitle>
-                     <div class="sub-title" *ngIf="book.isRented; else bookIsFree">Status: Unavailable </div>
-                  </mat-card-subtitle>
-                  <mat-card-subtitle><ng-template #bookIsFree>
-                        <div class="sub-title">Status: Available</div>
-                     </ng-template></mat-card-subtitle>
-                  <img mat-card-lg-image src="{{book.coverUrl}}" alt="book cover">
-               </mat-card-title-group>
-            </mat-card-header>
-            <mat-card-content>
-               <p class="label">Description / Resume by the Book Owner:</p>
-               <p style="max-width: 550px;">{{book.description.substring(0, 200)}}...</p>
-               <br>
-            </mat-card-content>
-            <mat-card-actions>
-               <button mat-raised-button color="primary"
-                  [routerLink]="['/catalog', book._id]"><mat-icon>book</mat-icon>Details</button>
-            </mat-card-actions>
-         </mat-card>
-      </mat-grid-tile>
-   </mat-grid-list>
+  <mat-grid-list cols="3" rowHeight="1:0.6" *ngIf="!isLoading">
+    <mat-grid-tile class="catalog-grid-tile" *ngFor="let book of books">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title-group>
+            <mat-card-title>{{ book.title }}</mat-card-title>
+            <mat-card-subtitle>by {{ book.author }}</mat-card-subtitle>
+            <mat-card-subtitle>
+              <hr />
+            </mat-card-subtitle>
+            <mat-card-subtitle>
+              <div class="stars">
+                <div class="sub-title">Rating:</div>
+                <div
+                  *ngFor="
+                    let star of book.averageRating
+                      ? getStars(book.averageRating).full
+                      : []
+                  "
+                >
+                  <mat-icon>star</mat-icon>
+                </div>
+                <div
+                  *ngFor="
+                    let star of book.averageRating
+                      ? getStars(book.averageRating).half
+                      : []
+                  "
+                >
+                  <mat-icon>star_half</mat-icon>
+                </div>
+                <div
+                  *ngFor="
+                    let star of book.averageRating
+                      ? getStars(book.averageRating).empty
+                      : []
+                  "
+                >
+                  <mat-icon>star_border</mat-icon>
+                </div>
+              </div>
+            </mat-card-subtitle>
+            <mat-card-subtitle>
+              <div class="sub-title">Genre: {{ book.genre }}</div>
+            </mat-card-subtitle>
+            <mat-card-subtitle>
+              <div class="sub-title" *ngIf="book.isRented; else bookIsFree">
+                Status: Unavailable
+              </div>
+            </mat-card-subtitle>
+            <mat-card-subtitle
+              ><ng-template #bookIsFree>
+                <div class="sub-title">Status: Available</div>
+              </ng-template></mat-card-subtitle
+            >
+            <img mat-card-lg-image src="{{ book.coverUrl }}" alt="book cover" />
+          </mat-card-title-group>
+        </mat-card-header>
+        <mat-card-content>
+          <p class="label">Description / Resume by the Book Owner:</p>
+          <p style="max-width: 550px">
+            {{ book.description.substring(0, 200) }}...
+          </p>
+          <br />
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+            mat-raised-button
+            color="primary"
+            [routerLink]="['/catalog', book._id]"
+          >
+            <mat-icon>book</mat-icon>Details
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
 </div>
 
 <div *ngIf="!this.hasResults">
-   <mat-card class="home-mat-card">
-      <mat-card-header>
-         <mat-card-title>
-            <h2 class="title">No Books to show at this time</h2>
-         </mat-card-title>
-      </mat-card-header>
-   </mat-card>
+  <mat-card class="home-mat-card">
+    <mat-card-header>
+      <mat-card-title>
+        <h2 class="title">No Books to show at this time</h2>
+      </mat-card-title>
+    </mat-card-header>
+  </mat-card>
 </div>

@@ -1,93 +1,149 @@
 <div class="center-div" *ngIf="isLoading">
-   <mat-spinner></mat-spinner>
+  <mat-spinner></mat-spinner>
 </div>
 <div class="top-div" *ngIf="!isLoading">
-   <mat-card>
-      <mat-card-header>
-         <mat-card-title-group>
-            <mat-card-title>
-               <h2 class="title">{{book.title}}</h2>
-            </mat-card-title>
-            <mat-card-subtitle>
-               <div class="sub-title">by {{book.author}}</div>
-            </mat-card-subtitle>
-            <mat-card-subtitle>
-               <hr>
-            </mat-card-subtitle>
-            <mat-card-subtitle>
-               <div class="stars">
-                  <div class="sub-title">Rating: {{book.averageRating}} </div>
-                  <div *ngFor="let star of (book.averageRating ? getStars(book.averageRating).full : [])">
-                     <mat-icon>star</mat-icon>
-                  </div>
-                  <div *ngFor="let star of (book.averageRating ? getStars(book.averageRating).half : [])">
-                     <mat-icon>star_half</mat-icon>
-                  </div>
-                  <div *ngFor="let star of (book.averageRating ? getStars(book.averageRating).empty : [])">
-                     <mat-icon>star_border</mat-icon>
-                  </div>
-               </div>
-            </mat-card-subtitle>
-            <mat-card-subtitle>
-               <div class="sub-title">Genre: {{book.genre}}</div>
-            </mat-card-subtitle>
-            <mat-card-subtitle>
-               <div class="sub-title" *ngIf="book.isRented===true">Status: Unavailable </div>
-            </mat-card-subtitle>
-            <mat-card-subtitle>
-               <div class="sub-title" *ngIf="book.isRented===false">Status: Available</div>
-            </mat-card-subtitle>
+   <button mat-raised-button (click)="goBack()">Back</button>
+  <mat-card>
+   
+    <mat-card-header>
+      <mat-card-title-group>
+        <mat-card-title>
+          <h2 class="title">{{ book.title }}</h2>
+        </mat-card-title>
+        <mat-card-subtitle>
+          <div class="sub-title">by {{ book.author }}</div>
+        </mat-card-subtitle>
+        <mat-card-subtitle>
+          <hr />
+        </mat-card-subtitle>
+        <mat-card-subtitle>
+          <div class="stars">
+            <div class="sub-title">Rating: {{ book.averageRating }}</div>
+            <div
+              *ngFor="
+                let star of book.averageRating
+                  ? getStars(book.averageRating).full
+                  : []
+              "
+            >
+              <mat-icon>star</mat-icon>
+            </div>
+            <div
+              *ngFor="
+                let star of book.averageRating
+                  ? getStars(book.averageRating).half
+                  : []
+              "
+            >
+              <mat-icon>star_half</mat-icon>
+            </div>
+            <div
+              *ngFor="
+                let star of book.averageRating
+                  ? getStars(book.averageRating).empty
+                  : []
+              "
+            >
+              <mat-icon>star_border</mat-icon>
+            </div>
+          </div>
+        </mat-card-subtitle>
+        <mat-card-subtitle>
+          <div class="sub-title">Genre: {{ book.genre }}</div>
+        </mat-card-subtitle>
+        <mat-card-subtitle>
+          <div class="sub-title" *ngIf="book.isRented === true">
+            Status: Unavailable
+          </div>
+        </mat-card-subtitle>
+        <mat-card-subtitle>
+          <div class="sub-title" *ngIf="book.isRented === false">
+            Status: Available
+          </div>
+        </mat-card-subtitle>
 
-            <mat-card-subtitle style="margin: 10px" *ngIf="!hasRented && loggedIn && !isOwner"><button mat-raised-button
-                  color="primary" (click)="book._id && requestBook(book._id)"><mat-icon>bookmark</mat-icon>Request this
-                  Book</button>
-            </mat-card-subtitle>
+        <mat-card-subtitle
+          style="margin: 10px"
+          *ngIf="!hasRented && loggedIn && !isOwner"
+          ><button
+            mat-raised-button
+            color="primary"
+            (click)="book._id && requestBook(book._id)"
+          >
+            <mat-icon>bookmark</mat-icon>Request this Book
+          </button>
+        </mat-card-subtitle>
 
-            <mat-card-subtitle style="margin: 10px" *ngIf="book.isRented && hasRented && loggedIn && !isOwner"><button
-                  mat-raised-button color="accent"
-                  (click)="book._id && cancelRequest(book._id)"><mat-icon>cancel</mat-icon>Cancel Your Book
-                  Request</button>
-            </mat-card-subtitle>
+        <mat-card-subtitle
+          style="margin: 10px"
+          *ngIf="book.isRented && hasRented && loggedIn && !isOwner"
+          ><button
+            mat-raised-button
+            color="accent"
+            (click)="book._id && cancelRequest(book._id)"
+          >
+            <mat-icon>cancel</mat-icon>Cancel Your Book Request
+          </button>
+        </mat-card-subtitle>
 
-            <img mat-card-xl-image src="{{book.coverUrl}}" alt="book cover">
-         </mat-card-title-group>
-      </mat-card-header>
-      <mat-card-content>
-         <br>
-         <div class="label">This Book is in:</div>
-         <p>{{book.bookLang}}</p>
+        <img mat-card-xl-image src="{{ book.coverUrl }}" alt="book cover" />
+      </mat-card-title-group>
+    </mat-card-header>
+    <mat-card-content>
+      <br />
+      <div class="label">This Book is in:</div>
+      <p>{{ book.bookLang }}</p>
 
-         <div class="label">Description / Resume:</div>
-         <p style="max-width: 650px;">{{book.description}}</p>
+      <div class="label">Description / Resume:</div>
+      <p style="max-width: 650px">{{ book.description }}</p>
 
-         <div class="label">Book Owner:</div>
-         <a [routerLink]="['/users/profile', book.owner._id]">
-            <p>{{book.owner.username}}</p>
-         </a>
+      <div class="label">Book Owner:</div>
+      <a [routerLink]="['/users/profile', book.owner._id]">
+        <p>{{ book.owner.username }}</p>
+      </a>
 
-         <div class="label">Book Requested by:</div>
-         <ng-container *ngFor="let item of book.requestedBy; let isLast=last">
-            <span *ngIf="item.user">
-               <a [routerLink]="['/users/profile', item.user._id]">{{item.user.username}}</a> (on {{item.requestedOn | date:'dd MMMM yyyy'}})
-            </span>
-            <span *ngIf="!isLast">; </span>
-         </ng-container>
-
-      </mat-card-content>
-      <mat-card-actions>
-         <button mat-raised-button class="mat-raised-button" color="primary" *ngIf="loggedIn===true"
-            (click)="onToggle()"><mat-icon>
-               forum</mat-icon>View User's Comments for the Book</button>
-         <button mat-raised-button class="mat-raised-button" color="accent"
-            [routerLink]="['/catalog', book._id, 'edit-book']"
-            *ngIf="isOwner===true"><mat-icon>edit</mat-icon>Edit</button>
-         <button mat-raised-button class="mat-raised-button" color="warn" *ngIf="isOwner===true"
-            (click)="book._id && onDelete(book._id)">
-            <mat-icon>delete</mat-icon>Delete (permanent)</button>
-      </mat-card-actions>
-      <mat-card-footer>
-      </mat-card-footer>
-   </mat-card>
+      <div class="label">Book Requested by:</div>
+      <ng-container *ngFor="let item of book.requestedBy; let isLast = last">
+        <span *ngIf="item.user">
+          <a [routerLink]="['/users/profile', item.user._id]">{{
+            item.user.username
+          }}</a>
+          (on {{ item.requestedOn | date: "dd MMMM yyyy" }})
+        </span>
+        <span *ngIf="!isLast">; </span>
+      </ng-container>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-raised-button
+        class="mat-raised-button"
+        color="primary"
+        *ngIf="loggedIn === true"
+        (click)="onToggle()"
+      >
+        <mat-icon> forum</mat-icon>View User's Comments for the Book
+      </button>
+      <button
+        mat-raised-button
+        class="mat-raised-button"
+        color="accent"
+        [routerLink]="['/catalog', book._id, 'edit-book']"
+        *ngIf="isOwner === true"
+      >
+        <mat-icon>edit</mat-icon>Edit
+      </button>
+      <button
+        mat-raised-button
+        class="mat-raised-button"
+        color="warn"
+        *ngIf="isOwner === true"
+        (click)="book._id && onDelete(book._id)"
+      >
+        <mat-icon>delete</mat-icon>Delete (permanent)
+      </button>
+    </mat-card-actions>
+    <mat-card-footer> </mat-card-footer>
+  </mat-card>
 </div>
 
 <app-all-comments *ngIf="showComments"></app-all-comments>
