@@ -1,18 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+
 import { BookService } from 'src/app/core/services/book.service';
+import { SearchService } from 'src/app/core/services/search.service';
 import { Book } from 'src/app/core/types/book';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+  styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
   isLoading: boolean = true;
+  searchResults: Book[] = [];
+
   ngOnInit(): void {
+    if (this.searchService.searchParams) {
+      const params = this.searchService.searchParams;
+
+      this.searchBook.controls['title'].setValue(params.title);
+      this.searchBook.controls['author'].setValue(params.author);
+      this.searchBook.controls['genre'].setValue(params.genre);
+      this.searchBook.controls['owner'].setValue(params.owner);
+    }
+
+    if (this.searchService.searchResults) {
+      this.searchResults = this.searchService.searchResults;
+    }
+
     setTimeout(() => {
       this.isLoading = false;
     }, 1000);
@@ -41,12 +57,16 @@ export class SearchComponent implements OnInit {
     title: [''],
     author: [''],
     genre: [''],
-    owner: ['']
+    owner: [''],
   });
 
-  constructor(private fb: FormBuilder, private bookApi: BookService, private snackBar: MatSnackBar, private router: Router) { }
+  constructor(
+    private fb: FormBuilder,
+    private bookApi: BookService,
+    private snackBar: MatSnackBar,
+    private searchService: SearchService,
+  ) {}
 
-  searchResults: Book[] = [];
   onSubmit(): void {
     if (this.searchBook.valid) {
       const title = this.searchBook.value.title || '';
@@ -56,9 +76,11 @@ export class SearchComponent implements OnInit {
 
       this.bookApi.searchBooks(title, author, genre, owner).subscribe({
         next: (response) => {
-          this.searchResults = response; 
- 
-          if(this.searchResults.length === 0){
+          this.searchResults = response;
+          this.searchService.searchParams = this.searchBook.value;
+          this.searchService.searchResults = response;
+
+          if (this.searchResults.length === 0) {
             this.snackBar.open('No Books to show at this time!', 'Close', {
               duration: 20000,
             });
@@ -69,7 +91,8 @@ export class SearchComponent implements OnInit {
           }
         },
         error: (error) => {
-          let errorMessage = 'An error occurred while searching the book(s). Please try again.';
+          let errorMessage =
+            'An error occurred while searching the book(s). Please try again.';
 
           if (error.status === 400) {
             errorMessage += ' There was a problem with the data you entered.';
@@ -82,7 +105,7 @@ export class SearchComponent implements OnInit {
           this.snackBar.open(errorMessage, 'Close', {
             duration: 20000,
           });
-        }
+        },
       });
     }
   }
@@ -93,9 +116,9 @@ export class SearchComponent implements OnInit {
     let emptyStars = 5 - fullStars - halfStars;
 
     return {
-        full: Array(fullStars).fill('star'),
-        half: Array(halfStars).fill('star_half'),
-        empty: Array(emptyStars).fill('star_border')
+      full: Array(fullStars).fill('star'),
+      half: Array(halfStars).fill('star_half'),
+      empty: Array(emptyStars).fill('star_border'),
     };
   }
 }
