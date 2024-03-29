@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
+
 import { BookService } from 'src/app/core/services/book.service';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-add-book',
   templateUrl: './add-book.component.html',
-  styleUrls: ['./add-book.component.scss']
+  styleUrls: ['./add-book.component.scss'],
 })
-
 export class AddBookComponent implements OnInit {
   isLoading: boolean = true;
 
@@ -35,12 +35,34 @@ export class AddBookComponent implements OnInit {
   ];
 
   bookForm = this.fb.group({
-    title: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(256)]],
-    author: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(256)]],
+    title: [
+      '',
+      [Validators.required, Validators.minLength(2), Validators.maxLength(256)],
+    ],
+    author: [
+      '',
+      [Validators.required, Validators.minLength(2), Validators.maxLength(256)],
+    ],
     genre: ['', Validators.required],
-    coverUrl: ['', [Validators.required, Validators.pattern(/https:\/\/.+\.(jpg|jpeg|png|gif)/i)]],
-    bookLang: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
-    description: ['', [Validators.required, Validators.minLength(100), Validators.maxLength(2000)]],
+    coverUrl: [
+      '',
+      [
+        Validators.required,
+        Validators.pattern(/https:\/\/.+\.(jpg|jpeg|png|gif)/i),
+      ],
+    ],
+    bookLang: [
+      '',
+      [Validators.required, Validators.minLength(2), Validators.maxLength(30)],
+    ],
+    description: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(100),
+        Validators.maxLength(2000),
+      ],
+    ],
   });
 
   constructor(
@@ -48,8 +70,8 @@ export class AddBookComponent implements OnInit {
     private bookApi: BookService,
     private snackBar: MatSnackBar,
     private router: Router,
-    private userApi: UserService
-  ) { }
+    private location: Location
+  ) {}
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -57,8 +79,7 @@ export class AddBookComponent implements OnInit {
     }, 1000);
   }
 
-  onSubmit(): void {    
-
+  onSubmit(): void {
     if (this.bookForm.valid) {
       const title = this.bookForm.value.title || '';
       const author = this.bookForm.value.author || '';
@@ -67,31 +88,37 @@ export class AddBookComponent implements OnInit {
       const bookLang = this.bookForm.value.bookLang || '';
       const description = this.bookForm.value.description || '';
 
-      this.bookApi.addBook(title, author, genre, coverUrl, bookLang, description).subscribe({
-        next: (response) => {
+      this.bookApi
+        .addBook(title, author, genre, coverUrl, bookLang, description)
+        .subscribe({
+          next: (response) => {
+            this.snackBar.open('Book added successfully!', 'Close', {
+              duration: 20000,
+            });
+            this.bookForm.reset();
+            this.router.navigate(['/catalog']);
+          },
+          error: (error) => {
+            let errorMessage =
+              'An error occurred while adding the book. Please try again.';
 
-          this.snackBar.open('Book added successfully!', 'Close', {
-            duration: 20000,
-          });
-          this.bookForm.reset();
-          this.router.navigate(['/catalog']);
-        },
-        error: (error) => {
-          let errorMessage = 'An error occurred while adding the book. Please try again.';
+            if (error.status === 400) {
+              errorMessage += ' There was a problem with the data you entered.';
+            } else if (error.status === 500) {
+              errorMessage += ' There was a problem with the server.';
+            }
 
-          if (error.status === 400) {
-            errorMessage += ' There was a problem with the data you entered.';
-          } else if (error.status === 500) {
-            errorMessage += ' There was a problem with the server.';
-          }
+            errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
 
-          errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
-
-          this.snackBar.open(errorMessage, 'Close', {
-            duration: 20000,
-          });
-        }
-      });
+            this.snackBar.open(errorMessage, 'Close', {
+              duration: 20000,
+            });
+          },
+        });
     }
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

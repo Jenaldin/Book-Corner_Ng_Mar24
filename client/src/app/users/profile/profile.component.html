@@ -3,6 +3,7 @@
 </div>
 <div class="top-div" *ngIf="!isLoading">
   <ng-container *ngIf="!showEditMode">
+    <button mat-raised-button (click)="goBack()"><mat-icon>arrow_back</mat-icon>Back</button>
     <mat-card>
       <mat-card-header>
         <mat-card-title-group>
@@ -79,6 +80,7 @@
   </ng-container>
 
   <ng-container *ngIf="showEditMode">
+    <button mat-raised-button (click)="goBack()"><mat-icon>arrow_back</mat-icon>Back</button>
     <mat-card>
       <mat-card-header>
         <mat-card-title-group>

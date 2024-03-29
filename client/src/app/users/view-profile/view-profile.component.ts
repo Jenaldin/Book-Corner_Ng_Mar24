@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute} from '@angular/router';
+import { Location } from '@angular/common';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { emailValidator } from 'src/app/core/utils/email-valid';
 import { UserService } from 'src/app/core/services/user.service';
 import { UserDetailed } from 'src/app/core/types/user';
 
@@ -29,6 +28,7 @@ export class ViewProfileComponent implements OnInit {
     private userApi: UserService,
     private snackBar: MatSnackBar,
     private activeRoute: ActivatedRoute,
+    private location: Location,
   ) { };
 
   ngOnInit(): void {
@@ -58,5 +58,9 @@ export class ViewProfileComponent implements OnInit {
       });
 
     });
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

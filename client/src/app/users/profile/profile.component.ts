@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Location } from '@angular/common';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -32,6 +33,7 @@ export class ProfileComponent implements OnInit {
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
     private router: Router,
+    private location: Location,
   ) { };
 
   editUserForm = this.fb.group({
@@ -121,4 +123,8 @@ export class ProfileComponent implements OnInit {
     }
     return updatedFields;
   };
+
+  goBack() {
+    this.location.back();
+  }
 }

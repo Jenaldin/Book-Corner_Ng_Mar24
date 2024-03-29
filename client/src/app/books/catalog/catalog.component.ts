@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BookService } from 'src/app/core/services/book.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { Book } from 'src/app/core/types/book';
-import { PageService } from 'src/app/core/services/page.service';
 
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -25,7 +24,6 @@ export class CatalogComponent implements OnInit {
     private bookApi: BookService,
     private userApi: UserService,
     private snackBar: MatSnackBar,
-    private pageService: PageService,
     private router: Router,
     private activeRoute: ActivatedRoute,
   ) {}
@@ -95,7 +93,6 @@ export class CatalogComponent implements OnInit {
   }
 
   pageChanged(event: PageEvent): void {
-    this.pageService.page = event.pageIndex;
     this.router.navigate([], { queryParams: { page: event.pageIndex } });
     this.loadBooks(event.pageIndex, event.pageSize);
   }

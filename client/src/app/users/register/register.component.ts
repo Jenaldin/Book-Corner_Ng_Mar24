@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/core/services/user.service';
+import { Location } from '@angular/common';
 
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserService } from 'src/app/core/services/user.service';
 import { matchPass } from 'src/app/core/utils/pass-match';
 import { emailValidator } from 'src/app/core/utils/email-valid';
+
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-register',
@@ -43,6 +46,7 @@ export class RegisterComponent implements OnInit {
     private userApi: UserService,
     private snackBar: MatSnackBar,
     private router: Router,
+    private location: Location,
   ) { }
 
   ngOnInit(): void {
@@ -88,5 +92,9 @@ export class RegisterComponent implements OnInit {
         });
       }
     })
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
+
 import { BookService } from 'src/app/core/services/book.service';
 import { Book } from 'src/app/core/types/book';
+
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-edit-book',
@@ -38,6 +41,7 @@ export class EditBookComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     private snackBar: MatSnackBar,
     private router: Router,
+    private location: Location,
   ) { }
 
   ngOnInit(): void {
@@ -117,5 +121,9 @@ export class EditBookComponent implements OnInit {
       }
     }
     return updatedFields;
+  };
+
+  goBack() {
+    this.location.back();
   }
 }
