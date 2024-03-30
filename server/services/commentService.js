@@ -33,5 +33,6 @@ exports.addNewComment = async (payloadData, userId) => {
 
    return createdComment;
 };
+exports.editComment = async (commentId, payloadData) => commentModel.findByIdAndUpdate(commentId, payloadData, { runValidators: true });
 
 exports.deleteComment = (commentId) => commentModel.findByIdAndDelete(commentId);

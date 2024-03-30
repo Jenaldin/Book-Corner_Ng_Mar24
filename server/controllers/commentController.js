@@ -41,7 +41,19 @@ const newComment = async (req, res) => {
 };
 
 const updateComment = async (req, res) => {
-   
+   const payloadData = req.body;
+   const { commentId } = req.params;
+   try {
+      await commentService.editComment(commentId, payloadData);
+      res.json({ message: 'Comment updated successfully' });
+   } catch (err) {
+      const errMsg = err.message;
+      if (err.name === 'ValidationError') {
+         res.status(400).json({ message: errMsg });
+      } else {
+         res.status(500).json({ message: errMsg });
+      }
+   }
 };
 
 const removeComment = async (req, res) => {
