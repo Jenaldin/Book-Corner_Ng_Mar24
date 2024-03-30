@@ -1,9 +1,67 @@
 <div class="center-div" *ngIf="isLoading">
-   <mat-spinner></mat-spinner>
+  <mat-spinner></mat-spinner>
 </div>
 
-<div class="center-div" *ngIf="!isLoading">
-   <h1 class="margin-top">all-comments works!</h1>
+<div class="header">
+  <p>Book Comments</p>
+</div>
+<div class="header">
+  <button mat-raised-button color="accent" (click)="newComment()">
+    <mat-icon>comment</mat-icon> Add New Comment
+  </button>
 </div>
 
+<div class="top-div-comments" *ngIf="!isLoading">
+  <mat-accordion>
+    <mat-expansion-panel
+      (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false"
+    >
+      <mat-expansion-panel-header class="panel-header">
+        <mat-panel-title class="panel-title">
+          <button mat-icon-button color="basic" click="">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" click="">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <hr />
+        </mat-panel-title>
 
+        <mat-panel-title class="panel-title">
+          User:<br />Jenaldin
+          <hr
+        /></mat-panel-title>
+        <mat-panel-title class="panel-title">
+          From:<br />26 March 2024
+          <hr />
+        </mat-panel-title>
+        <mat-panel-title class="panel-title">
+          Title:<br />Remember, when using these components, you'll need to
+          <hr />
+        </mat-panel-title>
+        <mat-panel-title class="panel-title">
+          I rate this book: {{ 0 }} / 5
+          <hr />
+        </mat-panel-title>
+        <mat-panel-title class="panel-title">
+          Comment useful?
+          <button mat-icon-button color="basic" onclick="">
+            <mat-icon>thumb_up</mat-icon>
+          </button>
+          <p>{{ 0 }}</p>
+          <button mat-icon-button color="basic" onclick="">
+            <mat-icon>thumb_down</mat-icon>
+          </button>
+          <p>{{ 0 }}</p>
+          <hr />
+        </mat-panel-title>
+
+        <mat-panel-description class="panel-description">
+          {{ panelOpenState ? "Hide Comment Text..." : "Show Comment Text..." }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>COMMENT BODY</p>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

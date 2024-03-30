@@ -1,10 +1,40 @@
 .center-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.mat-mdc-form-field + .mat-mdc-form-field {
+  margin-left: 8px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header {
+   margin-top: 20px;
+   font-weight: bold;
+   font-size: 24px;
    display: flex;
    justify-content: center;
    align-items: center;
-   margin: 20px;
+ }
+
+.top-div-comments {
+  margin: 30px;
+  justify-content: center;
+  height: auto;
 }
 
-// .margin-top {
-//    margin-top: 150px;
-// }
+.panel-header {
+   display: flex;
+   justify-content: space-between;
+ }
+ 
+ .panel-title {
+   flex: 1 auto;
+ }
+ 
+ .panel-description {
+   flex: 0 auto;
+ }
