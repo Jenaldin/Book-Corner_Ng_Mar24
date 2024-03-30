@@ -4,8 +4,10 @@ const getComments = async (req, res) => {
    try {
       let pageNumber = Number(req.query.start);
       const pageSize = Number(req.query.end);
-      const items = await commentService.getComments(pageNumber, pageSize).lean();
-      res.send(items);
+      const bookId = req.query.bookId;
+      const item = await commentService.getComments(pageNumber, pageSize, bookId);
+   
+      res.json({comments: item.comments, total: item.total});
    } catch (err) {
       const errMsg = err.message;
       if (err.name === 'ValidationError') {
@@ -16,19 +18,6 @@ const getComments = async (req, res) => {
    }
 };
 
-const getTotalComments = async (req, res) => {
-   try {
-      const items = await commentService.getTotalComments();
-      res.send(items.toString());
-   } catch (err) {
-      const errMsg = err.message;
-      if (err.name === 'ValidationError') {
-         res.status(400).json({ message: errMsg });
-      } else {
-         res.status(500).json({ message: errMsg });
-      }
-   }
-};
 
 const getComment = async (req, res) => {
    
@@ -61,7 +50,6 @@ const removeComment = async (req, res) => {
 
 module.exports = {
    getComments,
-   getTotalComments,
    getComment,
    newComment,
    updateComment,

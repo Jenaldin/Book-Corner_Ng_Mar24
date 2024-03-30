@@ -11,14 +11,9 @@ import { Comment } from '../types/comment';
  export class CommentService {
    constructor(private http: HttpClient) { }
 
-   getComments(start: number, end: number) {
+   getComments(start: number, end: number, bookId: string) {
       const { apiUrl } = environment;
-      return this.http.get<Comment[]>(`${apiUrl}/comment?start=${start}&end=${end}`, {withCredentials: true});
-    }
-  
-    getTotalComments(){
-      const { apiUrl } = environment;
-      return this.http.get<number>(`${apiUrl}/comment/total`, {withCredentials: true})
+      return this.http.get<{ comments: Comment[], total: number }>(`${apiUrl}/comment?start=${start}&end=${end}&bookId=${bookId}`, {withCredentials: true});
     }
    
    addComment(book:string, title: string, commentBody: string, ratedBookWith: number){

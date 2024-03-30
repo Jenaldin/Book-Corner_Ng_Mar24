@@ -1,12 +1,15 @@
 const { bookModel, userModel, commentModel } = require('../models/index');
 
-exports.getComments = (pageNumber, pageSize) => commentModel
-   .find()
+exports.getComments = async (pageNumber, pageSize, bookId) => {
+   const comments = await commentModel
+   .find({book: bookId})
    .skip(pageNumber)
    .limit(pageSize)
    .populate('user', 'username');
 
-exports.getTotalComments = () => commentModel.countDocuments();
+   const total = await commentModel.countDocuments({book: bookId});
+   return { comments, total }
+}
 
 exports.addNewComment = async (payloadData, userId) => {
    const createdComment = await commentModel.create({
