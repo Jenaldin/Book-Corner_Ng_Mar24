@@ -1,1 +1,88 @@
-<p>add-comment works!</p>
+<mat-dialog-content class="mat-dialog-content-comment">
+  <form #formComment="ngForm" (ngSubmit)="addComment(formComment)">
+    <div>
+      <h2 class="form-header">
+        <mat-icon>comment</mat-icon> Add new comment from below
+      </h2>
+    </div>
+    <div>
+      <p class="field-label">What is your comment title?</p>
+      <mat-form-field class="mat-form-comment" appearance="fill">
+        <mat-label>Title</mat-label>
+        <input
+          matInput
+          name="title"
+          ngModel
+          required
+          minlength="5"
+          maxlength="50"
+          #titleField="ngModel"
+        />
+        <mat-error *ngIf="titleField.errors?.['required']"
+          >Title is required.</mat-error
+        >
+        <mat-error *ngIf="titleField.errors?.['minlength']"
+          >Title must be at least 5 characters long.</mat-error
+        >
+        <mat-error *ngIf="titleField.errors?.['maxlength']"
+          >Title must be no more than 50 characters long.</mat-error
+        >
+      </mat-form-field>
+    </div>
+
+    <div>
+      <p class="field-label">
+        Between 1 and 5 (5 being the highest) how would you rate this book?
+      </p>
+      <mat-form-field class="mat-form-comment" appearance="fill">
+        <mat-label>Rating</mat-label>
+        <mat-select name="ratedBookWith" ngModel #ratedBookWithField="ngModel">
+          <mat-option *ngFor="let i of [1, 2, 3, 4, 5]" [value]="i">
+            {{ i }} stars
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <p class="field-label">What is your comment about this book?</p>
+      <mat-form-field class="mat-form-comment" appearance="fill">
+        <mat-label>Text</mat-label>
+        <textarea
+          class="mat-input-comment"
+          matInput
+          name="commentBody"
+          ngModel
+          required
+          minlength="10"
+          maxlength="1000"
+          #commentBodyField="ngModel"
+        ></textarea>
+        <mat-error *ngIf="commentBodyField.errors?.['required']"
+          >Text is required.</mat-error
+        >
+        <mat-error *ngIf="commentBodyField.errors?.['minlength']"
+          >Text must be at least 10 characters long.</mat-error
+        >
+        <mat-error *ngIf="commentBodyField.errors?.['maxlength']"
+          >Text must be no more than 1000 characters long.</mat-error
+        >
+      </mat-form-field>
+    </div>
+    <div class="submit-comment-btn">
+      <button 
+        mat-raised-button
+        color="primary"
+        [mat-dialog-close]="true"
+        cdkFocusInitial
+        type="submit"
+        [disabled]="!formComment.valid"
+      >
+        <mat-icon>send</mat-icon>Submit
+      </button>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="basic" mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

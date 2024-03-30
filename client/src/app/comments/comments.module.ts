@@ -4,22 +4,37 @@ import { CommonModule } from '@angular/common';
 import { AddCommentComponent } from './add-comment/add-comment.component';
 import { EditCommentComponent } from './edit-comment/edit-comment.component';
 import { AllCommentsComponent } from './all-comments/all-comments.component';
+
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AddCommentComponent,
     EditCommentComponent,
-    AllCommentsComponent
+    AllCommentsComponent,
   ],
   imports: [
     MatProgressSpinnerModule,
-    CommonModule
+    MatExpansionModule,
+    MatCardModule,
+    MatButtonModule, 
+    MatDialogModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    FormsModule,
+    CommonModule,
   ],
-  exports: [
-    AddCommentComponent,
-    EditCommentComponent,
-    AllCommentsComponent
-  ],
+  exports: [AddCommentComponent, EditCommentComponent, AllCommentsComponent],
 })
-export class CommentsModule { }
+export class CommentsModule {}
