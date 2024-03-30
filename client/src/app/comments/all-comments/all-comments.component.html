@@ -11,8 +11,17 @@
   </button>
 </div>
 
-<div class="top-div-comments" *ngIf="!isLoading">
-  <mat-accordion>
+<mat-paginator
+  class="pagin-font"
+  [length]="totalComments"
+  [pageSize]="2"
+  [pageIndex]="currentPage"
+  (page)="pageChanged($event)"
+></mat-paginator>
+<hr />
+
+<div class="top-div-comments" *ngIf="!isLoading && this.hasResults">
+  <mat-accordion *ngFor="let comment of comments">
     <mat-expansion-panel
       (opened)="panelOpenState = true"
       (closed)="panelOpenState = false"
@@ -29,19 +38,19 @@
         </mat-panel-title>
 
         <mat-panel-title class="panel-title">
-          User:<br />Jenaldin
+          User:<br />{{comment.user.username}}
           <hr
         /></mat-panel-title>
         <mat-panel-title class="panel-title">
-          From:<br />26 March 2024
+          From:<br />{{ comment.createdAt | date: "dd MMMM yyyy" }}
           <hr />
         </mat-panel-title>
         <mat-panel-title class="panel-title">
-          Title:<br />Remember, when using these components, you'll need to
+          Title:<br />{{comment.title}}
           <hr />
         </mat-panel-title>
         <mat-panel-title class="panel-title">
-          I rate this book: {{ 0 }} / 5
+          I rate this book: {{comment.ratedBookWith}} / 5
           <hr />
         </mat-panel-title>
         <mat-panel-title class="panel-title">
@@ -61,7 +70,18 @@
           {{ panelOpenState ? "Hide Comment Text..." : "Show Comment Text..." }}
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <p>COMMENT BODY</p>
+      <p>{{comment.commentBody}}</p>
     </mat-expansion-panel>
   </mat-accordion>
 </div>
+
+<div class="top-div-comments" *ngIf="!isLoading && !this.hasResults">
+   <mat-card>
+     <mat-card-header>
+       <mat-card-title>
+         <h2>No Comments to show at this time</h2>
+       </mat-card-title>
+     </mat-card-header>
+   </mat-card>
+ </div>
+ 

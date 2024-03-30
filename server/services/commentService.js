@@ -1,5 +1,13 @@
 const { bookModel, userModel, commentModel } = require('../models/index');
 
+exports.getComments = (pageNumber, pageSize) => commentModel
+   .find()
+   .skip(pageNumber)
+   .limit(pageSize)
+   .populate('user', 'username');
+
+exports.getTotalComments = () => commentModel.countDocuments();
+
 exports.addNewComment = async (payloadData, userId) => {
    const createdComment = await commentModel.create({
       ...payloadData,

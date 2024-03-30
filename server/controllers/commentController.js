@@ -1,11 +1,33 @@
 const commentService = require('../services/commentService');
 
 const getComments = async (req, res) => {
-
+   try {
+      let pageNumber = Number(req.query.start);
+      const pageSize = Number(req.query.end);
+      const items = await commentService.getComments(pageNumber, pageSize).lean();
+      res.send(items);
+   } catch (err) {
+      const errMsg = err.message;
+      if (err.name === 'ValidationError') {
+         res.status(400).json({ message: errMsg });
+      } else {
+         res.status(500).json({ message: errMsg });
+      }
+   }
 };
 
 const getTotalComments = async (req, res) => {
-   
+   try {
+      const items = await commentService.getTotalComments();
+      res.send(items.toString());
+   } catch (err) {
+      const errMsg = err.message;
+      if (err.name === 'ValidationError') {
+         res.status(400).json({ message: errMsg });
+      } else {
+         res.status(500).json({ message: errMsg });
+      }
+   }
 };
 
 const getComment = async (req, res) => {
