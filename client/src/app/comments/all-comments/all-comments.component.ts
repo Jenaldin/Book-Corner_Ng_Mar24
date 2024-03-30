@@ -6,6 +6,7 @@ import { Comment } from 'src/app/core/types/comment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommentService } from 'src/app/core/services/comment.service';
 import { PageEvent } from '@angular/material/paginator';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-all-comments',
@@ -18,7 +19,6 @@ export class AllCommentsComponent implements OnInit {
   panelOpenState = false;
   hasResults: boolean = true;
   comments: Comment[] | null = [];
-  commentsFiltered: Comment[] | null = [];
   totalComments: number = 0;
   currentPage: number = 0;
 
@@ -26,10 +26,15 @@ export class AllCommentsComponent implements OnInit {
     public dialogBox: MatDialog,
     private snackBar: MatSnackBar,
     private commentsApi: CommentService,
+    private userApi: UserService
   ) {}
 
+  get currentUserId(): string | undefined {
+    return this.userApi.currentUserId;
+  }
+
   ngOnInit(): void {
-    this.loadComments(0, 2);
+    this.loadComments(0, 10);
     this.loadTotalComments();
 
     setTimeout(() => {
@@ -41,8 +46,12 @@ export class AllCommentsComponent implements OnInit {
     this.isLoading = true;
     this.commentsApi.getComments(pageIndex * pageSize, pageSize, this.bookId).subscribe({
       next: ({ comments, total }) => {
-        this.comments = comments;
-        this.totalComments = total
+        this.comments = comments.sort((a,b) => {
+          const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+          const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+          return dateB - dateA;
+        });
+        this.totalComments = total;
 
         if (this.comments.length === 0) {
           this.hasResults = false;

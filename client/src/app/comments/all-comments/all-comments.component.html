@@ -14,7 +14,7 @@
 <mat-paginator
   class="pagin-font"
   [length]="totalComments"
-  [pageSize]="2"
+  [pageSize]="10"
   [pageIndex]="currentPage"
   (page)="pageChanged($event)"
 ></mat-paginator>
@@ -28,41 +28,46 @@
     >
       <mat-expansion-panel-header class="panel-header">
         <mat-panel-title class="panel-title">
-          <button mat-icon-button color="basic" click="">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-icon-button color="warn" click="">
-            <mat-icon>delete</mat-icon>
-          </button>
-          <hr />
-        </mat-panel-title>
-
-        <mat-panel-title class="panel-title">
-          User:<br />{{comment.user.username}}
-          <hr
-        /></mat-panel-title>
-        <mat-panel-title class="panel-title">
           From:<br />{{ comment.createdAt | date: "dd MMMM yyyy" }}
           <hr />
         </mat-panel-title>
         <mat-panel-title class="panel-title">
-          Title:<br />{{comment.title}}
+          Title:<br />{{ comment.title }}
           <hr />
         </mat-panel-title>
         <mat-panel-title class="panel-title">
-          I rate this book: {{comment.ratedBookWith}} / 5
-          <hr />
-        </mat-panel-title>
+          User:<br />{{ comment.user.username }}
+          <hr
+        /></mat-panel-title>
         <mat-panel-title class="panel-title">
           Comment useful?
-          <button mat-icon-button color="basic" onclick="">
+          <button mat-icon-button color="basic" click="" onclick="">
             <mat-icon>thumb_up</mat-icon>
           </button>
           <p>{{ 0 }}</p>
-          <button mat-icon-button color="basic" onclick="">
+          <button mat-icon-button color="basic" click="" onclick="">
             <mat-icon>thumb_down</mat-icon>
           </button>
           <p>{{ 0 }}</p>
+          <hr />
+        </mat-panel-title>
+        <mat-panel-title class="panel-title">
+          <button
+            mat-icon-button
+            color="basic"
+            *ngIf="comment.user._id === this.currentUserId"
+            click=""
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            color="warn"
+            *ngIf="comment.user._id === this.currentUserId"
+            click=""
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
           <hr />
         </mat-panel-title>
 
@@ -70,18 +75,25 @@
           {{ panelOpenState ? "Hide Comment Text..." : "Show Comment Text..." }}
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <p>{{comment.commentBody}}</p>
+      <div
+      class="panel-title"
+      *ngIf="comment.ratedBookWith !== 0"
+    >
+      I rate this book: {{ comment.ratedBookWith }} / 5
+      
+   </div>
+   <hr />
+      <p>{{ comment.commentBody }}</p>
     </mat-expansion-panel>
   </mat-accordion>
 </div>
 
 <div class="top-div-comments" *ngIf="!isLoading && !this.hasResults">
-   <mat-card>
-     <mat-card-header>
-       <mat-card-title>
-         <h2>No Comments to show at this time</h2>
-       </mat-card-title>
-     </mat-card-header>
-   </mat-card>
- </div>
- 
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <h2>No Comments to show at this time</h2>
+      </mat-card-title>
+    </mat-card-header>
+  </mat-card>
+</div>
