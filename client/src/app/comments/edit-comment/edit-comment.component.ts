@@ -21,10 +21,7 @@ export class EditCommentComponent {
       commentBody: string;
       ratedBookWith: number;
     },
-  ) {
-    console.log('AddCommentComponent instantiated');
-    console.log('commentData:', this.commentData);
-  }
+  ) {  }
 
   editComment(formComment: NgForm) {
     if (formComment.invalid) {
