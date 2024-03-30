@@ -25,7 +25,7 @@ export class AllCommentsComponent implements OnInit {
   constructor(
     public dialogBox: MatDialog,
     private snackBar: MatSnackBar,
-    private commentsApi: CommentService,
+    private commentApi: CommentService,
     private userApi: UserService
   ) {}
 
@@ -44,7 +44,7 @@ export class AllCommentsComponent implements OnInit {
 
   loadComments(pageIndex: number, pageSize: number): void {
     this.isLoading = true;
-    this.commentsApi.getComments(pageIndex * pageSize, pageSize, this.bookId).subscribe({
+    this.commentApi.getComments(pageIndex * pageSize, pageSize, this.bookId).subscribe({
       next: ({ comments, total }) => {
         this.comments = comments.sort((a,b) => {
           const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
@@ -92,7 +92,34 @@ export class AllCommentsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`dialog closed`);
+      this.ngOnInit()
+    });
+  }
+
+  deleteComment(id: string): void {  
+    this.commentApi.deleteComment(id).subscribe({
+      next: (response) => {
+        this.snackBar.open('Comment deleted successfully!', 'Close', {
+          duration: 20000,
+        });
+        this.ngOnInit()
+      },
+      error: (error) => {
+        let errorMessage =
+          'An error occurred while deleting the comment. Please try again.';
+
+        if (error.status === 400) {
+          errorMessage += ' There was a problem with the data you entered.';
+        } else if (error.status === 500) {
+          errorMessage += ' There was a problem with the server.';
+        }
+
+        errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
+
+        this.snackBar.open(errorMessage, 'Close', {
+          duration: 20000,
+        });
+      },
     });
   }
 }

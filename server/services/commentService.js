@@ -33,3 +33,5 @@ exports.addNewComment = async (payloadData, userId) => {
 
    return createdComment;
 };
+
+exports.deleteComment = (commentId) => commentModel.findByIdAndDelete(commentId);

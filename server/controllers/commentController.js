@@ -45,7 +45,19 @@ const updateComment = async (req, res) => {
 };
 
 const removeComment = async (req, res) => {
-   
+   const { commentId } = req.params;
+   try {
+      console.log(commentId);
+      await commentService.deleteComment(commentId);
+      res.json({ message: 'Comment deleted successfully' });
+   } catch (err) {
+      const errMsg = err.message;
+      if (err.name === 'ValidationError') {
+         res.status(400).json({ message: errMsg });
+      } else {
+         res.status(500).json({ message: errMsg });
+      }
+   }
 };
 
 module.exports = {

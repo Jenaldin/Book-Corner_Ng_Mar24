@@ -22,4 +22,9 @@ import { Comment } from '../types/comment';
 
     return this.http.post<Comment>(`${apiUrl}/comment/new`, payload, {withCredentials: true});
    }
+
+   deleteComment(id: string){
+      const { apiUrl } = environment;
+      return this.http.delete(`${apiUrl}/comment/${id}`, {withCredentials: true});
+   }
  }
