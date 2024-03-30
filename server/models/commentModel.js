@@ -4,7 +4,7 @@ const commentSchema = new mongoose.Schema({
    title: {
       type: String,
       minlength: [5, 'Comment title minimal length is 5 symbol'],
-      maxlength: [10, 'Comment title maximal length is 10 symbols'],
+      maxlength: [35, 'Comment title maximal length is 35 symbols'],
       required: [true, 'Comment title content is required']
    },
    commentBody: {

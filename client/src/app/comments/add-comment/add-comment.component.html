@@ -15,17 +15,17 @@
           ngModel
           required
           minlength="5"
-          maxlength="10"
+          maxlength="35"
           #titleField="ngModel"
         />
         <mat-error *ngIf="titleField.errors?.['required']"
           >Title is required.</mat-error
         >
         <mat-error *ngIf="titleField.errors?.['minlength']"
-          >Title must be at least 5 characters long.</mat-error
+          >Title must be between 5 and 35 characters long.</mat-error
         >
         <mat-error *ngIf="titleField.errors?.['maxlength']"
-          >Title must be no more than 10 characters long.</mat-error
+          >Title must be between 5 and 35 characters long.</mat-error
         >
       </mat-form-field>
     </div>
@@ -68,10 +68,10 @@
           >Text is required.</mat-error
         >
         <mat-error *ngIf="commentBodyField.errors?.['minlength']"
-          >Text must be at least 10 characters long.</mat-error
+          >Text must be between 10 and 1000 characters long.</mat-error
         >
         <mat-error *ngIf="commentBodyField.errors?.['maxlength']"
-          >Text must be no more than 1000 characters long.</mat-error
+          >Text must be between 10 and 1000 characters long.</mat-error
         >
       </mat-form-field>
     </div>
