@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddCommentComponent } from '../add-comment/add-comment.component';
 
@@ -8,12 +8,14 @@ import { AddCommentComponent } from '../add-comment/add-comment.component';
   styleUrls: ['./all-comments.component.scss']
 })
 export class AllCommentsComponent implements OnInit{
+  @Input() bookId: string = '';
   isLoading: boolean = true;
   panelOpenState = false;
 
   constructor(public dialogBox: MatDialog) {}
 
   ngOnInit(): void {
+    
     setTimeout(() => {
       this.isLoading = false;
     }, 500);
@@ -21,11 +23,12 @@ export class AllCommentsComponent implements OnInit{
 
   newComment() {
     const dialogRef = this.dialogBox.open(AddCommentComponent, {
-      disableClose: true 
+      disableClose: true,
+      data: { bookId: this.bookId }
     });
   
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      console.log(`dialog closed`);
     });
   }
 
