@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -6,13 +6,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { UserService } from 'src/app/core/services/user.service';
 import { UserDetailed } from 'src/app/core/types/user';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-view-profile',
   templateUrl: './view-profile.component.html',
   styleUrls: ['./view-profile.component.scss']
 })
-export class ViewProfileComponent implements OnInit {
+export class ViewProfileComponent implements OnInit, OnDestroy {
   isLoading: boolean = true;
   user = {} as UserDetailed;
 
@@ -31,8 +32,10 @@ export class ViewProfileComponent implements OnInit {
     private location: Location,
   ) { };
 
+  private paramsSubscription: Subscription = new Subscription();
+
   ngOnInit(): void {
-    this.activeRoute.params.subscribe((data) => {
+    this.paramsSubscription = this.activeRoute.params.subscribe((data) => {
       const id = data['userId'];
 
       this.userApi.getProfile(id).subscribe({
@@ -62,5 +65,9 @@ export class ViewProfileComponent implements OnInit {
 
   goBack() {
     this.location.back();
+  }
+
+  ngOnDestroy(): void {
+    this.paramsSubscription.unsubscribe();
   }
 }
