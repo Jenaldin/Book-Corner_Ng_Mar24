@@ -6,9 +6,7 @@ exports.addNewComment = async (payloadData, userId) => {
       user: userId,
    })
 
-   console.log('payloadData.book:', payloadData.book);
    const book = await bookModel.findById(payloadData.book);
-   console.log("Initial book: " + book);
    
    if(createdComment.ratedBookWith > 0){
       if(book.usersWhoRated.includes(createdComment.user)){
@@ -20,7 +18,6 @@ exports.addNewComment = async (payloadData, userId) => {
       book.usersWhoRated.push(createdComment.user);
       book.averageRating = totalRating / book.usersWhoRated.length;
       await book.save();
-      console.log("Updated book: " + book)
    }
 
    return createdComment;

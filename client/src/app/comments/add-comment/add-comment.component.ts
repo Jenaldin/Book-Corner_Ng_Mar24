@@ -2,7 +2,6 @@ import { Component, Inject } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 import { CommentService } from 'src/app/core/services/comment.service';
 
 @Component({
@@ -15,7 +14,6 @@ export class AddCommentComponent {
   constructor(
     private commentApi: CommentService,
     private snackBar: MatSnackBar,
-    private router: Router,
     @Inject(MAT_DIALOG_DATA) public bookData: { bookId: string },
   ) {console.log('AddCommentComponent instantiated');
   console.log('bookData:', this.bookData);}
@@ -40,7 +38,6 @@ export class AddCommentComponent {
         this.snackBar.open('Your Comment was submitted successfully', 'Close', {
           duration: 20000,
         });
-        //this.router.navigate(['/catalog/book']);
       },
       error: (error) => {
         let errorMessage =
