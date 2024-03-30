@@ -4,7 +4,7 @@ import { Book } from "./book";
 export interface Comment {
    _id?: string;
    title: string;
-   body: string;
+   commentBody: string;
    ratedBookWith?: number;
    helpfulYes?: number;
    helpfulNo?: number;

@@ -3,14 +3,14 @@ const mongoose = require('mongoose');
 const commentSchema = new mongoose.Schema({
    title: {
       type: String,
-      minlength: [10, 'Comment title minimal length is 10 symbol'],
+      minlength: [5, 'Comment title minimal length is 10 symbol'],
       maxlength: [50, 'Comment title maximal length is 50 symbols'],
       required: [true, 'Comment title content is required']
    },
-   body: {
+   commentBody: {
       type: String,
-      minlength: [5, 'Comment message minimal length is 1 symbol'],
-      maxlength: [500, 'Comment message maximal length is 500 symbols'],
+      minlength: [10, 'Comment message minimal length is 1 symbol'],
+      maxlength: [1000, 'Comment message maximal length is 500 symbols'],
       required: [true, 'Comment message is required']
    },
    ratedBookWith: {
