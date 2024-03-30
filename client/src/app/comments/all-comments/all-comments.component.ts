@@ -15,6 +15,7 @@ import { UserService } from 'src/app/core/services/user.service';
 })
 export class AllCommentsComponent implements OnInit {
   @Input() bookId: string = '';
+  @Input() hasRatedBook: boolean = false;
   isLoading: boolean = true;
   panelOpenState = false;
   hasResults: boolean = true;
@@ -26,7 +27,7 @@ export class AllCommentsComponent implements OnInit {
     public dialogBox: MatDialog,
     private snackBar: MatSnackBar,
     private commentApi: CommentService,
-    private userApi: UserService
+    private userApi: UserService,
   ) {}
 
   get currentUserId(): string | undefined {
@@ -44,41 +45,43 @@ export class AllCommentsComponent implements OnInit {
 
   loadComments(pageIndex: number, pageSize: number): void {
     this.isLoading = true;
-    this.commentApi.getComments(pageIndex * pageSize, pageSize, this.bookId).subscribe({
-      next: ({ comments, total }) => {
-        this.comments = comments.sort((a,b) => {
-          const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
-          const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
-          return dateB - dateA;
-        });
-        this.totalComments = total;
+    this.commentApi
+      .getComments(pageIndex * pageSize, pageSize, this.bookId)
+      .subscribe({
+        next: ({ comments, total }) => {
+          this.comments = comments.sort((a, b) => {
+            const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+            const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+            return dateB - dateA;
+          });
+          this.totalComments = total;
 
-        if (this.comments.length === 0) {
-          this.hasResults = false;
-        }
+          if (this.comments.length === 0) {
+            this.hasResults = false;
+          }
 
-        setTimeout(() => {
-          this.isLoading = false;
-        }, 1000);
-      },
-      error: (error) => {
-        let errorMessage =
-          'An error occurred while fetching the comments. Please try again.';
-        if (error.status === 400) {
-          errorMessage += ' There was a problem with the data you entered.';
-        } else if (error.status === 500) {
-          errorMessage += ' There was a problem with the server.';
-        }
-        errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
-        this.snackBar.open(errorMessage, 'Close', {
-          duration: 20000,
-        });
-      },
-    });
+          setTimeout(() => {
+            this.isLoading = false;
+          }, 1000);
+        },
+        error: (error) => {
+          let errorMessage =
+            'An error occurred while fetching the comments. Please try again.';
+          if (error.status === 400) {
+            errorMessage += ' There was a problem with the data you entered.';
+          } else if (error.status === 500) {
+            errorMessage += ' There was a problem with the server.';
+          }
+          errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
+          this.snackBar.open(errorMessage, 'Close', {
+            duration: 20000,
+          });
+        },
+      });
   }
 
   loadTotalComments(): void {
-    this.totalComments
+    this.totalComments;
   }
 
   pageChanged(event: PageEvent): void {
@@ -86,23 +89,24 @@ export class AllCommentsComponent implements OnInit {
   }
 
   newComment() {
+
     const dialogRef = this.dialogBox.open(AddCommentComponent, {
-      disableClose: true,
-      data: { bookId: this.bookId },
+      disableClose: true,      
+      data: { bookId: this.bookId, hasRatedBook: this.hasRatedBook },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      this.ngOnInit()
+      this.ngOnInit();
     });
   }
 
-  deleteComment(id: string): void {  
+  deleteComment(id: string): void {
     this.commentApi.deleteComment(id).subscribe({
       next: (response) => {
         this.snackBar.open('Comment deleted successfully!', 'Close', {
           duration: 20000,
         });
-        this.ngOnInit()
+        this.ngOnInit();
       },
       error: (error) => {
         let errorMessage =

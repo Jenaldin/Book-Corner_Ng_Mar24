@@ -1,4 +1,10 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -21,6 +27,7 @@ export class ViewBookComponent implements OnInit, OnDestroy {
   showComments: boolean = false;
   hasRented: boolean = false;
   bookId: string = '';
+  hasRatedBook: boolean = false;
 
   constructor(
     private userApi: UserService,
@@ -32,7 +39,7 @@ export class ViewBookComponent implements OnInit, OnDestroy {
   ) {}
 
   private paramsSubscription: Subscription = new Subscription();
-  @Output() currentBookId = new EventEmitter<string>();
+  @Output() currentBookData = new EventEmitter<{hasRated: boolean, bookId: string}>();
 
   get loggedIn(): boolean {
     return this.userApi.isLoggedIn;
@@ -59,9 +66,16 @@ export class ViewBookComponent implements OnInit, OnDestroy {
           const userHasRented = book.requestedBy?.some(
             (u) => u.user?._id === this.currentUserId,
           );
-          if (userHasRented === true) {
+          if (userHasRented) {
             this.hasRented = true;
           }
+
+          const userHasRated = book.usersWhoRated?.some(
+            (userId) => userId.toString() === this.currentUserId,
+          );
+          if(userHasRated){
+            this.hasRatedBook = true
+          }        
 
           setTimeout(() => {
             this.isLoading = false;
@@ -199,16 +213,16 @@ export class ViewBookComponent implements OnInit, OnDestroy {
     this.showComments = !this.showComments;
   }
 
-  sendBookId() {
+  sendBookData() {
     this.paramsSubscription = this.activeRoute.params.subscribe((data) => {
       this.bookId = data['bookId'];
-      this.currentBookId.emit(this.bookId);
+      this.currentBookData.emit({hasRated: this.hasRatedBook, bookId: this.bookId});
     });
   }
 
-  toggleAndSendBookId() {
+  toggleAndSendBookData() {
     this.onToggle();
-    this.sendBookId();
+    this.sendBookData();
   }
 
   goBack() {

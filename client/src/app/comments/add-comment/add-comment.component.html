@@ -15,7 +15,7 @@
           ngModel
           required
           minlength="5"
-          maxlength="50"
+          maxlength="10"
           #titleField="ngModel"
         />
         <mat-error *ngIf="titleField.errors?.['required']"
@@ -25,12 +25,12 @@
           >Title must be at least 5 characters long.</mat-error
         >
         <mat-error *ngIf="titleField.errors?.['maxlength']"
-          >Title must be no more than 50 characters long.</mat-error
+          >Title must be no more than 10 characters long.</mat-error
         >
       </mat-form-field>
     </div>
 
-    <div>
+    <div *ngIf="!this.bookData.hasRatedBook">
       <p class="field-label">
         Between 1 and 5 (5 being the highest) how would you rate this book?
       </p>
@@ -42,6 +42,12 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
+    </div>
+
+    <div *ngIf="this.bookData.hasRatedBook">
+      <p class="field-label">
+        Rating: You have already rated this book.
+      </p>
     </div>
 
     <div>

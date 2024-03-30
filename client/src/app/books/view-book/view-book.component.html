@@ -119,7 +119,7 @@
         class="mat-raised-button"
         color="primary"
         *ngIf="loggedIn === true"
-        (click)="toggleAndSendBookId()"
+        (click)="toggleAndSendBookData()"
       >
         <mat-icon> forum</mat-icon>View User's Comments for the Book
       </button>
@@ -146,4 +146,4 @@
   </mat-card>
 </div>
 
-<app-all-comments *ngIf="showComments && loggedIn === true" [bookId]="bookId"></app-all-comments>
+<app-all-comments *ngIf="showComments && loggedIn === true" [bookId]="bookId" [hasRatedBook]="hasRatedBook"></app-all-comments>

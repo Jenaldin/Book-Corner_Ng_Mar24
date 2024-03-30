@@ -14,7 +14,7 @@ export class AddCommentComponent {
   constructor(
     private commentApi: CommentService,
     private snackBar: MatSnackBar,
-    @Inject(MAT_DIALOG_DATA) public bookData: { bookId: string },
+    @Inject(MAT_DIALOG_DATA) public bookData: { bookId: string; hasRatedBook:boolean },
   ) {console.log('AddCommentComponent instantiated');
   console.log('bookData:', this.bookData);}
 
