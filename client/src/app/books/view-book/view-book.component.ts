@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -7,19 +7,20 @@ import { BookService } from 'src/app/core/services/book.service';
 import { Book } from 'src/app/core/types/book';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-view-book',
   templateUrl: './view-book.component.html',
-  styleUrls: ['./view-book.component.scss']
+  styleUrls: ['./view-book.component.scss'],
 })
-export class ViewBookComponent implements OnInit {
+export class ViewBookComponent implements OnInit, OnDestroy {
   book = {} as Book;
   isLoading: boolean = true;
   isOwner: boolean = false;
   showComments: boolean = false;
   hasRented: boolean = false;
+  bookId: string = '';
 
   constructor(
     private userApi: UserService,
@@ -27,23 +28,26 @@ export class ViewBookComponent implements OnInit {
     private snackBar: MatSnackBar,
     private activeRoute: ActivatedRoute,
     private router: Router,
-    private location: Location
-  ) { };
+    private location: Location,
+  ) {}
+
+  private paramsSubscription: Subscription = new Subscription();
+  @Output() currentBookId = new EventEmitter<string>();
 
   get loggedIn(): boolean {
     return this.userApi.isLoggedIn;
-  };
+  }
 
   get currentUser(): string | undefined {
     return this.userApi.currentUsername;
-  };
+  }
 
   get currentUserId(): string | undefined {
     return this.userApi.currentUserId;
-  };
+  }
 
   ngOnInit(): void {
-    this.activeRoute.params.subscribe((data) => {
+    this.paramsSubscription = this.activeRoute.params.subscribe((data) => {
       const id = data['bookId'];
       this.bookApi.getBook(id).subscribe({
         next: (book) => {
@@ -51,10 +55,12 @@ export class ViewBookComponent implements OnInit {
           if (book.owner._id === this.currentUserId) {
             this.isOwner = true;
           }
-          
-          const userHasRented = book.requestedBy?.some(u => u.user?._id === this.currentUserId);
-          if(userHasRented === true){
-            this.hasRented = true
+
+          const userHasRented = book.requestedBy?.some(
+            (u) => u.user?._id === this.currentUserId,
+          );
+          if (userHasRented === true) {
+            this.hasRented = true;
           }
 
           setTimeout(() => {
@@ -62,7 +68,8 @@ export class ViewBookComponent implements OnInit {
           }, 1000);
         },
         error: (error) => {
-          let errorMessage = 'An error occurred while fetching the book. Please try again.';
+          let errorMessage =
+            'An error occurred while fetching the book. Please try again.';
 
           if (error.status === 400) {
             errorMessage += ' There was a problem with the data you entered.';
@@ -75,22 +82,22 @@ export class ViewBookComponent implements OnInit {
           this.snackBar.open(errorMessage, 'Close', {
             duration: 20000,
           });
-        }
+        },
       });
     });
-  };
+  }
 
   onDelete(id: string): void {
     this.bookApi.deleteBook(id).subscribe({
       next: (response) => {
-
         this.snackBar.open('Book deleted successfully!', 'Close', {
           duration: 20000,
         });
         this.router.navigate(['/catalog']);
       },
       error: (error) => {
-        let errorMessage = 'An error occurred while deleting the book. Please try again.';
+        let errorMessage =
+          'An error occurred while deleting the book. Please try again.';
 
         if (error.status === 400) {
           errorMessage += ' There was a problem with the data you entered.';
@@ -103,9 +110,9 @@ export class ViewBookComponent implements OnInit {
         this.snackBar.open(errorMessage, 'Close', {
           duration: 20000,
         });
-      }
+      },
     });
-  };
+  }
 
   requestBook(id: string): void {
     const userId = this.currentUserId;
@@ -113,13 +120,18 @@ export class ViewBookComponent implements OnInit {
     if (userId) {
       this.bookApi.requestBook(id, userId, isRented).subscribe({
         next: (response) => {
-          this.snackBar.open('Your request for the book is successful!', 'Close', {
-            duration: 20000,
-          });
+          this.snackBar.open(
+            'Your request for the book is successful!',
+            'Close',
+            {
+              duration: 20000,
+            },
+          );
           this.router.navigate(['/catalog']);
         },
         error: (error) => {
-          let errorMessage = 'An error occurred while making your request for the book. Please try again.';
+          let errorMessage =
+            'An error occurred while making your request for the book. Please try again.';
 
           if (error.status === 400) {
             errorMessage += ' There was a problem with the data you entered.';
@@ -132,7 +144,7 @@ export class ViewBookComponent implements OnInit {
           this.snackBar.open(errorMessage, 'Close', {
             duration: 20000,
           });
-        }
+        },
       });
     }
   }
@@ -142,13 +154,18 @@ export class ViewBookComponent implements OnInit {
     if (userId) {
       this.bookApi.cancelRequest(id, userId).subscribe({
         next: (response) => {
-          this.snackBar.open('You cancelled your book request successfully!', 'Close', {
-            duration: 20000,
-          });
+          this.snackBar.open(
+            'You cancelled your book request successfully!',
+            'Close',
+            {
+              duration: 20000,
+            },
+          );
           this.router.navigate(['/catalog']);
         },
         error: (error) => {
-          let errorMessage = 'An error occurred while making your request for the book. Please try again.';
+          let errorMessage =
+            'An error occurred while making your request for the book. Please try again.';
 
           if (error.status === 400) {
             errorMessage += ' There was a problem with the data you entered.';
@@ -161,7 +178,7 @@ export class ViewBookComponent implements OnInit {
           this.snackBar.open(errorMessage, 'Close', {
             duration: 20000,
           });
-        }
+        },
       });
     }
   }
@@ -174,15 +191,31 @@ export class ViewBookComponent implements OnInit {
     return {
       full: Array(fullStars).fill('star'),
       half: Array(halfStars).fill('star_half'),
-      empty: Array(emptyStars).fill('star_border')
+      empty: Array(emptyStars).fill('star_border'),
     };
-  };
-  
+  }
+
   onToggle(): void {
-    this.showComments = !this.showComments
-  };
+    this.showComments = !this.showComments;
+  }
+
+  sendBookId() {
+    this.paramsSubscription = this.activeRoute.params.subscribe((data) => {
+      this.bookId = data['bookId'];
+      this.currentBookId.emit(this.bookId);
+    });
+  }
+
+  toggleAndSendBookId() {
+    this.onToggle();
+    this.sendBookId();
+  }
 
   goBack() {
     this.location.back();
-  };
+  }
+
+  ngOnDestroy(): void {
+    this.paramsSubscription.unsubscribe();
+  }
 }
