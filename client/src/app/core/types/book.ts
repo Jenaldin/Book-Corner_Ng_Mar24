@@ -10,6 +10,7 @@ export interface Book {
    bookLang: string;
    description: string;
    averageRating?: number;
+   usersWhoRated?: User[] ;
    createdDate?: Date;
    owner: User;
    isRented?: boolean;

@@ -3,11 +3,12 @@ import { Book } from "./book";
 
 export interface Comment {
    _id?: string;
-   content: string;
-   rating?: number;
+   title: string;
+   body: string;
+   ratedBookWith?: number;
    helpfulYes?: number;
    helpfulNo?: number;
-   votedHelpful?: string[];
+   usersVotedHelpful?: User[];
    user: User;
    createdAt?: Date;
    book: Book;

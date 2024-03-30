@@ -1,13 +1,19 @@
 const mongoose = require('mongoose');
 
 const commentSchema = new mongoose.Schema({
-   content: {
+   title: {
       type: String,
-      minlength: [1, 'Comment minimal length is 1 symbol'],
-      maxlength: [500, 'Comment maximal length is 500 symbols'],
-      required: [true, 'Comment content is required']
+      minlength: [10, 'Comment title minimal length is 10 symbol'],
+      maxlength: [50, 'Comment title maximal length is 50 symbols'],
+      required: [true, 'Comment title content is required']
    },
-   rating: {
+   body: {
+      type: String,
+      minlength: [5, 'Comment message minimal length is 1 symbol'],
+      maxlength: [500, 'Comment message maximal length is 500 symbols'],
+      required: [true, 'Comment message is required']
+   },
+   ratedBookWith: {
       type: Number,
       min: [1, 'Rating minimal value is 1'],
       max: [5, 'Rating maximal value is 5'],
@@ -22,11 +28,7 @@ const commentSchema = new mongoose.Schema({
       type: Number,
       default: 0,
    },
-   votedHelpful: [{
-      type: mongoose.Types.ObjectId,
-      ref: 'User',
-   }],
-   gaveRating: [{
+   usersVotedHelpful: [{
       type: mongoose.Types.ObjectId,
       ref: 'User',
    }],

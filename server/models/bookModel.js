@@ -46,6 +46,10 @@ const bookSchema = new mongoose.Schema({
       max: 5,
       default: 0,
    },
+   usersWhoRated: [{
+      type: mongoose.Types.ObjectId,
+      ref: 'User',
+   }],
    createdDate: {
       type: Date,
    },
