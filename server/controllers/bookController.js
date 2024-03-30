@@ -1,5 +1,4 @@
 const bookService = require('../services/bookService');
-const { getErrorMessage } = require('../utils/errorUtil');
 
 const getBooks = async (req, res) => {
    try {

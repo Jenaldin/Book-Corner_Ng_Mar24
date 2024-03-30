@@ -27,10 +27,35 @@ export class AddCommentComponent {
 
     const title = formComment.value.title;
     const commentBody = formComment.value.commentBody;
-    const ratedBookWith = formComment.value.ratedBookWith;
-
-    console.log("this would be a comment submitted for book ID: " + this.bookData.bookId);
+    let ratedBookWith: number = 0
     
+    if(formComment.value.ratedBookWith == ''){
+      ratedBookWith = 0
+    }
+    ratedBookWith = Number(formComment.value.ratedBookWith);
+    const book = this.bookData.bookId    
+    
+    this.commentApi.addComment(book, title, commentBody, ratedBookWith).subscribe({
+      next: (response) => {
+        this.snackBar.open('Your Comment was submitted successfully', 'Close', {
+          duration: 20000,
+        });
+        //this.router.navigate(['/catalog/book']);
+      },
+      error: (error) => {
+        let errorMessage =
+          'An error occurred while posting the comment. Please try again.';
+        if (error.status === 400) {
+          errorMessage += ' There was a problem with the data you entered.';
+        } else if (error.status === 500) {
+          errorMessage += ' There was a problem with the server.';
+        }
+        errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
+        this.snackBar.open(errorMessage, 'Close', {
+          duration: 20000,
+        });
+      },
+    });
 
   }
 }

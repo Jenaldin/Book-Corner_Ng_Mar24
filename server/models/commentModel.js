@@ -15,9 +15,8 @@ const commentSchema = new mongoose.Schema({
    },
    ratedBookWith: {
       type: Number,
-      min: [1, 'Rating minimal value is 1'],
+      min: [0, 'Rating minimal value is 1'],
       max: [5, 'Rating maximal value is 5'],
-      required: false,
       default: 0,
    },
    helpfulYes: {

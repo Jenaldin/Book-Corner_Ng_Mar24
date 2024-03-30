@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 
 import { environment } from 'src/environments/environment.development';
+import { Comment } from '../types/comment';
 
 @Injectable({
    providedIn: 'root'
@@ -10,4 +11,10 @@ import { environment } from 'src/environments/environment.development';
  export class CommentService {
    constructor(private http: HttpClient) { }
    
+   addComment(book:string, title: string, commentBody: string, ratedBookWith: number){
+      const { apiUrl } = environment;
+      const payload = { book, title, commentBody, ratedBookWith}; 
+
+    return this.http.post<Comment>(`${apiUrl}/comment/new`, payload, {withCredentials: true});
+   }
  }
