@@ -21,10 +21,16 @@ import { Comment } from '../types/comment';
       const payload = { book, title, commentBody, ratedBookWith}; 
 
     return this.http.post<Comment>(`${apiUrl}/comment/new`, payload, {withCredentials: true});
-   }
+   };
+
+   editComment(id: string, title: string, commentBody: string, ratedBookWith: number){
+      const { apiUrl } = environment;
+      const updatedFields = {title: title, commentBody: commentBody, ratedBookWith: ratedBookWith}     
+      return this.http.put<Comment>(`${apiUrl}/comment/${id}`, updatedFields, {withCredentials: true});
+   };
 
    deleteComment(id: string){
       const { apiUrl } = environment;
       return this.http.delete(`${apiUrl}/comment/${id}`, {withCredentials: true});
-   }
+   };
  }

@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommentService } from 'src/app/core/services/comment.service';
 import { PageEvent } from '@angular/material/paginator';
 import { UserService } from 'src/app/core/services/user.service';
+import { EditCommentComponent } from '../edit-comment/edit-comment.component';
 
 @Component({
   selector: 'app-all-comments',
@@ -89,10 +90,31 @@ export class AllCommentsComponent implements OnInit {
   }
 
   newComment() {
-
     const dialogRef = this.dialogBox.open(AddCommentComponent, {
-      disableClose: true,      
+      disableClose: true,
       data: { bookId: this.bookId, hasRatedBook: this.hasRatedBook },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      this.ngOnInit();
+    });
+  }
+
+  editComment(
+    id: string,
+    title: string,
+    commentBody: string,
+    ratedBookWith: any,
+  ) {
+    const dialogRef = this.dialogBox.open(EditCommentComponent, {
+      disableClose: true,
+      data: {
+        commentId: id,
+        hasRatedBook: this.hasRatedBook,
+        title: title,
+        commentBody: commentBody,
+        ratedBookWith: ratedBookWith,
+      },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
