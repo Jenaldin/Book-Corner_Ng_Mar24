@@ -6,7 +6,6 @@ import { UserService } from 'src/app/core/services/user.service';
 import { Book } from 'src/app/core/types/book';
 
 import { PageEvent } from '@angular/material/paginator';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorHandlerService } from 'src/app/core/services/error.service';
 
 @Component({
@@ -24,10 +23,9 @@ export class CatalogComponent implements OnInit {
   constructor(
     private bookApi: BookService,
     private userApi: UserService,
-    private snackBar: MatSnackBar,
     private router: Router,
     private activeRoute: ActivatedRoute,
-    private errorHandlerService: ErrorHandlerService
+    private errorHandlerService: ErrorHandlerService,
   ) {}
 
   get loggedIn(): boolean {
@@ -46,8 +44,9 @@ export class CatalogComponent implements OnInit {
   loadBooks(pageIndex: number, pageSize: number): void {
     this.isLoading = true;
     this.bookApi.getBooks(pageIndex * pageSize, pageSize).subscribe({
-      next: (books) => {
+      next: ({ books, total }) => {
         this.books = books;
+        this.totalBooks = total;
 
         if (this.books.length === 0) {
           this.hasResults = false;
@@ -67,17 +66,7 @@ export class CatalogComponent implements OnInit {
   }
 
   loadTotalBooks(): void {
-    this.bookApi.getTotalBooks().subscribe({
-      next: (total) => {
-        this.totalBooks = total;
-      },
-      error: (error) => {
-        this.errorHandlerService.handleError(
-          error,
-          'An error occurred while fetching the total number books. Please try again.',
-        );
-      },
-    });
+    this.totalBooks;
   }
 
   pageChanged(event: PageEvent): void {

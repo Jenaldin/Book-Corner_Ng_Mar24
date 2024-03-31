@@ -1,13 +1,16 @@
 const { bookModel, userModel } = require('../models/index');
 const mongoose = require('mongoose');
 
-exports.getBooks = (pageNumber, pageSize) => bookModel
+exports.getBooks = async (pageNumber, pageSize) => {
+   const books = await bookModel
    .find()
    .skip(pageNumber)
    .limit(pageSize)
    .populate('owner', 'username');
 
-exports.getTotalBooks = () => bookModel.countDocuments();
+   const total = await bookModel.countDocuments();
+   return { books, total }
+};
 
 exports.getLatestBooks = () => bookModel
    .find()

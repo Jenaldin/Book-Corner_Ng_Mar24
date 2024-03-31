@@ -6,7 +6,6 @@ const { isAuth } = require('../middlewares/authMiddleware');
 const { isBookOwner } = require('../middlewares/ownerMiddleware')
 
 router.get('/', bookController.getBooks);
-router.get('/total', bookController.getTotalBooks);
 router.get('/latest', bookController.getLatestBooks);
 router.get('/search', bookController.searchBook);
 router.get('/:bookId', bookController.getBook);

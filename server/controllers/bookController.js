@@ -4,22 +4,8 @@ const getBooks = async (req, res) => {
    try {
       let pageNumber = Number(req.query.start);
       const pageSize = Number(req.query.end);
-      const items = await bookService.getBooks(pageNumber, pageSize).lean();
-      res.send(items);
-   } catch (err) {
-      const errMsg = err.message;
-      if (err.name === 'ValidationError') {
-         res.status(400).json({ message: errMsg });
-      } else {
-         res.status(500).json({ message: errMsg });
-      }
-   }
-};
-
-const getTotalBooks = async (req, res) => {
-   try {
-      const items = await bookService.getTotalBooks();
-      res.send(items.toString());
+      const item = await bookService.getBooks(pageNumber, pageSize);
+      res.json({books: item.books, total: item.total});
    } catch (err) {
       const errMsg = err.message;
       if (err.name === 'ValidationError') {
@@ -158,7 +144,6 @@ const cancelSub = async (req, res) => {
 
 module.exports = {
    getBooks,
-   getTotalBooks,
    getLatestBooks,
    getBook,
    searchBook,
