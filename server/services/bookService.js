@@ -1,4 +1,5 @@
 const { bookModel, userModel } = require('../models/index');
+const mongoose = require('mongoose');
 
 exports.getBooks = (pageNumber, pageSize) => bookModel
    .find()
@@ -39,7 +40,18 @@ exports.search = async (title, author, genre, owner) => {
    return bookModel.find(query).populate('owner', 'username').lean();
 };
 
-exports.getBook = async (bookId) => bookModel.findById(bookId).populate('owner', 'username').populate('requestedBy.user', 'username')
+exports.getBook = async (bookId) => {
+   try {
+      const book = await bookModel.findById(bookId).populate('owner', 'username').populate('requestedBy.user', 'username')
+      return book
+   } catch (error) {
+      const isValidObjectId = (id) => mongoose.Types.ObjectId.isValid(id);
+      if (!isValidObjectId(bookId)) {
+         return 'Not a valid book id';
+      }
+   }
+
+}
 
 exports.addNewBook = async (payloadData, ownerId) => {
    const createdBook = await bookModel.create({
