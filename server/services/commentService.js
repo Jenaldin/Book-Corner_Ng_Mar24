@@ -3,6 +3,7 @@ const { bookModel, commentModel } = require('../models/index');
 exports.getComments = async (pageNumber, pageSize, bookId) => {
    const comments = await commentModel
    .find({book: bookId})
+   .sort({createdAt: -1})
    .skip(pageNumber)
    .limit(pageSize)
    .populate('user', 'username');

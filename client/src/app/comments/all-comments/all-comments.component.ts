@@ -66,11 +66,7 @@ export class AllCommentsComponent implements OnInit, OnDestroy {
       .getComments(pageIndex * pageSize, pageSize, this.bookId)
       .subscribe({
         next: ({ comments, total }) => {
-          this.comments = comments.sort((a, b) => {
-            const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
-            const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
-            return dateB - dateA;
-          });
+          this.comments = comments;
           this.totalComments = total;
 
           if (this.comments.length === 0) {
