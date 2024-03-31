@@ -20,7 +20,7 @@ export class ErrorHandlerService {
     errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
 
     this.snackBar.open(errorMessage, 'Close', {
-      duration: 20000,
+      duration: 10000,
     });
   }
 }
