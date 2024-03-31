@@ -69,9 +69,7 @@ export class AllCommentsComponent implements OnInit, OnDestroy {
           this.comments = comments;
           this.totalComments = total;
 
-          if (this.comments.length === 0) {
-            this.hasResults = false;
-          }
+          this.hasResults = this.comments.length > 0;
 
           setTimeout(() => {
             this.isLoading = false;
