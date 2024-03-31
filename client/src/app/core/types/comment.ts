@@ -8,7 +8,7 @@ export interface Comment {
    ratedBookWith?: number;
    helpfulYes?: number;
    helpfulNo?: number;
-   usersVotedHelpful?: User[];
+   usersVotedHelpful?:string[];
    user: User;
    createdAt?: Date;
    book: Book;
