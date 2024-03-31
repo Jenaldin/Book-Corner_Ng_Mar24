@@ -146,7 +146,7 @@ export class ViewBookComponent implements OnInit, OnDestroy {
             'You cancelled your book request successfully!',
             'Close',
             {
-              duration: 20000,
+              duration: 5000,
             },
           );
           this.router.navigate(['/catalog']);
