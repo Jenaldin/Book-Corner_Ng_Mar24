@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -7,16 +7,19 @@ import { Book } from 'src/app/core/types/book';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorHandlerService } from 'src/app/core/services/error.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-edit-book',
   templateUrl: './edit-book.component.html',
   styleUrls: ['./edit-book.component.scss']
 })
-export class EditBookComponent implements OnInit {
+export class EditBookComponent implements OnInit, OnDestroy {
   isLoading: boolean = true;
   book = {} as Book;
   originalBook = {} as Book;
+
+  private errorSubscription!: Subscription;
 
   genres: string[] = [
     'Fantasy',
@@ -47,6 +50,16 @@ export class EditBookComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.errorSubscription = this.errorHandlerService.apiError$.subscribe(
+      (errorMessage) => {
+        if (errorMessage) {
+          this.snackBar.open(errorMessage, 'Close', {
+            duration: 5000,
+          });
+        }
+      },
+    );
+
     const bookId = this.activeRoute.snapshot.paramMap.get('bookId');
 
     if (bookId) {
@@ -111,5 +124,9 @@ export class EditBookComponent implements OnInit {
 
   goBack() {
     this.location.back();
+  }
+
+  ngOnDestroy(): void {
+    this.errorSubscription.unsubscribe();
   }
 }

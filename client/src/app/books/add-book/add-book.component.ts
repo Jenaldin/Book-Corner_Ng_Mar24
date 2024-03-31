@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -7,14 +7,17 @@ import { BookService } from 'src/app/core/services/book.service';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorHandlerService } from 'src/app/core/services/error.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-book',
   templateUrl: './add-book.component.html',
   styleUrls: ['./add-book.component.scss'],
 })
-export class AddBookComponent implements OnInit {
+export class AddBookComponent implements OnInit, OnDestroy {
   isLoading: boolean = true;
+
+  private errorSubscription!: Subscription;
 
   genres = [
     'Fantasy',
@@ -76,6 +79,16 @@ export class AddBookComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.errorSubscription = this.errorHandlerService.apiError$.subscribe(
+      (errorMessage) => {
+        if (errorMessage) {
+          this.snackBar.open(errorMessage, 'Close', {
+            duration: 5000,
+          });
+        }
+      },
+    );
+
     setTimeout(() => {
       this.isLoading = false;
     }, 1000);
@@ -112,5 +125,9 @@ export class AddBookComponent implements OnInit {
 
   goBack() {
     this.location.back();
+  }
+
+  ngOnDestroy(): void {
+    this.errorSubscription.unsubscribe();
   }
 }

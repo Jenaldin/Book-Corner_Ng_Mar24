@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { BookService } from 'src/app/core/services/book.service';
@@ -7,24 +7,29 @@ import { Book } from 'src/app/core/types/book';
 
 import { PageEvent } from '@angular/material/paginator';
 import { ErrorHandlerService } from 'src/app/core/services/error.service';
+import { Subscription } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-catalog',
   templateUrl: './catalog.component.html',
   styleUrls: ['./catalog.component.scss'],
 })
-export class CatalogComponent implements OnInit {
+export class CatalogComponent implements OnInit, OnDestroy {
   books: Book[] | null = [];
   totalBooks: number = 0;
   currentPage: number = 0;
   isLoading: boolean = true;
   hasResults: boolean = true;
 
+  private errorSubscription!: Subscription;
+
   constructor(
     private bookApi: BookService,
     private userApi: UserService,
     private router: Router,
     private activeRoute: ActivatedRoute,
+    private snackBar: MatSnackBar,
     private errorHandlerService: ErrorHandlerService,
   ) {}
 
@@ -33,6 +38,16 @@ export class CatalogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.errorSubscription = this.errorHandlerService.apiError$.subscribe(
+      (errorMessage) => {
+        if (errorMessage) {
+          this.snackBar.open(errorMessage, 'Close', {
+            duration: 5000,
+          });
+        }
+      },
+    );
+
     this.activeRoute.queryParams.subscribe((params) => {
       const page = params['page'] ? +params['page'] : 0;
 
@@ -84,5 +99,9 @@ export class CatalogComponent implements OnInit {
       half: Array(halfStars).fill('star_half'),
       empty: Array(emptyStars).fill('star_border'),
     };
+  }
+
+  ngOnDestroy(): void {
+    this.errorSubscription.unsubscribe();
   }
 }

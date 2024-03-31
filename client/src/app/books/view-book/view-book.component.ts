@@ -30,6 +30,10 @@ export class ViewBookComponent implements OnInit, OnDestroy {
   bookId: string = '';
   hasRatedBook: boolean = false;
 
+  private errorSubscription!: Subscription;
+  private paramsSubscription: Subscription = new Subscription();
+  @Output() currentBookData = new EventEmitter<{hasRated: boolean, bookId: string}>();
+
   constructor(
     private userApi: UserService,
     private bookApi: BookService,
@@ -39,9 +43,6 @@ export class ViewBookComponent implements OnInit, OnDestroy {
     private location: Location,
     private errorHandlerService: ErrorHandlerService
   ) {}
-
-  private paramsSubscription: Subscription = new Subscription();
-  @Output() currentBookData = new EventEmitter<{hasRated: boolean, bookId: string}>();
 
   get loggedIn(): boolean {
     return this.userApi.isLoggedIn;
@@ -56,6 +57,16 @@ export class ViewBookComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.errorSubscription = this.errorHandlerService.apiError$.subscribe(
+      (errorMessage) => {
+        if (errorMessage) {
+          this.snackBar.open(errorMessage, 'Close', {
+            duration: 5000,
+          });
+        }
+      },
+    );
+
     this.paramsSubscription = this.activeRoute.params.subscribe((data) => {
       const id = data['bookId'];
       this.bookApi.getBook(id).subscribe({
@@ -194,6 +205,7 @@ export class ViewBookComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.errorSubscription.unsubscribe();
     this.paramsSubscription.unsubscribe();
   }
 }
