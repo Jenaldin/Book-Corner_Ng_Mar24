@@ -52,6 +52,8 @@ exports.getBook = async (bookId) => {
    }
 }
 
+exports.getOne = async (bookId) => await bookModel.findOne(bookId)
+
 exports.addNewBook = async (payloadData, ownerId) => {
    const createdBook = await bookModel.create({
       ...payloadData,
