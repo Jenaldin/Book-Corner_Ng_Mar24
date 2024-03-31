@@ -18,11 +18,6 @@ const getComments = async (req, res) => {
    }
 };
 
-
-const getComment = async (req, res) => {
-   
-};
-
 const newComment = async (req, res) => {
    const payloadData = req.body;
    const userId = req.user._id;
@@ -72,9 +67,42 @@ const removeComment = async (req, res) => {
    }
 };
 
+const voteYes = async (req, res) => {
+   const { commentId } = req.params;
+   const user  = req.body.userId
+   try {
+      await commentService.commentVoteYes(commentId, user);
+      res.json({ message: 'Comment voted Yes successfully' });
+   } catch (err) {
+      const errMsg = err.message;
+      if (err.name === 'ValidationError') {
+         res.status(400).json({ message: errMsg });
+      } else {
+         res.status(500).json({ message: errMsg });
+      }
+   }
+};
+
+const voteNo = async (req, res) => {
+   const { commentId } = req.params;
+   const user = req.body.userId
+   try {
+      await commentService.commentVoteNo(commentId, user);
+      res.json({ message: 'Comment voted No successfully' });
+   } catch (err) {
+      const errMsg = err.message;
+      if (err.name === 'ValidationError') {
+         res.status(400).json({ message: errMsg });
+      } else {
+         res.status(500).json({ message: errMsg });
+      }
+   }
+};
+
 module.exports = {
    getComments,
-   getComment,
+   voteYes,
+   voteNo,
    newComment,
    updateComment,
    removeComment,

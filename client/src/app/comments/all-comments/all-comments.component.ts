@@ -8,6 +8,7 @@ import { CommentService } from 'src/app/core/services/comment.service';
 import { PageEvent } from '@angular/material/paginator';
 import { UserService } from 'src/app/core/services/user.service';
 import { EditCommentComponent } from '../edit-comment/edit-comment.component';
+import { UserDetailed } from 'src/app/core/types/user';
 
 @Component({
   selector: 'app-all-comments',
@@ -17,8 +18,9 @@ import { EditCommentComponent } from '../edit-comment/edit-comment.component';
 export class AllCommentsComponent implements OnInit {
   @Input() bookId: string = '';
   @Input() hasRatedBook: boolean = false;
+
   isLoading: boolean = true;
-  panelOpenState = false;
+  panelOpenState: boolean = false;
   hasResults: boolean = true;
   comments: Comment[] | null = [];
   totalComments: number = 0;
@@ -89,7 +91,14 @@ export class AllCommentsComponent implements OnInit {
     this.loadComments(event.pageIndex, event.pageSize);
   }
 
-  newComment() {
+  isUserVotedHelpful(comment: Comment): boolean {
+    if (this.currentUserId) {
+      return comment.usersVotedHelpful?.includes(this.currentUserId) || false;
+    }
+    return false;
+  }
+
+  newComment(): void {
     const dialogRef = this.dialogBox.open(AddCommentComponent, {
       disableClose: true,
       data: { bookId: this.bookId, hasRatedBook: this.hasRatedBook },
@@ -105,7 +114,7 @@ export class AllCommentsComponent implements OnInit {
     title: string,
     commentBody: string,
     ratedBookWith: any,
-  ) {
+  ): void {
     const dialogRef = this.dialogBox.open(EditCommentComponent, {
       disableClose: true,
       data: {
@@ -147,5 +156,65 @@ export class AllCommentsComponent implements OnInit {
         });
       },
     });
+  }
+
+  voteHelpful(id: string): void {
+    const userId = this.currentUserId;
+    if (userId) {
+      this.commentApi.votedHelpfulYes(id, userId).subscribe({
+        next: (response) => {
+          this.snackBar.open('You voted successfully Yes for a comment!', 'Close', {
+            duration: 20000,
+          });
+          this.ngOnInit();
+        },
+        error: (error) => {
+          let errorMessage =
+            'An error occurred while voting for the comment. Please try again.';
+
+          if (error.status === 400) {
+            errorMessage += ' There was a problem with the data you entered.';
+          } else if (error.status === 500) {
+            errorMessage += ' There was a problem with the server.';
+          }
+
+          errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
+
+          this.snackBar.open(errorMessage, 'Close', {
+            duration: 20000,
+          });
+        },
+      });
+    }
+  }
+
+  voteNotHelpful(id: string): void {
+    const userId = this.currentUserId;
+    if (userId) {
+      this.commentApi.votedHelpfulNo(id, userId).subscribe({
+        next: (response) => {
+          this.snackBar.open('You voted successfully No for a comment!', 'Close', {
+            duration: 20000,
+          });
+          this.ngOnInit();
+        },
+        error: (error) => {
+          let errorMessage =
+            'An error occurred while voting for the comment. Please try again.';
+
+          if (error.status === 400) {
+            errorMessage += ' There was a problem with the data you entered.';
+          } else if (error.status === 500) {
+            errorMessage += ' There was a problem with the server.';
+          }
+
+          errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
+
+          this.snackBar.open(errorMessage, 'Close', {
+            duration: 20000,
+          });
+        },
+      });
+    }
   }
 }

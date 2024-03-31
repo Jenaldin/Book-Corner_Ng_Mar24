@@ -1,4 +1,4 @@
-const { bookModel, userModel, commentModel } = require('../models/index');
+const { bookModel, commentModel } = require('../models/index');
 
 exports.getComments = async (pageNumber, pageSize, bookId) => {
    const comments = await commentModel
@@ -36,3 +36,19 @@ exports.addNewComment = async (payloadData, userId) => {
 exports.editComment = async (commentId, payloadData) => commentModel.findByIdAndUpdate(commentId, payloadData, { runValidators: true });
 
 exports.deleteComment = (commentId) => commentModel.findByIdAndDelete(commentId);
+
+exports.commentVoteYes = async (commentId, user) => {
+   const comment = await commentModel.findById(commentId);
+   const newVote = comment.helpfulYes + 1
+   comment.helpfulYes = newVote;
+   comment.usersVotedHelpful.push(user);
+   await comment.save();
+}
+
+exports.commentVoteNo = async (commentId, user) => {
+   const comment = await commentModel.findById(commentId);
+   const newVote = comment.helpfulNo + 1
+   comment.helpfulNo = newVote;
+   comment.usersVotedHelpful.push(user);
+   await comment.save();
+}
