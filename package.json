@@ -3,5 +3,11 @@
     "@angular/cli": "^16.2.12",
     "@angular/material": "^16.2.14",
     "typescript": "^5.4.2"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "scripts": {
+    "start": "concurrently \"cd client && ng serve\" \"cd server && npm start\""
   }
 }
