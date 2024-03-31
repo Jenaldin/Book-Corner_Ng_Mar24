@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute} from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 import { Location } from '@angular/common';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -30,6 +30,7 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private activeRoute: ActivatedRoute,
     private location: Location,
+    private router: Router,
   ) { };
 
   private paramsSubscription: Subscription = new Subscription();
@@ -57,6 +58,7 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
           this.snackBar.open(errorMessage, 'Close', {
             duration: 20000,
           });
+          this.router.navigate(['/404'])
         }
       });
 

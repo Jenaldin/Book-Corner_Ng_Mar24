@@ -96,6 +96,7 @@ export class ViewBookComponent implements OnInit, OnDestroy {
           this.snackBar.open(errorMessage, 'Close', {
             duration: 20000,
           });
+          this.router.navigate(['/404'])
         },
       });
     });
