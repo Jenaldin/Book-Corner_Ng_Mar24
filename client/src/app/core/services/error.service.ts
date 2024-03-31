@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ErrorHandlerService {
+  private apiError$$ = new BehaviorSubject<string | null>(null)
+  public apiError$ = this.apiError$$.asObservable();
 
   constructor(private snackBar: MatSnackBar) { }
 
@@ -21,6 +24,7 @@ export class ErrorHandlerService {
 
     errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
 
+    this.apiError$$.next(errorMessage);
     this.snackBar.open(errorMessage, 'Close', {
       duration: 10000,
     });
