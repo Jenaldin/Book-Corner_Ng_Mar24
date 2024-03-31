@@ -37,8 +37,8 @@
       <mat-form-field class="mat-form-comment" appearance="fill">
         <mat-label>Rating</mat-label>
         <mat-select name="ratedBookWith" ngModel #ratedBookWithField="ngModel">
-          <mat-option *ngFor="let i of [1, 2, 3, 4, 5]" [value]="i">
-            {{ i }} stars
+          <mat-option *ngFor="let number of [1, 2, 3, 4, 5]" [value]="number">
+            {{ number }} stars
           </mat-option>
         </mat-select>
       </mat-form-field>
