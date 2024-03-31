@@ -13,7 +13,7 @@ router.get('/:bookId', bookController.getBook);
 
 router.post('/', isAuth, bookController.newBook);
 router.put('/:bookId', isBookOwner, bookController.updateBook);
-router.delete('/:bookId', isAuth, bookController.removeBook);
+router.delete('/:bookId', isBookOwner, bookController.removeBook);
 router.put('/requestSub/:bookId', isAuth, bookController.requestSub);
 router.put('/cancelSub/:bookId', isAuth, bookController.cancelSub);
 
