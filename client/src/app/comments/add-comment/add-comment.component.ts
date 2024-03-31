@@ -15,8 +15,7 @@ export class AddCommentComponent {
     private commentApi: CommentService,
     private snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public bookData: { bookId: string; hasRatedBook:boolean },
-  ) {console.log('AddCommentComponent instantiated');
-  console.log('bookData:', this.bookData);}
+  ) { }
 
   addComment(formComment: NgForm) {
     if (formComment.invalid) {

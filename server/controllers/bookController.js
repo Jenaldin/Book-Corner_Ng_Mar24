@@ -146,7 +146,6 @@ const cancelSub = async (req, res) => {
    try {
       await bookService.cancelReqBook(bookId, userId);
       res.json({ message: 'Successfully cancelled book request' });
-      console.log('Successfully cancelled book request');
    } catch (err) {
       const errMsg = err.message;
       if (err.name === 'ValidationError') {

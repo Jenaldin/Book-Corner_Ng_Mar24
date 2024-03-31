@@ -35,7 +35,6 @@ export class HomeComponent implements OnInit{
       this.books = books;
       
       if(this.books.length === 0){
-        console.log("Yes");
         this.hasResults = false;
       }
       

@@ -54,7 +54,6 @@ const updateComment = async (req, res) => {
 const removeComment = async (req, res) => {
    const { commentId } = req.params;
    try {
-      console.log(commentId);
       await commentService.deleteComment(commentId);
       res.json({ message: 'Comment deleted successfully' });
    } catch (err) {
