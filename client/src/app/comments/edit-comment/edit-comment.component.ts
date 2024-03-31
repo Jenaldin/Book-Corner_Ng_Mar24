@@ -40,10 +40,6 @@ export class EditCommentComponent implements OnInit, OnDestroy{
     );
   }
 
-  ngOnDestroy(): void {
-    this.errorSubscription.unsubscribe();
-  }
-
   editComment(formComment: NgForm) {
     if (formComment.invalid) {
       return;
@@ -79,5 +75,9 @@ export class EditCommentComponent implements OnInit, OnDestroy{
           );
         },
       });
+  }
+
+  ngOnDestroy(): void {
+    this.errorSubscription.unsubscribe();
   }
 }

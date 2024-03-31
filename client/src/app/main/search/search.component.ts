@@ -47,10 +47,6 @@ export class SearchComponent implements OnInit, OnDestroy {
       this.isLoading = false;
     }, 1000);
   }
-
-  ngOnDestroy(): void {
-    this.errorSubscription.unsubscribe();
-  }
   
   genres = [
     'Fantasy',
@@ -126,5 +122,9 @@ export class SearchComponent implements OnInit, OnDestroy {
       half: Array(halfStars).fill('star_half'),
       empty: Array(emptyStars).fill('star_border'),
     };
+  }
+
+  ngOnDestroy(): void {
+    this.errorSubscription.unsubscribe();
   }
 }

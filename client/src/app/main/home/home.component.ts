@@ -46,10 +46,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.loadLatest();
   }
 
-  ngOnDestroy(): void {
-    this.errorSubscription.unsubscribe();
-  }
-
   loadLatest(): void {
     this.isLoading = true;
     this.bookApi.getLatestBooks().subscribe((books) => {
@@ -75,5 +71,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       half: Array(halfStars).fill('star_half'),
       empty: Array(emptyStars).fill('star_border'),
     };
+  }
+
+  ngOnDestroy(): void {
+    this.errorSubscription.unsubscribe();
   }
 }

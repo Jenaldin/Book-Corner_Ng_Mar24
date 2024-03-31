@@ -33,10 +33,6 @@ export class AddCommentComponent implements OnInit, OnDestroy{
     );
   }
 
-  ngOnDestroy(): void {
-    this.errorSubscription.unsubscribe();
-  }
-
   addComment(formComment: NgForm) {
     if (formComment.invalid) {
       return;
@@ -65,6 +61,9 @@ export class AddCommentComponent implements OnInit, OnDestroy{
         );
       },
     });
+  }
 
+  ngOnDestroy(): void {
+    this.errorSubscription.unsubscribe();
   }
 }

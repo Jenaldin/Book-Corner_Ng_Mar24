@@ -60,10 +60,6 @@ export class AllCommentsComponent implements OnInit, OnDestroy {
     }, 500);
   }
 
-  ngOnDestroy(): void {
-    this.errorSubscription.unsubscribe();
-  }
-
   loadComments(pageIndex: number, pageSize: number): void {
     this.isLoading = true;
     this.commentApi
@@ -205,5 +201,9 @@ export class AllCommentsComponent implements OnInit, OnDestroy {
         },
       });
     }
+  }
+
+  ngOnDestroy(): void {
+    this.errorSubscription.unsubscribe();
   }
 }

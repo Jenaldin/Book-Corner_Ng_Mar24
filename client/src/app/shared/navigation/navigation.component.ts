@@ -40,10 +40,6 @@ export class NavigationComponent implements OnInit, OnDestroy{
     );
   }
 
-  ngOnDestroy(): void {
-    this.errorSubscription.unsubscribe();
-  }
-
   logout() {
     this.userApi.logout().subscribe({
       next: (response) => {
@@ -63,5 +59,9 @@ export class NavigationComponent implements OnInit, OnDestroy{
         );
       },
     });
+  }
+
+  ngOnDestroy(): void {
+    this.errorSubscription.unsubscribe();
   }
 }
