@@ -15,6 +15,8 @@ export class ErrorHandlerService {
       errorMessage += ' There was a problem with the data you entered.';
     } else if (error.status === 500) {
       errorMessage += ' There was a problem with the server.';
+    } else if (JSON.stringify(error.error.message) === undefined){
+      errorMessage += ' Seems there is no such item! Please contact the Admin.'
     }
 
     errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
