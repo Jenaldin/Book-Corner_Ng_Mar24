@@ -8,7 +8,7 @@ import { CommentService } from 'src/app/core/services/comment.service';
 import { PageEvent } from '@angular/material/paginator';
 import { UserService } from 'src/app/core/services/user.service';
 import { EditCommentComponent } from '../edit-comment/edit-comment.component';
-import { UserDetailed } from 'src/app/core/types/user';
+import { ErrorHandlerService } from 'src/app/core/services/error.service';
 
 @Component({
   selector: 'app-all-comments',
@@ -31,6 +31,7 @@ export class AllCommentsComponent implements OnInit {
     private snackBar: MatSnackBar,
     private commentApi: CommentService,
     private userApi: UserService,
+    private errorHandlerService: ErrorHandlerService,
   ) {}
 
   get currentUserId(): string | undefined {
@@ -68,17 +69,10 @@ export class AllCommentsComponent implements OnInit {
           }, 1000);
         },
         error: (error) => {
-          let errorMessage =
-            'An error occurred while fetching the comments. Please try again.';
-          if (error.status === 400) {
-            errorMessage += ' There was a problem with the data you entered.';
-          } else if (error.status === 500) {
-            errorMessage += ' There was a problem with the server.';
-          }
-          errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
-          this.snackBar.open(errorMessage, 'Close', {
-            duration: 20000,
-          });
+          this.errorHandlerService.handleError(
+            error,
+            'An error occurred while fetching the comments. Please try again.',
+          );
         },
       });
   }
@@ -135,25 +129,15 @@ export class AllCommentsComponent implements OnInit {
     this.commentApi.deleteComment(id).subscribe({
       next: (response) => {
         this.snackBar.open('Comment deleted successfully!', 'Close', {
-          duration: 20000,
+          duration: 5000,
         });
         this.ngOnInit();
       },
       error: (error) => {
-        let errorMessage =
-          'An error occurred while deleting the comment. Please try again.';
-
-        if (error.status === 400) {
-          errorMessage += ' There was a problem with the data you entered.';
-        } else if (error.status === 500) {
-          errorMessage += ' There was a problem with the server.';
-        }
-
-        errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
-
-        this.snackBar.open(errorMessage, 'Close', {
-          duration: 20000,
-        });
+        this.errorHandlerService.handleError(
+          error,
+          'An error occurred while deleting the comment the comment. Please try again.',
+        );
       },
     });
   }
@@ -163,26 +147,20 @@ export class AllCommentsComponent implements OnInit {
     if (userId) {
       this.commentApi.votedHelpfulYes(id, userId).subscribe({
         next: (response) => {
-          this.snackBar.open('You voted successfully Yes for a comment!', 'Close', {
-            duration: 20000,
-          });
+          this.snackBar.open(
+            'You voted successfully Yes for a comment!',
+            'Close',
+            {
+              duration: 5000,
+            },
+          );
           this.ngOnInit();
         },
         error: (error) => {
-          let errorMessage =
-            'An error occurred while voting for the comment. Please try again.';
-
-          if (error.status === 400) {
-            errorMessage += ' There was a problem with the data you entered.';
-          } else if (error.status === 500) {
-            errorMessage += ' There was a problem with the server.';
-          }
-
-          errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
-
-          this.snackBar.open(errorMessage, 'Close', {
-            duration: 20000,
-          });
+          this.errorHandlerService.handleError(
+            error,
+            'An error occurred while voting for the comment. Please try again.',
+          );
         },
       });
     }
@@ -193,26 +171,20 @@ export class AllCommentsComponent implements OnInit {
     if (userId) {
       this.commentApi.votedHelpfulNo(id, userId).subscribe({
         next: (response) => {
-          this.snackBar.open('You voted successfully No for a comment!', 'Close', {
-            duration: 20000,
-          });
+          this.snackBar.open(
+            'You voted successfully No for a comment!',
+            'Close',
+            {
+              duration: 5000,
+            },
+          );
           this.ngOnInit();
         },
         error: (error) => {
-          let errorMessage =
-            'An error occurred while voting for the comment. Please try again.';
-
-          if (error.status === 400) {
-            errorMessage += ' There was a problem with the data you entered.';
-          } else if (error.status === 500) {
-            errorMessage += ' There was a problem with the server.';
-          }
-
-          errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
-
-          this.snackBar.open(errorMessage, 'Close', {
-            duration: 20000,
-          });
+          this.errorHandlerService.handleError(
+            error,
+            'An error occurred while voting for the comment. Please try again.',
+          );
         },
       });
     }

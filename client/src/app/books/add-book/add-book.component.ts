@@ -6,6 +6,7 @@ import { Location } from '@angular/common';
 import { BookService } from 'src/app/core/services/book.service';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ErrorHandlerService } from 'src/app/core/services/error.service';
 
 @Component({
   selector: 'app-add-book',
@@ -70,7 +71,8 @@ export class AddBookComponent implements OnInit {
     private bookApi: BookService,
     private snackBar: MatSnackBar,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private errorHandlerService: ErrorHandlerService
   ) {}
 
   ngOnInit(): void {
@@ -93,26 +95,16 @@ export class AddBookComponent implements OnInit {
         .subscribe({
           next: (response) => {
             this.snackBar.open('Book added successfully!', 'Close', {
-              duration: 20000,
+              duration: 5000,
             });
             this.bookForm.reset();
             this.router.navigate(['/catalog']);
           },
           error: (error) => {
-            let errorMessage =
-              'An error occurred while adding the book. Please try again.';
-
-            if (error.status === 400) {
-              errorMessage += ' There was a problem with the data you entered.';
-            } else if (error.status === 500) {
-              errorMessage += ' There was a problem with the server.';
-            }
-
-            errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
-
-            this.snackBar.open(errorMessage, 'Close', {
-              duration: 20000,
-            });
+            this.errorHandlerService.handleError(
+              error,
+              'An error occurred while adding the book. Please try again.',
+            );
           },
         });
     }

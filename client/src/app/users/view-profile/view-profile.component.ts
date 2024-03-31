@@ -1,12 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { UserService } from 'src/app/core/services/user.service';
 import { UserDetailed } from 'src/app/core/types/user';
 import { Subscription } from 'rxjs';
+import { ErrorHandlerService } from 'src/app/core/services/error.service';
 
 @Component({
   selector: 'app-view-profile',
@@ -27,10 +26,9 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
 
   constructor(
     private userApi: UserService,
-    private snackBar: MatSnackBar,
     private activeRoute: ActivatedRoute,
     private location: Location,
-    private router: Router,
+    private errorHandlerService: ErrorHandlerService,
   ) { };
 
   private paramsSubscription: Subscription = new Subscription();
@@ -48,20 +46,12 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
           }, 1000);
         },
         error: (error) => {
-          let errorMessage = 'An error occurred while fetching the user. Please try again.';
-          if (error.status === 400) {
-            errorMessage += ' There was a problem with the data you entered.';
-          } else if (error.status === 500) {
-            errorMessage += ' There was a problem with the server.';
-          }
-          errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
-          this.snackBar.open(errorMessage, 'Close', {
-            duration: 20000,
-          });
-          this.router.navigate(['/404'])
+          this.errorHandlerService.handleError(
+            error,
+            'An error occurred while fetching the user. Please try again.',
+          );
         }
       });
-
     });
   }
 

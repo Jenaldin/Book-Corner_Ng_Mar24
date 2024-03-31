@@ -8,6 +8,7 @@ import { matchPass } from 'src/app/core/utils/pass-match';
 import { emailValidator } from 'src/app/core/utils/email-valid';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ErrorHandlerService } from 'src/app/core/services/error.service';
 
 
 @Component({
@@ -47,6 +48,7 @@ export class RegisterComponent implements OnInit {
     private snackBar: MatSnackBar,
     private router: Router,
     private location: Location,
+    private errorHandlerService: ErrorHandlerService,
   ) { }
 
   ngOnInit(): void {
@@ -72,24 +74,16 @@ export class RegisterComponent implements OnInit {
     this.userApi.register(firstName!, lastName!, username!, email!, password!, rePassword!, avatar!).subscribe({
       next: (response) => {
         this.snackBar.open('Your Registration was successful, welcome!', 'Close', {
-          duration: 20000,
+          duration: 5000,
         });
         this.registerForm.reset();
         this.router.navigate(['/']);
       },
       error: (error) => {
-        let errorMessage = 'An error occurred while registration. Please try again.';
-        if (error.status === 400) {
-          errorMessage += ' There was a problem with the data you entered.';
-        } else if (error.status === 500) {
-          errorMessage += ' There was a problem with the server.';
-        }
-
-        errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
-
-        this.snackBar.open(errorMessage, 'Close', {
-          duration: 20000,
-        });
+        this.errorHandlerService.handleError(
+          error,
+          'An error occurred during registration. Please try again.',
+        );
       }
     })
   }

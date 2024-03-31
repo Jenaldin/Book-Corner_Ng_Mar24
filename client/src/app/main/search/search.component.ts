@@ -3,6 +3,7 @@ import { FormBuilder, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { BookService } from 'src/app/core/services/book.service';
+import { ErrorHandlerService } from 'src/app/core/services/error.service';
 import { SearchService } from 'src/app/core/services/search.service';
 import { Book } from 'src/app/core/types/book';
 
@@ -65,6 +66,7 @@ export class SearchComponent implements OnInit {
     private bookApi: BookService,
     private snackBar: MatSnackBar,
     private searchService: SearchService,
+    private errorHandlerService: ErrorHandlerService,
   ) {}
 
   onSubmit(): void {
@@ -80,31 +82,18 @@ export class SearchComponent implements OnInit {
           this.searchService.searchParams = this.searchBook.value;
           this.searchService.searchResults = response;
 
-          if (this.searchResults.length === 0) {
-            this.snackBar.open('No Books to show at this time!', 'Close', {
-              duration: 20000,
-            });
-          } else {
+          if (this.searchResults.length !== 0) {
             this.snackBar.open('Book(s) found successfully!', 'Close', {
-              duration: 20000,
+              duration: 5000,
             });
           }
+
         },
         error: (error) => {
-          let errorMessage =
-            'An error occurred while searching the book(s). Please try again.';
-
-          if (error.status === 400) {
-            errorMessage += ' There was a problem with the data you entered.';
-          } else if (error.status === 500) {
-            errorMessage += ' There was a problem with the server.';
-          }
-
-          errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
-
-          this.snackBar.open(errorMessage, 'Close', {
-            duration: 20000,
-          });
+          this.errorHandlerService.handleError(
+            error,
+            'An error occurred while searching the book(s). Please try again.',
+          );
         },
       });
     }

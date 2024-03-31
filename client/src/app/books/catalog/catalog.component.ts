@@ -7,6 +7,7 @@ import { Book } from 'src/app/core/types/book';
 
 import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ErrorHandlerService } from 'src/app/core/services/error.service';
 
 @Component({
   selector: 'app-catalog',
@@ -26,6 +27,7 @@ export class CatalogComponent implements OnInit {
     private snackBar: MatSnackBar,
     private router: Router,
     private activeRoute: ActivatedRoute,
+    private errorHandlerService: ErrorHandlerService
   ) {}
 
   get loggedIn(): boolean {
@@ -56,17 +58,10 @@ export class CatalogComponent implements OnInit {
         }, 1000);
       },
       error: (error) => {
-        let errorMessage =
-          'An error occurred while fetching the books. Please try again.';
-        if (error.status === 400) {
-          errorMessage += ' There was a problem with the data you entered.';
-        } else if (error.status === 500) {
-          errorMessage += ' There was a problem with the server.';
-        }
-        errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
-        this.snackBar.open(errorMessage, 'Close', {
-          duration: 20000,
-        });
+        this.errorHandlerService.handleError(
+          error,
+          'An error occurred while fetching the books. Please try again.',
+        );
       },
     });
   }
@@ -77,17 +72,10 @@ export class CatalogComponent implements OnInit {
         this.totalBooks = total;
       },
       error: (error) => {
-        let errorMessage =
-          'An error occurred while fetching the total number books. Please try again.';
-        if (error.status === 400) {
-          errorMessage += ' There was a problem with the data you entered.';
-        } else if (error.status === 500) {
-          errorMessage += ' There was a problem with the server.';
-        }
-        errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
-        this.snackBar.open(errorMessage, 'Close', {
-          duration: 20000,
-        });
+        this.errorHandlerService.handleError(
+          error,
+          'An error occurred while fetching the total number books. Please try again.',
+        );
       },
     });
   }

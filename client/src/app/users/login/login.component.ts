@@ -6,6 +6,7 @@ import { Location } from '@angular/common';
 import { UserService } from 'src/app/core/services/user.service';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ErrorHandlerService } from 'src/app/core/services/error.service';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,7 @@ export class LoginComponent implements OnInit {
     private snackBar: MatSnackBar,
     private router: Router,
     private location: Location,
+    private errorHandlerService: ErrorHandlerService,
   ) {}
 
   ngOnInit(): void {
@@ -40,22 +42,15 @@ export class LoginComponent implements OnInit {
     this.userApi.login(username, password).subscribe({
       next: (response) => {
         this.snackBar.open('Your Login was successful, welcome!', 'Close', {
-          duration: 20000,
+          duration: 5000,
         });
         this.router.navigate(['/']);
       },
       error: (error) => {
-        let errorMessage =
-          'An error occurred while registration. Please try again.';
-        if (error.status === 400) {
-          errorMessage += ' There was a problem with the data you entered.';
-        } else if (error.status === 500) {
-          errorMessage += ' There was a problem with the server.';
-        }
-        errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
-        this.snackBar.open(errorMessage, 'Close', {
-          duration: 20000,
-        });
+        this.errorHandlerService.handleError(
+          error,
+          'An error occurred during login. Please try again.',
+        );
       },
     });
   }

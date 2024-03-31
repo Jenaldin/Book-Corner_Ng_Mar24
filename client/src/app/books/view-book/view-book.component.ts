@@ -14,6 +14,7 @@ import { Book } from 'src/app/core/types/book';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
+import { ErrorHandlerService } from 'src/app/core/services/error.service';
 
 @Component({
   selector: 'app-view-book',
@@ -36,6 +37,7 @@ export class ViewBookComponent implements OnInit, OnDestroy {
     private activeRoute: ActivatedRoute,
     private router: Router,
     private location: Location,
+    private errorHandlerService: ErrorHandlerService
   ) {}
 
   private paramsSubscription: Subscription = new Subscription();
@@ -82,22 +84,11 @@ export class ViewBookComponent implements OnInit, OnDestroy {
           }, 1000);
         },
         error: (error) => {
-          let errorMessage =
-            'An error occurred while fetching the book. Please try again.';
 
-          if (error.status === 400) {
-            errorMessage += ' There was a problem with the data you entered.';
-          } else if (error.status === 500) {
-            errorMessage += ' There was a problem with the server.';
-          } else if (JSON.stringify(error.error.message) === undefined){
-            errorMessage += ' Seems there is no such book!'
-          }
-
-          errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
-
-          this.snackBar.open(errorMessage, 'Close', {
-            duration: 20000,
-          });
+          this.errorHandlerService.handleError(
+            error,
+            'An error occurred while fetching the book. Please try again.',
+          );
           this.router.navigate(['/404'])
         },
       });
@@ -108,25 +99,15 @@ export class ViewBookComponent implements OnInit, OnDestroy {
     this.bookApi.deleteBook(id).subscribe({
       next: (response) => {
         this.snackBar.open('Book deleted successfully!', 'Close', {
-          duration: 20000,
+          duration: 5000,
         });
         this.router.navigate(['/catalog']);
       },
       error: (error) => {
-        let errorMessage =
-          'An error occurred while deleting the book. Please try again.';
-
-        if (error.status === 400) {
-          errorMessage += ' There was a problem with the data you entered.';
-        } else if (error.status === 500) {
-          errorMessage += ' There was a problem with the server.';
-        }
-
-        errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
-
-        this.snackBar.open(errorMessage, 'Close', {
-          duration: 20000,
-        });
+        this.errorHandlerService.handleError(
+          error,
+          'An error occurred while deleting the book. Please try again.',
+        );
       },
     });
   }
@@ -138,29 +119,19 @@ export class ViewBookComponent implements OnInit, OnDestroy {
       this.bookApi.requestBook(id, userId, isRented).subscribe({
         next: (response) => {
           this.snackBar.open(
-            'Your request for the book is successful!',
+            'Your requested the book successfully!',
             'Close',
             {
-              duration: 20000,
+              duration: 5000,
             },
           );
           this.router.navigate(['/catalog']);
         },
         error: (error) => {
-          let errorMessage =
-            'An error occurred while making your request for the book. Please try again.';
-
-          if (error.status === 400) {
-            errorMessage += ' There was a problem with the data you entered.';
-          } else if (error.status === 500) {
-            errorMessage += ' There was a problem with the server.';
-          }
-
-          errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
-
-          this.snackBar.open(errorMessage, 'Close', {
-            duration: 20000,
-          });
+          this.errorHandlerService.handleError(
+            error,
+            'An error occurred while making your request for the book. Please try again.',
+          );
         },
       });
     }
@@ -181,20 +152,10 @@ export class ViewBookComponent implements OnInit, OnDestroy {
           this.router.navigate(['/catalog']);
         },
         error: (error) => {
-          let errorMessage =
-            'An error occurred while making your request for the book. Please try again.';
-
-          if (error.status === 400) {
-            errorMessage += ' There was a problem with the data you entered.';
-          } else if (error.status === 500) {
-            errorMessage += ' There was a problem with the server.';
-          }
-
-          errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
-
-          this.snackBar.open(errorMessage, 'Close', {
-            duration: 20000,
-          });
+          this.errorHandlerService.handleError(
+            error,
+            'An error occurred while canceling your request. Please try again.',
+          );
         },
       });
     }

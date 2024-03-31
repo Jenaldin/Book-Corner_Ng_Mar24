@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { emailValidator } from 'src/app/core/utils/email-valid';
 import { UserService } from 'src/app/core/services/user.service';
 import { UserDetailed } from 'src/app/core/types/user';
+import { ErrorHandlerService } from 'src/app/core/services/error.service';
 
 @Component({
   selector: 'app-profile',
@@ -34,6 +35,7 @@ export class ProfileComponent implements OnInit {
     private snackBar: MatSnackBar,
     private router: Router,
     private location: Location,
+    private errorHandlerService: ErrorHandlerService,
   ) { };
 
   editUserForm = this.fb.group({
@@ -60,16 +62,10 @@ export class ProfileComponent implements OnInit {
           }, 1000);
         },
         error: (error) => {
-          let errorMessage = 'An error occurred while fetching the user. Please try again.';
-          if (error.status === 400) {
-            errorMessage += ' There was a problem with the data you entered.';
-          } else if (error.status === 500) {
-            errorMessage += ' There was a problem with the server.';
-          }
-          errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
-          this.snackBar.open(errorMessage, 'Close', {
-            duration: 20000,
-          });
+          this.errorHandlerService.handleError(
+            error,
+            'An error occurred while fetching the user. Please try again.',
+          );
         }
       });
     }
@@ -87,29 +83,20 @@ export class ProfileComponent implements OnInit {
       this.userApi.editMyUser(userId, updatedFields).subscribe({
         next: (response) => {
           this.snackBar.open('User profile updated successfully!', 'Close', {
-            duration: 20000,
+            duration: 5000,
           });
           this.router.navigate(['/']);
         },
         error: (error) => {
-          let errorMessage = 'An error occurred while updating your profile. Please try again.';
-
-          if (error.status === 400) {
-            errorMessage += ' There was a problem with the data you entered.';
-          } else if (error.status === 500) {
-            errorMessage += ' There was a problem with the server.';
-          }
-
-          errorMessage += ` Error message from server: ${JSON.stringify(error.error.message)}`;
-
-          this.snackBar.open(errorMessage, 'Close', {
-            duration: 20000,
-          });
+          this.errorHandlerService.handleError(
+            error,
+            'An error occurred while updating your profile. Please try again.',
+          );
         }
       })
     } else {
       this.snackBar.open(`Looks like something broke and your profile is unavailable! Please try again later`, 'Close', {
-        duration: 20000,
+        duration: 10000,
       });
     };
   };
