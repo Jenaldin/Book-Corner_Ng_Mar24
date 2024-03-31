@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -7,15 +7,18 @@ import { UserService } from 'src/app/core/services/user.service';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorHandlerService } from 'src/app/core/services/error.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   isLoading: boolean = true;
   hide = true;
+
+  private errorSubscription!: Subscription;
 
   constructor(
     private userApi: UserService,
@@ -26,6 +29,16 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.errorSubscription = this.errorHandlerService.apiError$.subscribe(
+      (errorMessage) => {
+        if (errorMessage) {
+          this.snackBar.open(errorMessage, 'Close', {
+            duration: 5000,
+          });
+        }
+      },
+    );
+
     setTimeout(() => {
       this.isLoading = false;
     }, 1000);
@@ -57,5 +70,9 @@ export class LoginComponent implements OnInit {
 
   goBack() {
     this.location.back();
+  }
+
+  ngOnDestroy(): void {
+    this.errorSubscription.unsubscribe();
   }
 }

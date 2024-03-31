@@ -6,6 +6,7 @@ import { UserService } from 'src/app/core/services/user.service';
 import { UserDetailed } from 'src/app/core/types/user';
 import { Subscription } from 'rxjs';
 import { ErrorHandlerService } from 'src/app/core/services/error.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-view-profile',
@@ -15,6 +16,9 @@ import { ErrorHandlerService } from 'src/app/core/services/error.service';
 export class ViewProfileComponent implements OnInit, OnDestroy {
   isLoading: boolean = true;
   user = {} as UserDetailed;
+
+  private paramsSubscription: Subscription = new Subscription();
+  private errorSubscription!: Subscription;
 
   get currentUser(): string | undefined {
     return this.userApi.currentUsername;
@@ -29,11 +33,20 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
     private activeRoute: ActivatedRoute,
     private location: Location,
     private errorHandlerService: ErrorHandlerService,
+    private snackBar: MatSnackBar,
   ) { };
 
-  private paramsSubscription: Subscription = new Subscription();
-
   ngOnInit(): void {
+    this.errorSubscription = this.errorHandlerService.apiError$.subscribe(
+      (errorMessage) => {
+        if (errorMessage) {
+          this.snackBar.open(errorMessage, 'Close', {
+            duration: 5000,
+          });
+        }
+      },
+    );
+
     this.paramsSubscription = this.activeRoute.params.subscribe((data) => {
       const id = data['userId'];
 
@@ -61,5 +74,6 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.paramsSubscription.unsubscribe();
+    this.errorSubscription.unsubscribe();
   }
 }

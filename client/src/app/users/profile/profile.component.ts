@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
@@ -9,6 +9,7 @@ import { emailValidator } from 'src/app/core/utils/email-valid';
 import { UserService } from 'src/app/core/services/user.service';
 import { UserDetailed } from 'src/app/core/types/user';
 import { ErrorHandlerService } from 'src/app/core/services/error.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -16,10 +17,12 @@ import { ErrorHandlerService } from 'src/app/core/services/error.service';
   styleUrls: ['./profile.component.scss']
 })
 
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
   isLoading: boolean = true;
   showEditMode: boolean = false;
   user = {} as UserDetailed;
+
+  private errorSubscription!: Subscription;
 
   get currentUser(): string | undefined {
     return this.userApi.currentUsername;
@@ -47,6 +50,16 @@ export class ProfileComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.errorSubscription = this.errorHandlerService.apiError$.subscribe(
+      (errorMessage) => {
+        if (errorMessage) {
+          this.snackBar.open(errorMessage, 'Close', {
+            duration: 5000,
+          });
+        }
+      },
+    );
+
     const userId = this.currentUserId;
 
     if (userId) {
@@ -113,5 +126,9 @@ export class ProfileComponent implements OnInit {
 
   goBack() {
     this.location.back();
+  }
+
+  ngOnDestroy(): void {
+    this.errorSubscription.unsubscribe();
   }
 }

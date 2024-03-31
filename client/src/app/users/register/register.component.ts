@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -9,6 +9,7 @@ import { emailValidator } from 'src/app/core/utils/email-valid';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorHandlerService } from 'src/app/core/services/error.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -16,10 +17,12 @@ import { ErrorHandlerService } from 'src/app/core/services/error.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
   isLoading: boolean = true;
   hide = true;
   hideRe = true;
+
+  private errorSubscription!: Subscription;
 
   registerForm = this.fb.group({
     firstName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30), Validators.pattern('^[a-zA-Z\u00C0-\u017F\'\u0400-\u04FF]+(-[a-zA-Z\u00C0-\u017F\'\u0400-\u04FF]+)*$')]],
@@ -52,6 +55,16 @@ export class RegisterComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.errorSubscription = this.errorHandlerService.apiError$.subscribe(
+      (errorMessage) => {
+        if (errorMessage) {
+          this.snackBar.open(errorMessage, 'Close', {
+            duration: 5000,
+          });
+        }
+      },
+    );
+
     setTimeout(() => {
       this.isLoading = false;
     }, 1000);
@@ -90,5 +103,9 @@ export class RegisterComponent implements OnInit {
 
   goBack() {
     this.location.back();
+  }
+
+  ngOnDestroy(): void {
+    this.errorSubscription.unsubscribe();
   }
 }
