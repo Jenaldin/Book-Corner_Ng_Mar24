@@ -6,6 +6,7 @@ import { ViewBookComponent } from './view-book/view-book.component';
 import { AddBookComponent } from './add-book/add-book.component';
 import { EditBookComponent } from './edit-book/edit-book.component';
 import { AuthActive } from '../core/guards/auth.activate';
+import { OwnerActive } from '../core/guards/owner.activate';
 
 const routes: Routes = [
   {
@@ -24,7 +25,7 @@ const routes: Routes = [
           {
             path: 'edit-book',
             component: EditBookComponent,
-            canActivate: [AuthActive],
+            canActivate: [OwnerActive],
           },
         ],
       },
