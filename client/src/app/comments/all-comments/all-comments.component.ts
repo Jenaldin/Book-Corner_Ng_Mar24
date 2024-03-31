@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddCommentComponent } from '../add-comment/add-comment.component';
 
@@ -9,13 +9,14 @@ import { PageEvent } from '@angular/material/paginator';
 import { UserService } from 'src/app/core/services/user.service';
 import { EditCommentComponent } from '../edit-comment/edit-comment.component';
 import { ErrorHandlerService } from 'src/app/core/services/error.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-all-comments',
   templateUrl: './all-comments.component.html',
   styleUrls: ['./all-comments.component.scss'],
 })
-export class AllCommentsComponent implements OnInit {
+export class AllCommentsComponent implements OnInit, OnDestroy {
   @Input() bookId: string = '';
   @Input() hasRatedBook: boolean = false;
 
@@ -25,6 +26,8 @@ export class AllCommentsComponent implements OnInit {
   comments: Comment[] | null = [];
   totalComments: number = 0;
   currentPage: number = 0;
+
+  private errorSubscription!: Subscription;
 
   constructor(
     public dialogBox: MatDialog,
@@ -42,9 +45,23 @@ export class AllCommentsComponent implements OnInit {
     this.loadComments(0, 10);
     this.loadTotalComments();
 
+    this.errorSubscription = this.errorHandlerService.apiError$.subscribe(
+      errorMessage => {
+        if (errorMessage) {
+          this.snackBar.open(errorMessage, 'Close', {
+            duration: 5000,
+          });
+        }
+      }
+    );
+
     setTimeout(() => {
       this.isLoading = false;
     }, 500);
+  }
+
+  ngOnDestroy(): void {
+    this.errorSubscription.unsubscribe();
   }
 
   loadComments(pageIndex: number, pageSize: number): void {

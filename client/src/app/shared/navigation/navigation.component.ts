@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ErrorHandlerService } from 'src/app/core/services/error.service';
 import { UserService } from 'src/app/core/services/user.service';
 
@@ -9,7 +10,9 @@ import { UserService } from 'src/app/core/services/user.service';
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss'],
 })
-export class NavigationComponent {
+export class NavigationComponent implements OnInit, OnDestroy{
+  private errorSubscription!: Subscription;
+  
   constructor(
     private userApi: UserService,
     private router: Router,
@@ -23,6 +26,22 @@ export class NavigationComponent {
 
   get currentUser(): string | undefined {
     return this.userApi.currentUsername;
+  }
+
+  ngOnInit(): void {
+    this.errorSubscription = this.errorHandlerService.apiError$.subscribe(
+      errorMessage => {
+        if (errorMessage) {
+          this.snackBar.open(errorMessage, 'Close', {
+            duration: 5000,
+          });
+        }
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.errorSubscription.unsubscribe();
   }
 
   logout() {

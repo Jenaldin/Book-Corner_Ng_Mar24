@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 
 import { BookService } from 'src/app/core/services/book.service';
 import { ErrorHandlerService } from 'src/app/core/services/error.service';
@@ -12,11 +13,23 @@ import { Book } from 'src/app/core/types/book';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
+  private errorSubscription!: Subscription;
+
   isLoading: boolean = true;
   searchResults: Book[] = [];
 
   ngOnInit(): void {
+    this.errorSubscription = this.errorHandlerService.apiError$.subscribe(
+      errorMessage => {
+        if (errorMessage) {
+          this.snackBar.open(errorMessage, 'Close', {
+            duration: 5000,
+          });
+        }
+      }
+    );
+
     if (this.searchService.searchParams) {
       const params = this.searchService.searchParams;
 
@@ -35,6 +48,10 @@ export class SearchComponent implements OnInit {
     }, 1000);
   }
 
+  ngOnDestroy(): void {
+    this.errorSubscription.unsubscribe();
+  }
+  
   genres = [
     'Fantasy',
     'Sci-Fi',
