@@ -33,8 +33,8 @@ exports.login = async ({ username, password }) => {
    return {token, username: user.username, id: user._id};
 };
 
-exports.getUserInfo = async (userId) => userModel.findById(userId).populate('booksOwned', 'title _id').populate('booksRequested', 'title _id');
+exports.getUserInfo = async (userId) => await userModel.findById(userId).populate('booksOwned', 'title _id').populate('booksRequested', 'title _id');
 
-exports.getMyInfo = async (userId) => userModel.findById(userId).populate('booksOwned', 'title _id').populate('booksRequested', 'title _id');
+exports.getMyInfo = async (userId) => await userModel.findById(userId).populate('booksOwned', 'title _id').populate('booksRequested', 'title _id');
 
-exports.editMyInfo = async (userId, payload) => userModel.findByIdAndUpdate(userId, payload, { runValidators: true })
+exports.editMyInfo = async (userId, payload) => await userModel.findByIdAndUpdate(userId, payload, { runValidators: true })

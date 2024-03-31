@@ -9,7 +9,7 @@ exports.getComments = async (pageNumber, pageSize, bookId) => {
 
    const total = await commentModel.countDocuments({book: bookId});
    return { comments, total }
-}
+};
 
 exports.addNewComment = async (payloadData, userId) => {
    const createdComment = await commentModel.create({
@@ -33,9 +33,10 @@ exports.addNewComment = async (payloadData, userId) => {
 
    return createdComment;
 };
+
 exports.editComment = async (commentId, payloadData) => commentModel.findByIdAndUpdate(commentId, payloadData, { runValidators: true });
 
-exports.deleteComment = (commentId) => commentModel.findByIdAndDelete(commentId);
+exports.deleteComment = async (commentId) => await commentModel.findByIdAndDelete(commentId);
 
 exports.commentVoteYes = async (commentId, user) => {
    const comment = await commentModel.findById(commentId);
@@ -43,7 +44,7 @@ exports.commentVoteYes = async (commentId, user) => {
    comment.helpfulYes = newVote;
    comment.usersVotedHelpful.push(user);
    await comment.save();
-}
+};
 
 exports.commentVoteNo = async (commentId, user) => {
    const comment = await commentModel.findById(commentId);
@@ -51,4 +52,4 @@ exports.commentVoteNo = async (commentId, user) => {
    comment.helpfulNo = newVote;
    comment.usersVotedHelpful.push(user);
    await comment.save();
-}
+};

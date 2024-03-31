@@ -50,7 +50,6 @@ exports.getBook = async (bookId) => {
          return 'Not a valid book id';
       }
    }
-
 }
 
 exports.addNewBook = async (payloadData, ownerId) => {
@@ -64,9 +63,9 @@ exports.addNewBook = async (payloadData, ownerId) => {
    return createdBook;
 };
 
-exports.editBook = async (bookId, payloadData) => bookModel.findByIdAndUpdate(bookId, payloadData, { runValidators: true });
+exports.editBook = async (bookId, payloadData) => await bookModel.findByIdAndUpdate(bookId, payloadData, { runValidators: true });
 
-exports.deleteBook = (bookId) => bookModel.findByIdAndDelete(bookId);
+exports.deleteBook = async (bookId) => await bookModel.findByIdAndDelete(bookId);
 
 exports.requestBook = async (bookId, userId, isRented) => {
    const book = await bookModel.findById(bookId);
