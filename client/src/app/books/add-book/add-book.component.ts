@@ -48,6 +48,7 @@ export class AddBookComponent implements OnInit, OnDestroy {
       [Validators.required, Validators.minLength(2), Validators.maxLength(256)],
     ],
     genre: ['', Validators.required],
+    averageRating: ['', Validators.required],
     coverUrl: [
       '',
       [
@@ -99,12 +100,13 @@ export class AddBookComponent implements OnInit, OnDestroy {
       const title = this.bookForm.value.title || '';
       const author = this.bookForm.value.author || '';
       const genre = this.bookForm.value.genre || '';
+      const averageRating = Number(this.bookForm.value.averageRating) || 1;
       const coverUrl = this.bookForm.value.coverUrl || '';
       const bookLang = this.bookForm.value.bookLang || '';
       const description = this.bookForm.value.description || '';
 
       this.bookApi
-        .addBook(title, author, genre, coverUrl, bookLang, description)
+        .addBook(title, author, genre, averageRating, coverUrl, bookLang, description)
         .subscribe({
           next: (response) => {
             this.snackBar.open('Book added successfully!', 'Close', {

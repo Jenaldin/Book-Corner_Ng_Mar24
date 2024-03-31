@@ -42,9 +42,9 @@ const bookSchema = new mongoose.Schema({
    },
    averageRating: {
       type: Number,
-      min: 0,
+      min: 1,
       max: 5,
-      default: 0,
+      required:[true, 'Rating is required initially'],
    },
    usersWhoRated: [{
       type: mongoose.Types.ObjectId,

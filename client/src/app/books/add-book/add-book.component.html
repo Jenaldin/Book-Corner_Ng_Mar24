@@ -77,6 +77,24 @@
         </div>
 
         <div class="label">
+          <p>Initial Rating:</p>
+          <mat-form-field class="mat-form-field" appearance="fill">
+            <mat-label>Rating</mat-label>
+            <mat-select
+              formControlName="averageRating"
+              matTooltip="Please select the value for initial rating. You will be able to do it just here and not change it later."
+            >
+              <mat-error *ngIf="bookForm.get('averageRating')?.errors?.['required']"
+                >Rating is required.</mat-error
+              >
+              <mat-option *ngFor="let number of [1, 2, 3, 4, 5]" [value]="number">
+                {{ number }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="label">
           <p>Book Cover:</p>
           <mat-form-field class="mat-form-field" appearance="fill">
             <mat-label>Cover URL</mat-label>
