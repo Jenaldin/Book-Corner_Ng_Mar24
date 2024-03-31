@@ -64,7 +64,7 @@
           <button
             mat-icon-button
             color="basic"
-            *ngIf="comment.user._id === this.currentUserId || isUserVotedHelpful(comment)"
+            *ngIf="comment.user._id === this.currentUserId"
             (click)="
               comment._id &&
                 editComment(
