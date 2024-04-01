@@ -44,12 +44,17 @@ As end user you have the following two possibilities:
 
 ### REST API Endpoints
 Base URL is http://localhost:3000/api
+Note: In below table, Ownership indicates the user is already logged in, so where Ownership is required, the Logged in is marked :no_entry_sign:
 
 Endpoint | HTTP Method | Description | Guests can access (Y/N)? | Logged in can access (Y/N)? | Ownership required (Y/N)?
-------------|-------------|----------|--------------------------|-----------------------------|--------------------------
+------------|-------------|----------|:------------------------:|-----------------------------|------------------------------
 / | GET | Test to see if API router works | :heavy_check_mark: | :heavy_check_mark: | :x:
-
-
+/catalog | GET | Get all the book items | :heavy_check_mark: | :heavy_check_mark: | :x:
+/catalog | POST | Create a new book item | :x: | :heavy_check_mark: | :x:
+/catalog/latest | GET | Get the latest 5 book items | :heavy_check_mark: | :heavy_check_mark: | :x:
+/catalog/search | GET | Get the search results | :heavy_check_mark: | :heavy_check_mark: | :x:
+/catalog/:bookId | GET | Get the details of a book item | :heavy_check_mark: | :heavy_check_mark: | :x:
+/catalog/:bookId | PUT | Update/Edit the details of a book item | :x: | :no_entry_sign: | :heavy_check_mark:
 
 ### Architecture
 Here is a ***high-level*** overview of the project's architecture:
