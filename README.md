@@ -19,9 +19,9 @@ Angular Material | BCrypt, Cookie-parser, JSON Web Token
 1. Download/Clone repository
 2. To install dependencies, run `npm install`.
 3. Application has concurrently installed, to start both FE and BE simultaneously run `npm start`.
-4. To seed data to MongoDB, use following command `<INSERT LATER AFTER SEED FILES ARE MADE>`.
-5. Create your own .env file in /server for following variables (if you do not want to use the provided in project OR alternatives): ```DB_URI```, ```DB_PORT```, ```SECRET```, ```SALT```
-6. If you have changed the DB_PORT, please go to /client/environments and change the apiUrl
+4. <<***optional***>> If you wish to seed data to MongoDB, use following command `<INSERT LATER AFTER SEED FILES ARE MADE>`.
+5. <<***optional***>> Create your own .env file in /server for following variables (if you do not want to use the provided in project OR alternatives): ```DB_URI```, ```DB_PORT```, ```SECRET```, ```SALT```
+6. <<***optional***>> If you have changed the DB_PORT, please go to /client/environments and change the apiUrl
 
 ## Usage
 ### End User Perspective
@@ -45,6 +45,9 @@ As end user you have the following two possibilities:
 ### REST API Endpoints
 Base URL is http://localhost:3000/api
 
+HTTP Method | Description | Endpoint | Guests can access? | Logged in can access? | Ownership required?
+------------|-------------|----------|--------------------|-----------------------|--------------------
+GET | Test to see if API works | / | Y :heavy_check_mark: | Y :white_check_mark: | N :x:
 
 ### Architecture
 Here is a ***high-level*** overview of the project's architecture:
