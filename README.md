@@ -47,8 +47,10 @@ Base URL is http://localhost:3000/api
 ***Note:*** In below table, Ownership indicates the user is already logged in, so where Ownership is required, the Logged in is marked with **-**
 
 Endpoint | HTTP Method | Description | Guests can access (Y/N)? | Logged in can access (Y/N)? | Ownership required (Y/N)?
-------------|-------------|----------|:------------------------:|:---------------------------:|:-------------------------:
+---------|:-----------:|-------------|:------------------------:|:---------------------------:|:-------------------------:
 / | GET | Test to see if API router works | :heavy_check_mark: | :heavy_check_mark: | :x:
+* | GET | If there is no such route, 404 | :heavy_check_mark: | :heavy_check_mark: | :x:
+~~~ | ~~~ | ~~~ | ~~~ | ~~~ | ~~~
 /catalog | GET | Get all the book items | :heavy_check_mark: | :heavy_check_mark: | :x:
 /catalog | POST | Create a new book item | :x: | :heavy_check_mark: | :x:
 /catalog/latest | GET | Get the latest 5 book items | :heavy_check_mark: | :heavy_check_mark: | :x:
@@ -56,6 +58,17 @@ Endpoint | HTTP Method | Description | Guests can access (Y/N)? | Logged in can 
 /catalog/:bookId | GET | Get the details of a book item | :heavy_check_mark: | :heavy_check_mark: | :x:
 /catalog/:bookId | PUT | Update/Edit the details of a book item | :x: | **-** | :heavy_check_mark:
 /catalog/:bookId | DELETE | Delete a book item | :x: | **-** | :heavy_check_mark:
+/catalog/requestSub/:bookId | PUT | Subscribe to a book item (Request to read it) | :x: | :heavy_check_mark: | :x:
+/catalog/cancelSub/:bookId | PUT | Unsubscribe to a book item (Cancel request to read it) | :x: | :heavy_check_mark: | :x:
+~~~ | ~~~ | ~~~ | ~~~ | ~~~ | ~~~
+/user/register | POST | Create a new user item | :heavy_check_mark: | :x: | :x:
+/user/login | POST | Login as an existing user | :heavy_check_mark: | :x: | :x:
+/user/logout | POST | Logout an existing user | :x: | :heavy_check_mark: | :x:
+/user/profile/:userId | GET | Get a user profile | :x: | :heavy_check_mark: | :x:
+/user/my-profile/:userId | GET | Get your profile | :x: | **-** | :heavy_check_mark:
+/user/my-profile/:userId | PUT | Update/Edit your profile | :x: | **-** | :heavy_check_mark:
+~~~ | ~~~ | ~~~ | ~~~ | ~~~ | ~~~
+
 
 ### Architecture
 Here is a ***high-level*** overview of the project's architecture:
