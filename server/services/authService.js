@@ -33,6 +33,8 @@ exports.login = async ({ username, password }) => {
    return {token, username: user.username, id: user._id};
 };
 
+exports.getOne = async (userId) => await userModel.findOne(userId);
+
 exports.getUserInfo = async (userId) => await userModel.findById(userId).populate('booksOwned', 'title _id').populate('booksRequested', 'title _id');
 
 exports.getMyInfo = async (userId) => await userModel.findById(userId).populate('booksOwned', 'title _id').populate('booksRequested', 'title _id');
