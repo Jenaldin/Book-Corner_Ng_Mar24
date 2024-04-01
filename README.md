@@ -32,10 +32,10 @@ The Book Corner web app is provides a blog-like space where small communities, l
 3. Application has concurrently installed, to start both FE and BE simultaneously run `npm start`.
 4. To seed data to MongoDB, use following command `<INSERT LATER AFTER SEED FILES ARE MADE>`.
 5. Create your own .env file in /server for following variables (if you do not want to use the provided in project || locations)
-`DB_URI`
-`DB_PORT`
-`SECRET`
-`SALT`
+```DB_URI```
+```DB_PORT```
+```SECRET```
+```SALT```
 
 ## Usage
 ### End User Perspective
