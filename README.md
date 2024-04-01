@@ -1,24 +1,24 @@
-# The Book Corner
-My (Jenny Guteva) Angular project for SoftUni course final exam March/April 2024.
+# The Book Corner by Jenny Guteva (SoftUni Angular Exam Project, April 2024)
+The Book Corner web app is provides a blog-like space where small communities, like a neighborhood or other small gathering of people, can lend each other books to read, without any financial transactions and based on mutual agreement it is not for profit, but for expanding the community, getting to know people better and enjoying a shared hobby without needing 2 additional rooms at home for book storage.
 
 ## Description
 Currently app is entirely in DEV environment and no implementation for PROD is included. 
-- FE runs on http://localhost:4200/ and is build with:
-   - Angular v16
+FE runs on http://localhost:4200/ and is build with: | BE (server API as a RESTFul service) runs on http://localhost:3000/api and is build with:
+-----------------------------------------------------|---------------------------------------------------------------------
+   - Angular v16 
    - Angular Material
    - TypeScript
    - (check /client/package.json for more dependencies)
-- BE (server API as a RESTFul service) runs on http://localhost:3000/api and is build with:
-   - Express
-   - Mongoose
+   |
    - BCrypt
    - Cookie-parser
    - JSON Web Token
    - (check /server/package.json for more dependencies)
+
 - DB used is MongoDB and runs on mongodb://127.0.0.1:27017/
 
 ## Application Idea
-The Book Corner web app is provides a blog-like space where small communities, like a neighborhood or other small gathering of people, can lend each other books to read, without any financial transactions and based on mutual agreement it is not for profit, but for expanding the community, getting to know people better and enjoying a shared hobby without needing 2 additional rooms at home for book storage.
+
 
 ## Installation
 ### Prerequisites
