@@ -49,8 +49,8 @@ Base URL is http://localhost:3000/api
 Endpoint | HTTP Method | Description | Guests can access (Y/N)? | Logged in can access (Y/N)? | Ownership required (Y/N)?
 ---------|:-----------:|-------------|:------------------------:|:---------------------------:|:-------------------------:
 / | GET | Test to see if API router works | :heavy_check_mark: | :heavy_check_mark: | :x:
-*** | GET | If there is no such route, 404 | :heavy_check_mark: | :heavy_check_mark: | :x:
-~~~ | ~~~ | ~~~ | ~~~ | ~~~ | ~~~
+\* | GET | If there is no such route, 404 | :heavy_check_mark: | :heavy_check_mark: | :x:
+\~~~ | ~~~ | ~~~ | ~~~ | ~~~ | ~~~
 /catalog | GET | Get all the book items | :heavy_check_mark: | :heavy_check_mark: | :x:
 /catalog | POST | Create a new book item | :x: | :heavy_check_mark: | :x:
 /catalog/latest | GET | Get the latest 5 book items | :heavy_check_mark: | :heavy_check_mark: | :x:
