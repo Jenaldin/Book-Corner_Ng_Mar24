@@ -24,6 +24,16 @@ const routes: Routes = [
         component: SearchComponent,
       },
       {
+        path: 'login',
+        pathMatch: 'full',
+        redirectTo: '/users/login',
+      },
+      {
+        path: 'register',
+        pathMatch: 'full',
+        redirectTo: '/users/register',
+      },
+      {
         path: '404',
         component: NotFoundComponent,
       },
