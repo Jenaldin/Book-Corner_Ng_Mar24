@@ -6,6 +6,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { AuthActive } from '../core/guards/auth.activate';
 import { guestActive } from '../core/guards/guest.activate';
 import { ViewProfileComponent } from './view-profile/view-profile.component';
+import { LogoutComponent } from './logout/logout.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,11 @@ const routes: Routes = [
         path: 'register',
         component: RegisterComponent,
         canActivate: [guestActive()],
+      },
+      {
+        path: 'logout',
+        component: LogoutComponent,
+        canActivate: [AuthActive],
       },
       {
         path: 'profile',

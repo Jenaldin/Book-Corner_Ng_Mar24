@@ -18,7 +18,7 @@
 
    <ng-container *ngIf="loggedIn">
       <button mat-raised-button class="mat-raised-button" fxFlex="50%" fxFlex.lt-sm="100%" color="accent"
-      (click)="logout()">
+      [routerLink]="['/users/logout']">
          <mat-icon>exit_to_app</mat-icon>Logout</button>
       <button mat-raised-button class="mat-raised-button" fxFlex="50%" fxFlex.lt-sm="100%" color="accent"
          [routerLink]="['/users/profile']">

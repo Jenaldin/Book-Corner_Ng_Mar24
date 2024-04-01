@@ -34,6 +34,11 @@ const routes: Routes = [
         redirectTo: '/users/register',
       },
       {
+        path: 'logout',
+        pathMatch: 'full',
+        redirectTo: '/users/logout',
+      },
+      {
         path: '404',
         component: NotFoundComponent,
       },

@@ -20,13 +20,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ViewProfileComponent } from './view-profile/view-profile.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
     RegisterComponent,
     LoginComponent,
     ProfileComponent,
-    ViewProfileComponent
+    ViewProfileComponent,
+    LogoutComponent
   ],
   imports: [
     MatSlideToggleModule,
