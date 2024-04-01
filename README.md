@@ -45,9 +45,11 @@ As end user you have the following two possibilities:
 ### REST API Endpoints
 Base URL is http://localhost:3000/api
 
-HTTP Method | Description | Endpoint | Guests can access? | Logged in can access? | Ownership required?
-------------|-------------|----------|--------------------|-----------------------|--------------------
-GET | Test to see if API works | / | Y :heavy_check_mark: | Y :white_check_mark: | N :x:
+Endpoint | HTTP Method | Description | Guests can access (Y/N)? | Logged in can access (Y/N)? | Ownership required (Y/N)?
+------------|-------------|----------|--------------------------|-----------------------------|--------------------------
+/ | GET | Test to see if API router works | :heavy_check_mark: | :heavy_check_mark: | :x:
+
+
 
 ### Architecture
 Here is a ***high-level*** overview of the project's architecture:
