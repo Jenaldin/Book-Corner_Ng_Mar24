@@ -59,6 +59,48 @@ As end user you have the following two possibilities:
    - If you try to access a page you are not authorized to see, you will get a notification and be redirected to home.
 
 ### Architecture
+Here is a high-level overview of the project's architecture:
+- client
+  - src
+    - app
+      - books
+        - add-book
+        - catalog
+        - edit-book
+        - view-book
+      - comments
+        - add-comment
+        - all-comments
+        - edit-comment
+      - core
+        - guards
+        - services
+        - types
+        - utils
+      - main
+        - about
+        - home
+        - not-found
+        - search
+      - shared
+        - footer
+        - header
+        - navigation
+      - users
+        - login
+        - profile
+        - register
+        - view-profile
+    - assets
+      - img
+    - environments
+- server
+  - controllers
+  - middlewares
+  - models
+  - router
+  - services
+  - utils
 
 ### API Endpoints
 
