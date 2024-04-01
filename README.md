@@ -5,15 +5,10 @@ The Book Corner web app is provides a blog-like space where small communities, l
 Currently app is entirely in DEV environment and no implementation for PROD is included. 
 FE runs on http://localhost:4200/ and is build with: | BE (server API as a RESTFul service) runs on http://localhost:3000/api and is build with:
 -----------------------------------------------------|---------------------------------------------------------------------
-   - Angular v16 
-   - Angular Material
-   - TypeScript
-   - (check /client/package.json for more dependencies)
-   |
-   - BCrypt
-   - Cookie-parser
-   - JSON Web Token
-   - (check /server/package.json for more dependencies)
+   - Angular v16 |   - Express
+   - Angular Material |    - Mongoose
+   - TypeScript |    	- BCrypt, Cookie-parser, JSON Web Token
+   - (check /client/package.json for more dependencies) |   - (check /server/package.json for more dependencies)
 
 - DB used is MongoDB and runs on mongodb://127.0.0.1:27017/
 
