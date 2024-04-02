@@ -1,8 +1,10 @@
-# The Book Corner by Jenny Guteva (SoftUni Angular Exam Project, April 2024)
+# The Book Corner by Jenny Guteva
+This project is intended as a SoftUni Angular Exam Project for exam session in April 2024; In the future, per author's available time and other commitments, it could become a passion project and grow with more functionalities.
+
 The Book Corner web app is provides a blog-like space where small communities, like a neighborhood or other small gathering of people, can lend each other books to read, without any financial transactions and based on mutual agreement it is not for profit, but for expanding the community, getting to know people better and enjoying a shared hobby without needing 2 additional rooms at home for book storage.
 
 ## Description
-App is entirely in DEV environment and no implementation for PROD is included. DB used is MongoDB and runs on mongodb://127.0.0.1:27017/
+App is entirely in DEV stage and no options for PROD are included. DB used is MongoDB (mongodb://127.0.0.1:27017/)
 FE runs on http://localhost:4200/ and uses: | BE runs on http://localhost:3000/ and uses:
 --------------------------------------------|--------------------------------------------
 Angular v16, TypeScript | Express, Mongoose
