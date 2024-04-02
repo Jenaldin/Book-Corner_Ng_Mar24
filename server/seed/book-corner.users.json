@@ -1,0 +1,157 @@
+[{
+  "_id": {
+    "$oid": "660c4bcd6b0062631297c8eb"
+  },
+  "firstName": "Jenny",
+  "lastName": "Guteva",
+  "username": "Jenaldin",
+  "email": "jenaldin@fake.com",
+  "password": "$2b$12$HogQaQ3I8eZuaTWbeUqlSuvS88mAYjp3E0pwoXbeor/G2DPixpbQu",
+  "avatar": "https://pusheen.com/wp-content/uploads/2019/11/1080-250x250.jpg",
+  "aboutMe": " Hi there! I love fantasy books, but also read some mystery/crime, romance novels and from time to time horror stories, like the Penny Dreadfuls. I also enjoy nature, melodic vibes, good food and have a cat. Will be happy to exchange interesting book worlds with you! :)",
+  "booksOwned": [
+    {
+      "$oid": "660c504b6b0062631297c906"
+    },
+    {
+      "$oid": "660c54e46b0062631297c931"
+    },
+    {
+      "$oid": "660c56e16b0062631297c937"
+    },
+    {
+      "$oid": "660c8735899f42ad9600ca65"
+    }
+  ],
+  "booksRequested": [
+    {
+      "$oid": "660c82b7899f42ad9600c9fb"
+    },
+    {
+      "$oid": "660c65f7ebc0ac53f2c4dbe1"
+    },
+    {
+      "$oid": "660c7ec8899f42ad9600c997"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660c588d6b0062631297c94b"
+  },
+  "firstName": "John",
+  "lastName": "Doe",
+  "username": "Here_is_Johnny",
+  "email": "john@doe.co.uk",
+  "password": "$2b$12$BF7uVq6FqeycPuU8scj0iOPNdCubUMR/ejEg7DG2ZPqmJ3ttsb5uS",
+  "avatar": "https://cdn.shopify.com/s/files/1/1140/8354/files/Pusheen_How_Old_Is_She_480x480.jpg",
+  "aboutMe": " Books enrich the mind and soul, and sharpen the tongue and the senses. Without books, this would be a dull world... Escape is just one page away...",
+  "booksOwned": [
+    {
+      "$oid": "660c5e55ebc0ac53f2c4db39"
+    }
+  ],
+  "booksRequested": [
+    {
+      "$oid": "660c56e16b0062631297c937"
+    },
+    {
+      "$oid": "660c65f7ebc0ac53f2c4dbe1"
+    },
+    {
+      "$oid": "660c504b6b0062631297c906"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660c5f80ebc0ac53f2c4db57"
+  },
+  "firstName": "Jane",
+  "lastName": "Schäfer",
+  "username": "Space-Cookie",
+  "email": "cookie_jane@something.de",
+  "password": "$2b$12$xdCLuFqRoxOA/6M8xNMtxOsWiPySyGWHzubC2JqahBMES65g0WHpu",
+  "avatar": "https://media.tenor.com/0NIm2vn7A3sAAAAe/pusheen-book.png",
+  "aboutMe": " I'm new to The Book Corner! Nice to meet you :) Passionate book lover, still have much to read. See you between the pages ;)",
+  "booksOwned": [
+    {
+      "$oid": "660c61e3ebc0ac53f2c4db98"
+    },
+    {
+      "$oid": "660c65f7ebc0ac53f2c4dbe1"
+    }
+  ],
+  "booksRequested": [
+    {
+      "$oid": "660c504b6b0062631297c906"
+    },
+    {
+      "$oid": "660c54e46b0062631297c931"
+    },
+    {
+      "$oid": "660c5e55ebc0ac53f2c4db39"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660c7147899f42ad9600c8fd"
+  },
+  "firstName": "Peter",
+  "lastName": "Pan",
+  "username": "TheBookFellah",
+  "email": "_neverland_fellah_@something.bg",
+  "password": "$2b$12$Df9mvYfHDIhHih36BpgS9.sUmZaH29Hzt45SIbcAYwlKT4IYdRTDW",
+  "avatar": "https://pm1.aminoapps.com/8012/7848ddc59e418da90608bdc0e7497d66c5a2cf61r1-236-235v2_hq.jpg",
+  "aboutMe": " ",
+  "booksOwned": [
+    {
+      "$oid": "660c79e0899f42ad9600c94f"
+    },
+    {
+      "$oid": "660c7bc2899f42ad9600c96e"
+    },
+    {
+      "$oid": "660c7ec8899f42ad9600c997"
+    }
+  ],
+  "booksRequested": [
+    {
+      "$oid": "660c5e55ebc0ac53f2c4db39"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660c804d899f42ad9600c9b4"
+  },
+  "firstName": "User",
+  "lastName": "Testing",
+  "username": "Test_User",
+  "email": "test@users.edu",
+  "password": "$2b$12$v.uFsemNv1IE5JzYizgUBut6j/iUyctLHMFV.gcjid9EMzNJPl/xK",
+  "avatar": "http://localhost:4200/assets/img/defaultAvatar.PNG",
+  "aboutMe": " This is just a test user with test information. You will see below a lot of Lorem Ipsum, as well as in his book.\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+  "booksOwned": [
+    {
+      "$oid": "660c82b7899f42ad9600c9fb"
+    },
+    {
+      "$oid": "660c8559899f42ad9600ca41"
+    }
+  ],
+  "booksRequested": [
+    {
+      "$oid": "660c7bc2899f42ad9600c96e"
+    },
+    {
+      "$oid": "660c7ec8899f42ad9600c997"
+    }
+  ],
+  "__v": 0
+}]

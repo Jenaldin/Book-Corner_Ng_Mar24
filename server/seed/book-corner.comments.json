@@ -1,0 +1,538 @@
+[{
+  "_id": {
+    "$oid": "660c50f16b0062631297c91b"
+  },
+  "title": "First comment here! Edit also works",
+  "commentBody": "Yes, this is a wonderful book! An this is a wonderful comment, the first of many to come, as this is for test data. Hopefully all works as expected and no major bugs appear. I wish us luck! :)",
+  "ratedBookWith": 0,
+  "helpfulYes": 0,
+  "helpfulNo": 4,
+  "usersVotedHelpful": [
+    {
+      "$oid": "660c588d6b0062631297c94b"
+    },
+    {
+      "$oid": "660c5f80ebc0ac53f2c4db57"
+    },
+    {
+      "$oid": "660c7147899f42ad9600c8fd"
+    },
+    {
+      "$oid": "660c804d899f42ad9600c9b4"
+    }
+  ],
+  "user": {
+    "$oid": "660c4bcd6b0062631297c8eb"
+  },
+  "book": {
+    "$oid": "660c504b6b0062631297c906"
+  },
+  "createdAt": {
+    "$date": "2024-04-02T18:39:45.035Z"
+  },
+  "__v": 4
+},
+{
+  "_id": {
+    "$oid": "660c59256b0062631297c961"
+  },
+  "title": "An awesome book!",
+  "commentBody": "One of my favorites, most definitely a time well spend, just don't read it alone in the dark if you are easily depressed. I would enjoy reading it in Bulgarian, as I have read it in German and English, and believe me, there is no scarier moment than reading about Pennywise's yellow eyes in German, hehe",
+  "ratedBookWith": 5,
+  "helpfulYes": 1,
+  "helpfulNo": 0,
+  "usersVotedHelpful": [
+    {
+      "$oid": "660c4bcd6b0062631297c8eb"
+    }
+  ],
+  "user": {
+    "$oid": "660c588d6b0062631297c94b"
+  },
+  "book": {
+    "$oid": "660c56e16b0062631297c937"
+  },
+  "createdAt": {
+    "$date": "2024-04-02T19:14:45.178Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "660c59a96b0062631297c97f"
+  },
+  "title": "A good fantasy, a little too long",
+  "commentBody": "Not exactly my cup of tea, but had its very good moments. The pace is a little bit slow, but you can overlook that if you read it with a bit of skipping when you feel like you're stuck. I would give it a solid 3.",
+  "ratedBookWith": 3,
+  "helpfulYes": 4,
+  "helpfulNo": 0,
+  "usersVotedHelpful": [
+    {
+      "$oid": "660c5f80ebc0ac53f2c4db57"
+    },
+    {
+      "$oid": "660c4bcd6b0062631297c8eb"
+    },
+    {
+      "$oid": "660c7147899f42ad9600c8fd"
+    },
+    {
+      "$oid": "660c804d899f42ad9600c9b4"
+    }
+  ],
+  "user": {
+    "$oid": "660c588d6b0062631297c94b"
+  },
+  "book": {
+    "$oid": "660c504b6b0062631297c906"
+  },
+  "createdAt": {
+    "$date": "2024-04-02T19:16:57.661Z"
+  },
+  "__v": 4
+},
+{
+  "_id": {
+    "$oid": "660c5a256b0062631297c991"
+  },
+  "title": "P.S.: A follow-up question",
+  "commentBody": "What is this I hear about a second book? Has King changed his mind or just no good enough ideas?",
+  "ratedBookWith": 0,
+  "helpfulYes": 0,
+  "helpfulNo": 0,
+  "usersVotedHelpful": [],
+  "user": {
+    "$oid": "660c588d6b0062631297c94b"
+  },
+  "book": {
+    "$oid": "660c56e16b0062631297c937"
+  },
+  "createdAt": {
+    "$date": "2024-04-02T19:19:01.873Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660c6055ebc0ac53f2c4db85"
+  },
+  "title": "I would give it a shot",
+  "commentBody": "This is actually a test comment to see what happens if a comment does not have rating, to check if later in a second rating I will be able to provide it",
+  "ratedBookWith": 0,
+  "helpfulYes": 2,
+  "helpfulNo": 0,
+  "usersVotedHelpful": [
+    {
+      "$oid": "660c7147899f42ad9600c8fd"
+    },
+    {
+      "$oid": "660c804d899f42ad9600c9b4"
+    }
+  ],
+  "user": {
+    "$oid": "660c5f80ebc0ac53f2c4db57"
+  },
+  "book": {
+    "$oid": "660c504b6b0062631297c906"
+  },
+  "createdAt": {
+    "$date": "2024-04-02T19:45:25.116Z"
+  },
+  "__v": 2
+},
+{
+  "_id": {
+    "$oid": "660c60a2ebc0ac53f2c4db8c"
+  },
+  "title": "P.S.: Will rate after reading",
+  "commentBody": "Yes, it works to provide rating later. I personally would like to take the english edition, but lets see what comes from the subscription :)",
+  "ratedBookWith": 0,
+  "helpfulYes": 1,
+  "helpfulNo": 1,
+  "usersVotedHelpful": [
+    {
+      "$oid": "660c7147899f42ad9600c8fd"
+    },
+    {
+      "$oid": "660c804d899f42ad9600c9b4"
+    }
+  ],
+  "user": {
+    "$oid": "660c5f80ebc0ac53f2c4db57"
+  },
+  "book": {
+    "$oid": "660c504b6b0062631297c906"
+  },
+  "createdAt": {
+    "$date": "2024-04-02T19:46:42.218Z"
+  },
+  "__v": 2
+},
+{
+  "_id": {
+    "$oid": "660c63b6ebc0ac53f2c4dbd4"
+  },
+  "title": "I have also other N.Roberts books",
+  "commentBody": "Hey there, if you like her style of romance, outside of this trilogy I have 3 more, so keep an eye out for them posted here and subscribe to them ;)",
+  "ratedBookWith": 0,
+  "helpfulYes": 0,
+  "helpfulNo": 0,
+  "usersVotedHelpful": [],
+  "user": {
+    "$oid": "660c5f80ebc0ac53f2c4db57"
+  },
+  "book": {
+    "$oid": "660c61e3ebc0ac53f2c4db98"
+  },
+  "createdAt": {
+    "$date": "2024-04-02T19:59:50.397Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660c697ed6602df193a42554"
+  },
+  "title": "Another comment for test, a lot...",
+  "commentBody": "...test comments in the foreseeable future. I hope I don't get split personality in the end, hehe",
+  "ratedBookWith": 0,
+  "helpfulYes": 1,
+  "helpfulNo": 0,
+  "usersVotedHelpful": [
+    {
+      "$oid": "660c588d6b0062631297c94b"
+    }
+  ],
+  "user": {
+    "$oid": "660c5f80ebc0ac53f2c4db57"
+  },
+  "book": {
+    "$oid": "660c65f7ebc0ac53f2c4dbe1"
+  },
+  "createdAt": {
+    "$date": "2024-04-02T20:24:30.600Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "660c6f1f899f42ad9600c8d6"
+  },
+  "title": "Have read it before in Bulgarian",
+  "commentBody": "I enjoyed it very much and would like to read it again, now in its original language. Thanks for sharing, Cookie!",
+  "ratedBookWith": 5,
+  "helpfulYes": 1,
+  "helpfulNo": 0,
+  "usersVotedHelpful": [
+    {
+      "$oid": "660c5f80ebc0ac53f2c4db57"
+    }
+  ],
+  "user": {
+    "$oid": "660c588d6b0062631297c94b"
+  },
+  "book": {
+    "$oid": "660c65f7ebc0ac53f2c4dbe1"
+  },
+  "createdAt": {
+    "$date": "2024-04-02T20:48:31.093Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "660c701d899f42ad9600c8f3"
+  },
+  "title": "Sure thing, Johnny",
+  "commentBody": "Just do not come for me, please, with an axe through the bathroom door! Great movie though, I like Jack Nicholson a lot!",
+  "ratedBookWith": 0,
+  "helpfulYes": 0,
+  "helpfulNo": 0,
+  "usersVotedHelpful": [],
+  "user": {
+    "$oid": "660c5f80ebc0ac53f2c4db57"
+  },
+  "book": {
+    "$oid": "660c65f7ebc0ac53f2c4dbe1"
+  },
+  "createdAt": {
+    "$date": "2024-04-02T20:52:45.288Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660c7310899f42ad9600c90f"
+  },
+  "title": "I have not read it yet",
+  "commentBody": "It would be interesting, I watched the movies and they are fascinating! Scy-fy is not my strong suit, more of a fantasy type here, but the world they showed looks quite cool. I am not sure I would categorize it as science fiction just because its in space. Star Wars similarly is more of a fantasy than a science fiction. And I will die on that hill, as they say :)",
+  "ratedBookWith": 0,
+  "helpfulYes": 0,
+  "helpfulNo": 0,
+  "usersVotedHelpful": [],
+  "user": {
+    "$oid": "660c7147899f42ad9600c8fd"
+  },
+  "book": {
+    "$oid": "660c5e55ebc0ac53f2c4db39"
+  },
+  "createdAt": {
+    "$date": "2024-04-02T21:05:20.676Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660c8385899f42ad9600ca15"
+  },
+  "title": "This is a test lorem ipsum",
+  "commentBody": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.",
+  "ratedBookWith": 0,
+  "helpfulYes": 0,
+  "helpfulNo": 0,
+  "usersVotedHelpful": [],
+  "user": {
+    "$oid": "660c804d899f42ad9600c9b4"
+  },
+  "book": {
+    "$oid": "660c82b7899f42ad9600c9fb"
+  },
+  "createdAt": {
+    "$date": "2024-04-02T22:15:33.635Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660c87b4899f42ad9600ca7f"
+  },
+  "title": "Giving 5 stars BUT!!! Read below",
+  "commentBody": "Hey Test_User, just wanted to let you know you will need to rework this entry. The Riftwar Cycle is about 30 books and giving them out at the same time would be problematic, as no one could read them all in 3 months per The Book Corner agreement. So please, make it at least per trilogies. Outside of that the Riftwar world and the works of Ray Feist are spectacular and this are my favourite books! Thanks for sharing them :)",
+  "ratedBookWith": 5,
+  "helpfulYes": 0,
+  "helpfulNo": 0,
+  "usersVotedHelpful": [],
+  "user": {
+    "$oid": "660c4bcd6b0062631297c8eb"
+  },
+  "book": {
+    "$oid": "660c8559899f42ad9600ca41"
+  },
+  "createdAt": {
+    "$date": "2024-04-02T22:33:24.628Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660c883e899f42ad9600ca9b"
+  },
+  "title": "People, please try not to spam...",
+  "commentBody": "I know we have to test the comments section for pagination and make at least 10 comments, but still, try to be more to the point. Thanks!",
+  "ratedBookWith": 0,
+  "helpfulYes": 4,
+  "helpfulNo": 0,
+  "usersVotedHelpful": [
+    {
+      "$oid": "660c5f80ebc0ac53f2c4db57"
+    },
+    {
+      "$oid": "660c588d6b0062631297c94b"
+    },
+    {
+      "$oid": "660c7147899f42ad9600c8fd"
+    },
+    {
+      "$oid": "660c804d899f42ad9600c9b4"
+    }
+  ],
+  "user": {
+    "$oid": "660c4bcd6b0062631297c8eb"
+  },
+  "book": {
+    "$oid": "660c504b6b0062631297c906"
+  },
+  "createdAt": {
+    "$date": "2024-04-02T22:35:42.257Z"
+  },
+  "__v": 4
+},
+{
+  "_id": {
+    "$oid": "660c8906899f42ad9600cab2"
+  },
+  "title": "Hi Johnny :)",
+  "commentBody": "So first, I will contact you separately to agree how to pass down the book. I am even inclined to gift it to you directly and to transfer the ownership in a way (not sure how but still). Second, no I don't think there will be a follow-up. People talked about it in light of the movie's success, but King is not the type to disregard his policy just because of a little hype. And so, talk to you later :)",
+  "ratedBookWith": 0,
+  "helpfulYes": 0,
+  "helpfulNo": 0,
+  "usersVotedHelpful": [],
+  "user": {
+    "$oid": "660c4bcd6b0062631297c8eb"
+  },
+  "book": {
+    "$oid": "660c56e16b0062631297c937"
+  },
+  "createdAt": {
+    "$date": "2024-04-02T22:39:02.796Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "660c8a1b899f42ad9600cb49"
+  },
+  "title": "Will try not to, but then again...",
+  "commentBody": "We are 5-6 comments short on reaching target, let me call the others to post a bit here, so we can reach the target",
+  "ratedBookWith": 0,
+  "helpfulYes": 1,
+  "helpfulNo": 1,
+  "usersVotedHelpful": [
+    {
+      "$oid": "660c7147899f42ad9600c8fd"
+    },
+    {
+      "$oid": "660c804d899f42ad9600c9b4"
+    }
+  ],
+  "user": {
+    "$oid": "660c5f80ebc0ac53f2c4db57"
+  },
+  "book": {
+    "$oid": "660c504b6b0062631297c906"
+  },
+  "createdAt": {
+    "$date": "2024-04-02T22:43:39.917Z"
+  },
+  "__v": 2
+},
+{
+  "_id": {
+    "$oid": "660c8a66899f42ad9600cb81"
+  },
+  "title": "Okay, okay, here we go",
+  "commentBody": "Heard we need to push this past the 10th comment, so here to provide something instead of lorem ipsum :)",
+  "ratedBookWith": 0,
+  "helpfulYes": 0,
+  "helpfulNo": 2,
+  "usersVotedHelpful": [
+    {
+      "$oid": "660c7147899f42ad9600c8fd"
+    },
+    {
+      "$oid": "660c804d899f42ad9600c9b4"
+    }
+  ],
+  "user": {
+    "$oid": "660c588d6b0062631297c94b"
+  },
+  "book": {
+    "$oid": "660c504b6b0062631297c906"
+  },
+  "createdAt": {
+    "$date": "2024-04-02T22:44:54.870Z"
+  },
+  "__v": 2
+},
+{
+  "_id": {
+    "$oid": "660c8aea899f42ad9600cb9b"
+  },
+  "title": "Btw, the English copy is 3 tomes!",
+  "commentBody": "I will later edit this information above, but you should know the English copy of the book is the version split in 3 tomes and it is in B5 format, which makes them like little sweet fantasy bricks. Just as FYI",
+  "ratedBookWith": 0,
+  "helpfulYes": 2,
+  "helpfulNo": 0,
+  "usersVotedHelpful": [
+    {
+      "$oid": "660c7147899f42ad9600c8fd"
+    },
+    {
+      "$oid": "660c804d899f42ad9600c9b4"
+    }
+  ],
+  "user": {
+    "$oid": "660c4bcd6b0062631297c8eb"
+  },
+  "book": {
+    "$oid": "660c504b6b0062631297c906"
+  },
+  "createdAt": {
+    "$date": "2024-04-02T22:47:06.074Z"
+  },
+  "__v": 2
+},
+{
+  "_id": {
+    "$oid": "660c8bc6899f42ad9600cbb9"
+  },
+  "title": "Let me join in! This is a classic!!",
+  "commentBody": "So, the book is a classic, I am giving it 5 stars from the door. It is not true its is not action packed, just maybe need some more time to get used to Tolkien's style. Just remember, this man and this book led to universities where you study Elven and Numenorian as linguist. Our world would not be the same without them",
+  "ratedBookWith": 5,
+  "helpfulYes": 2,
+  "helpfulNo": 0,
+  "usersVotedHelpful": [
+    {
+      "$oid": "660c804d899f42ad9600c9b4"
+    },
+    {
+      "$oid": "660c4bcd6b0062631297c8eb"
+    }
+  ],
+  "user": {
+    "$oid": "660c7147899f42ad9600c8fd"
+  },
+  "book": {
+    "$oid": "660c504b6b0062631297c906"
+  },
+  "createdAt": {
+    "$date": "2024-04-02T22:50:46.520Z"
+  },
+  "__v": 2
+},
+{
+  "_id": {
+    "$oid": "660c8cae899f42ad9600cc33"
+  },
+  "title": "Giving my contribution.Book is fine",
+  "commentBody": "I was one of those who did not like it as much, so giving it only 2 stars. I think its a bit outdated, even if you are going to ban me for saying it. I like more the new Rings of Power Amazon series...",
+  "ratedBookWith": 2,
+  "helpfulYes": 0,
+  "helpfulNo": 1,
+  "usersVotedHelpful": [
+    {
+      "$oid": "660c4bcd6b0062631297c8eb"
+    }
+  ],
+  "user": {
+    "$oid": "660c804d899f42ad9600c9b4"
+  },
+  "book": {
+    "$oid": "660c504b6b0062631297c906"
+  },
+  "createdAt": {
+    "$date": "2024-04-04T10:54:38.636Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "660c8d2a899f42ad9600cc49"
+  },
+  "title": "Woow! Blasphemy! RoP is trash",
+  "commentBody": "Do not say that Rings of Power is good. It took beloved characters and turned them upside down to be more woke. The way those people were talking for their work was if they have never seen the LotR trilogy or Hobbit trilogy by Jackson and overall were stupid.\nBtw, we reached the required number of comments, you could stop the spam now :)",
+  "ratedBookWith": 0,
+  "helpfulYes": 0,
+  "helpfulNo": 0,
+  "usersVotedHelpful": [],
+  "user": {
+    "$oid": "660c4bcd6b0062631297c8eb"
+  },
+  "book": {
+    "$oid": "660c504b6b0062631297c906"
+  },
+  "createdAt": {
+    "$date": "2024-04-04T11:56:42.271Z"
+  },
+  "__v": 0
+}]
