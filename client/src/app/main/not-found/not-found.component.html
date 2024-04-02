@@ -1,18 +1,31 @@
 <div class="center-div" *ngIf="isLoading">
-   <mat-spinner></mat-spinner>
+  <mat-spinner></mat-spinner>
 </div>
 
 <div class="grid-container">
-   <div class="grid-item">
-      <h1 class="h1-title">Ohh... you have lost your way!</h1>
-      <h3 class="h3-title">It seems that this corner of the library is not the one you are looking for!</h3>
-      <p class="p-text">We propose you go back to <a [routerLink]="['/']">Home from the navigation above or by clicking
-            on this long sentence.</a></p>
-      <p class="p-text">Hope next time you will find the correct location! Though if issue persists, do contact the
-         App creator and provide them as much details, screenshots and information you can, so they can work on fixes. Thank you!
-      </p>
-   </div>
-   <div class="grid-item">
-      <img src="../../../assets/img/404.webp" alt="page not found" class="responsive-image">
-   </div>
+  <div class="grid-item">
+    <h1 class="h1-title">Oops... seems like a little detour!</h1>
+    <h3 class="h3-title">
+      This part of the library might not be what you're searching for.
+    </h3>
+    <p class="p-text">
+      We suggest you navigate back to
+      <a [routerLink]="['/']"
+        >Home using the navigation bar above or simply by clicking here.</a
+      >
+    </p>
+    <p class="p-text">
+      We hope your next visit leads you to the right spot! If you continue to
+      encounter issues, please don't hesitate to reach out to the App creator.
+      Your detailed feedback, including screenshots and other relevant
+      information, will be invaluable in helping us improve. Thank you!
+    </p>
+  </div>
+  <div class="grid-item">
+    <img
+      src="../../../assets/img/404.webp"
+      alt="page not found"
+      class="responsive-image"
+    />
+  </div>
 </div>
