@@ -1,4 +1,4 @@
-# The Book Corner by Jenny Guteva
+# The Book Corner by Jenny Guteva (README.md is WIP)
 The Book Corner is initially designed as an Angular Exam Project for SoftUni's April 2024 examination session. However, with the author's evolving commitments and availability, it holds the potential to blossom into a passion project, having additional features in the future.
 
 The essence of The Book Corner lies in its ability to foster a virtual, blog-like space for small communities - be it a neighborhood or any small group of individuals. It serves as a platform where book enthusiasts can lend and borrow books, fostering a culture of shared reading experiences. This process involves no financial transactions and operates purely on mutual agreements. The primary objective is to cultivate stronger community bonds, facilitate better understanding among members, and indulge in a shared hobby. It's a solution for those who love books but are constrained by space at home for book storage.
