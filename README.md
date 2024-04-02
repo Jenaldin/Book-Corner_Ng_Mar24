@@ -46,8 +46,8 @@ Angular Material (HTML, SCSS) | BCrypt, Cookie-parser, JSON Web Token
    - If you try to access a page for which you lack authorization, you will receive a notification and be redirected to the home page.
 
 ### REST API Endpoints
-Base URL is http://localhost:3000/api
-***Note:*** In the table below, “Ownership” indicates that the user is already logged in. Therefore, where “Ownership” is required, “Logged in” is marked with **-**
+Base URL is http://localhost:3000/api.
+***Note:*** In the table below, “Ownership” indicates that the user is already logged in. Therefore, where “Ownership” is required, “Logged in” is marked with **-**.
 
 Endpoint | HTTP Method | Description | Accessible to Guests (Y/N)? | Accessible when Logged in (Y/N)? | Requires Item Ownership (Y/N)?
 ---------|:-----------:|-------------|:---------------------------:|:--------------------------------:|:----------------------------:
