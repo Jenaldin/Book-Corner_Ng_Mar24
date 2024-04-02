@@ -74,7 +74,6 @@ Endpoint | HTTP Method | Description | Guests can access (Y/N)? | Logged in can 
 /comment/:commentId | DELETE | Delete a comment item | :x: | **-** | :heavy_check_mark:
 /comment/voteYes/:commentId | PUT | Vote for a comment item with yes (useful) | :x: | :heavy_check_mark: | :x:
 /comment/voteNo/:commentId | PUT | Vote for a comment item with no (not useful) | :x: | :heavy_check_mark: | :x:
-\~~~ | ~~~ | ~~~ | ~~~ | ~~~ | ~~~
 
 ### Architecture
 Here is a ***high-level*** overview of the project's architecture:
