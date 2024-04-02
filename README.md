@@ -1,7 +1,7 @@
 # The Book Corner by Jenny Guteva
-The Book Corner is initially designed as an Angular Exam Project for SoftUni's April 2024 examination session. However, with the author's evolving commitments and availability, it holds the potential to blossom into a passion project, enriched with additional features over time.
+The Book Corner is initially designed as an Angular Exam Project for SoftUni's April 2024 examination session. However, with the author's evolving commitments and availability, it holds the potential to blossom into a passion project, having additional features in the future.
 
-The essence of The Book Corner lies in its ability to foster a virtual, blog-like space for intimate communities - be it a neighborhood or any small group of individuals. It serves as a platform where book enthusiasts can lend and borrow books, fostering a culture of shared reading experiences. This process involves no financial transactions and operates purely on mutual agreements. The primary objective is to cultivate stronger community bonds, facilitate better understanding among members, and indulge in a shared hobby. It's a solution for those who love books but are constrained by space at home for book storage.
+The essence of The Book Corner lies in its ability to foster a virtual, blog-like space for small communities - be it a neighborhood or any small group of individuals. It serves as a platform where book enthusiasts can lend and borrow books, fostering a culture of shared reading experiences. This process involves no financial transactions and operates purely on mutual agreements. The primary objective is to cultivate stronger community bonds, facilitate better understanding among members, and indulge in a shared hobby. It's a solution for those who love books but are constrained by space at home for book storage.
 
 ## Project Overview
 The App is currently in the development phase, with no production options included. It utilizes MongoDB as its database (mongodb://127.0.0.1:27017/).
@@ -47,7 +47,7 @@ Angular Material (HTML, SCSS) | BCrypt, Cookie-parser, JSON Web Token
 
 ### REST API Endpoints
 Base URL is http://localhost:3000/api.
-***Note:*** In the table below, “Ownership” indicates that the user is already logged in. Therefore, where “Ownership” is required, “Logged in” is marked with **-** and vice versa - if “Logged in” is required, but “Ownership” is not, “Ownership” is marked with **-**.
+***Note:*** In the table below, “Ownership” indicates that the user is already logged in. Therefore, where “Ownership” is required, “Logged in” is marked with **-** and vice versa (if “Logged in” is required, but “Ownership” is not, the latter is marked with **-**).
 
 Endpoint | HTTP Method | Description | Accessible to Guests (Y/N)? | Accessible when Logged in (Y/N)? | Requires Item Ownership (Y/N)?
 ---------|:-----------:|-------------|:---------------------------:|:--------------------------------:|:----------------------------:
