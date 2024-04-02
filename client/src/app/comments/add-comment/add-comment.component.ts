@@ -42,10 +42,12 @@ export class AddCommentComponent implements OnInit, OnDestroy{
     const commentBody = formComment.value.commentBody;
     let ratedBookWith: number = 0
     
-    if(formComment.value.ratedBookWith == ''){
+    if(formComment.value.ratedBookWith === undefined){
       ratedBookWith = 0
+    } else {
+      ratedBookWith = Number(formComment.value.ratedBookWith);
     }
-    ratedBookWith = Number(formComment.value.ratedBookWith);
+ 
     const book = this.bookData.bookId    
     
     this.commentApi.addComment(book, title, commentBody, ratedBookWith).subscribe({
