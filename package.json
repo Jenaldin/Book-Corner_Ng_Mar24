@@ -8,6 +8,7 @@
     "concurrently": "^8.2.2"
   },
   "scripts": {
+    "install-all": "npm install && cd server && npm install && cd ../client && npm install && cd ..",
     "start": "concurrently \"cd client && ng serve\" \"cd server && npm start\"",
     "seed": "node ./server/seed.js"
   }
