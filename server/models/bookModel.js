@@ -14,7 +14,7 @@ const bookSchema = new mongoose.Schema({
       maxlength: [256, 'Author`s name the book is in maximal length is 256 symbols'],
       required: [true, 'Author`s name is required'],
    },
-   genre:{
+   genre: {
       type: String,
       required: [true, 'Genre is required'],
    },
@@ -44,7 +44,7 @@ const bookSchema = new mongoose.Schema({
       type: Number,
       min: 0,
       max: 5,
-      required:[true, 'Rating is required initially'],
+      required: [true, 'Rating is required initially'],
    },
    usersWhoRated: [{
       type: mongoose.Types.ObjectId,

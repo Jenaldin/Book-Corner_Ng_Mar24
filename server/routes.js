@@ -15,6 +15,6 @@ router.get('*', (req, res) => {
    <br>
    <div><h3>The requested resource could not be found on this server.</h3></div>
    <div><h3>Please use the front-end application at http://localhost:4200</h3></div>`);
- });
+});
 
 module.exports = router;

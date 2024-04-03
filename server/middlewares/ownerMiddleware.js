@@ -7,7 +7,7 @@ exports.isBookOwner = async (req, res, next) => {
    const book = await bookService.getOne({ _id: bookId });
    if (!book) {
       return res.status(404).send();
-    }
+   }
    if (book.owner.toString() !== req.user?._id) {
       return res.status(403).send({ error: 'Not authorized to access this book' });
    };
@@ -20,7 +20,7 @@ exports.isProfileOwner = async (req, res, next) => {
    const user = await authService.getOne({ _id: userId });
    if (!user) {
       return res.status(404).send();
-    }
+   }
    if (user._id.toString() !== req.user?._id) {
       return res.status(403).send({ error: 'Not authorized to access this profile' });
    };
@@ -33,7 +33,7 @@ exports.isCommentOwner = async (req, res, next) => {
    const comment = await commentService.getOne({ _id: commentId });
    if (!comment) {
       return res.status(404).send();
-    }
+   }
    if (comment.user.toString() !== req.user?._id) {
       return res.status(403).send({ error: 'Not authorized to access this comment' });
    };

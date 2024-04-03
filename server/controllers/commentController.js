@@ -6,8 +6,8 @@ const getComments = async (req, res) => {
       const pageSize = Number(req.query.end);
       const bookId = req.query.bookId;
       const item = await commentService.getComments(pageNumber, pageSize, bookId);
-   
-      res.json({comments: item.comments, total: item.total});
+
+      res.json({ comments: item.comments, total: item.total });
    } catch (err) {
       const errMsg = err.message;
       if (err.name === 'ValidationError') {
@@ -68,7 +68,7 @@ const removeComment = async (req, res) => {
 
 const voteYes = async (req, res) => {
    const { commentId } = req.params;
-   const user  = req.body.userId
+   const user = req.body.userId
    try {
       await commentService.commentVoteYes(commentId, user);
       res.json({ message: 'Comment voted Yes successfully' });

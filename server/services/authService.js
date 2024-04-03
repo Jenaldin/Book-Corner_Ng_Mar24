@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 
 const generateToken = require('../utils/tkn');
-const {userModel} = require('../models/index');
+const { userModel } = require('../models/index');
 
 exports.register = async (userData) => {
    if (userData.password !== userData.rePassword) {
@@ -15,7 +15,7 @@ exports.register = async (userData) => {
 
    const createdUser = await userModel.create(userData);
    const token = await generateToken(createdUser);
-   return {token, username: createdUser.username, id: createdUser._id};
+   return { token, username: createdUser.username, id: createdUser._id };
 };
 
 exports.login = async ({ username, password }) => {
@@ -30,7 +30,7 @@ exports.login = async ({ username, password }) => {
    };
 
    const token = await generateToken(user);
-   return {token, username: user.username, id: user._id};
+   return { token, username: user.username, id: user._id };
 };
 
 exports.getOne = async (userId) => await userModel.findOne(userId);

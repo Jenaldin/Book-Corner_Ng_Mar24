@@ -6,7 +6,7 @@ const { isGuest, isAuth } = require('../middlewares/authMiddleware');
 const { isProfileOwner } = require('../middlewares/ownerMiddleware')
 
 router.get('/profile/:userId', isAuth, authController.getUser);
-router.get('/my-profile/:userId', isProfileOwner , authController.getMyUser);
+router.get('/my-profile/:userId', isProfileOwner, authController.getMyUser);
 
 router.post('/register', isGuest, authController.registerUser);
 router.post('/login', isGuest, authController.loginUser);

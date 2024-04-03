@@ -3,10 +3,10 @@ const mongoose = require('mongoose');
 
 exports.getBooks = async (pageNumber, pageSize) => {
    const books = await bookModel
-   .find()
-   .skip(pageNumber)
-   .limit(pageSize)
-   .populate('owner', 'username');
+      .find()
+      .skip(pageNumber)
+      .limit(pageSize)
+      .populate('owner', 'username');
 
    const total = await bookModel.countDocuments();
    return { books, total }

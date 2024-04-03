@@ -2,13 +2,13 @@ const { bookModel, commentModel } = require('../models/index');
 
 exports.getComments = async (pageNumber, pageSize, bookId) => {
    const comments = await commentModel
-   .find({book: bookId})
-   .sort({createdAt: -1})
-   .skip(pageNumber)
-   .limit(pageSize)
-   .populate('user', 'username');
+      .find({ book: bookId })
+      .sort({ createdAt: -1 })
+      .skip(pageNumber)
+      .limit(pageSize)
+      .populate('user', 'username');
 
-   const total = await commentModel.countDocuments({book: bookId});
+   const total = await commentModel.countDocuments({ book: bookId });
    return { comments, total }
 };
 
@@ -19,9 +19,9 @@ exports.addNewComment = async (payloadData, userId) => {
    })
 
    const book = await bookModel.findById(payloadData.book);
-   
-   if(createdComment.ratedBookWith > 0){
-      if(book.usersWhoRated.includes(createdComment.user)){
+
+   if (createdComment.ratedBookWith > 0) {
+      if (book.usersWhoRated.includes(createdComment.user)) {
          throw new Error('You have already rated this book, you cannot rate it again');
       }
 

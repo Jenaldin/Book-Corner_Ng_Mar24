@@ -5,7 +5,7 @@ const getBooks = async (req, res) => {
       let pageNumber = Number(req.query.start);
       const pageSize = Number(req.query.end);
       const item = await bookService.getBooks(pageNumber, pageSize);
-      res.json({books: item.books, total: item.total});
+      res.json({ books: item.books, total: item.total });
    } catch (err) {
       const errMsg = err.message;
       if (err.name === 'ValidationError') {

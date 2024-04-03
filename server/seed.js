@@ -4,6 +4,8 @@ const Book = require("./models/bookModel");
 const User = require("./models/userModel");
 const Comment = require("./models/commentModel");
 
+const dbUri = process.env.DB_URI || 'mongodb://127.0.0.1:27017/book-corner';
+
 let bookData = require("./seed/book-corner.books.json");
 let userData = require("./seed/book-corner.users.json");
 let commentData = require("./seed/book-corner.comments.json");
@@ -70,7 +72,7 @@ commentData = commentData.map(comment => {
 });
 
 mongoose
-   .connect("mongodb://127.0.0.1:27017/book-corner", {
+   .connect(dbUri, {
    })
    .then(() => {
       console.log("MongoDB successfully connected for seeding");
