@@ -117,6 +117,7 @@ Here is a ***high-level*** overview of the project's structure:
   - middlewares
   - models
   - router
+  - seed
   - services
   - utils
   
