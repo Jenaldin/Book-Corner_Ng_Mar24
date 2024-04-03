@@ -19,9 +19,9 @@ Angular Material (HTML, SCSS) | BCrypt, Cookie-parser, JSON Web Token
 
 ### Setup Instructions
 1. Download or clone the repository.
-2. Run `npm install` to install the necessary dependencies.
-3. The application has ‘concurrently’ installed. To start both the frontend and backend simultaneously, run `npm start`.
-4. <<***optional***>> If you wish to seed data to MongoDB, use following command: `npm run seed`. Alternatively, if you have MongoDB Compass, you can download the files from /server/seed and import them via it.
+2. Run `npm run install-all` to install all the necessary dependencies from `package.json` files for the project (root, server & client).
+3. The application uses ‘concurrently’. To start both the frontend and backend simultaneously, run `npm start`.
+4. <<***optional***>> If you wish to seed data to MongoDB, use following command: `npm run seed`. Alternatively, if you have MongoDB Compass, you can download the files from /server/seed and import them manually.
 5. <<***optional***>> Create your own .env file in /server for the following variables if you prefer not to use the provided project "OR" alternatives: ```DB_URI```, ```DB_PORT```, ```SECRET``` and ```SALT```.
 6. <<***optional***>> If you have modified the DB_PORT, navigate to /client/environments and update the apiUrl.
 
