@@ -45,9 +45,7 @@
     </div>
 
     <div *ngIf="this.bookData.hasRatedBook">
-      <p class="field-label">
-        Rating: You have already rated this book.
-      </p>
+      <p class="field-label">Rating: You have already rated this book.</p>
     </div>
 
     <div>
@@ -76,7 +74,7 @@
       </mat-form-field>
     </div>
     <div class="submit-comment-btn">
-      <button 
+      <button
         mat-raised-button
         style="margin: 5px"
         color="primary"
@@ -87,7 +85,14 @@
       >
         <mat-icon>send</mat-icon>Submit
       </button>
-      <button style="margin: 5px; color: black" mat-raised-button color="basic" mat-dialog-close>Cancel</button>
+      <button
+        style="margin: 5px; color: black"
+        mat-raised-button
+        color="basic"
+        mat-dialog-close
+      >
+        Cancel
+      </button>
     </div>
   </form>
 </mat-dialog-content>

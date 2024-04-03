@@ -6,9 +6,11 @@ export function emailValidator(): ValidatorFn {
     if (!email) {
       return null;
     }
-    const regex = new RegExp(`^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$`);
+    const regex = new RegExp(
+      `^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$`,
+    );
     const valid = regex.test(email);
 
-    return valid ? null : { 'emailValid': true };
+    return valid ? null : { emailValid: true };
   };
 }

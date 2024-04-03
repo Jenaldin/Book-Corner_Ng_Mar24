@@ -23,7 +23,7 @@ import { MainRoutingModule } from './main-routing.module';
     HomeComponent,
     AboutComponent,
     NotFoundComponent,
-    SearchComponent
+    SearchComponent,
   ],
   imports: [
     MatProgressSpinnerModule,
@@ -37,13 +37,8 @@ import { MainRoutingModule } from './main-routing.module';
     MatInputModule,
     ReactiveFormsModule,
     CommonModule,
-    MainRoutingModule
+    MainRoutingModule,
   ],
-  exports: [
-    HomeComponent,
-    AboutComponent,
-    NotFoundComponent,
-    SearchComponent
-  ]
+  exports: [HomeComponent, AboutComponent, NotFoundComponent, SearchComponent],
 })
-export class MainModule { }
+export class MainModule {}

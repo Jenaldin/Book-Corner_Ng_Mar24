@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-edit-book',
   templateUrl: './edit-book.component.html',
-  styleUrls: ['./edit-book.component.scss']
+  styleUrls: ['./edit-book.component.scss'],
 })
 export class EditBookComponent implements OnInit, OnDestroy {
   isLoading: boolean = true;
@@ -46,8 +46,8 @@ export class EditBookComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private router: Router,
     private location: Location,
-    private errorHandlerService: ErrorHandlerService
-  ) { }
+    private errorHandlerService: ErrorHandlerService,
+  ) {}
 
   ngOnInit(): void {
     this.errorSubscription = this.errorHandlerService.apiError$.subscribe(
@@ -63,11 +63,11 @@ export class EditBookComponent implements OnInit, OnDestroy {
     const bookId = this.activeRoute.snapshot.paramMap.get('bookId');
 
     if (bookId) {
-       this.bookApi.getBook(bookId).subscribe({
+      this.bookApi.getBook(bookId).subscribe({
         next: (data: any) => {
           this.book = data;
           this.originalBook = { ...data };
-          
+
           setTimeout(() => {
             this.isLoading = false;
           }, 1000);
@@ -77,13 +77,17 @@ export class EditBookComponent implements OnInit, OnDestroy {
             error,
             'An error occurred while fetching the book. Please try again.',
           );
-        }
+        },
       });
     } else {
-      this.snackBar.open(`Looks like this book does not exist! Try another one.`, 'Close', {
-        duration: 10000,
-      });
-    };
+      this.snackBar.open(
+        `Looks like this book does not exist! Try another one.`,
+        'Close',
+        {
+          duration: 10000,
+        },
+      );
+    }
   }
 
   onSubmit(formValue: any): void {
@@ -103,13 +107,17 @@ export class EditBookComponent implements OnInit, OnDestroy {
             error,
             'An error occurred while updating the book. Please try again.',
           );
-        }
+        },
       });
     } else {
-      this.snackBar.open(`Looks like this book does not exist! Try another one.`, 'Close', {
-        duration: 10000,
-      });
-    };
+      this.snackBar.open(
+        `Looks like this book does not exist! Try another one.`,
+        'Close',
+        {
+          duration: 10000,
+        },
+      );
+    }
   }
 
   getUpdatedFields(original: any, updated: any) {
@@ -120,7 +128,7 @@ export class EditBookComponent implements OnInit, OnDestroy {
       }
     }
     return updatedFields;
-  };
+  }
 
   goBack() {
     this.location.back();

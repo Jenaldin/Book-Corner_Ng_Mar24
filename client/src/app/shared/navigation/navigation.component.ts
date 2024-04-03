@@ -9,9 +9,9 @@ import { UserService } from 'src/app/core/services/user.service';
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss'],
 })
-export class NavigationComponent implements OnInit, OnDestroy{
+export class NavigationComponent implements OnInit, OnDestroy {
   private errorSubscription!: Subscription;
-  
+
   constructor(
     private userApi: UserService,
     private snackBar: MatSnackBar,
@@ -28,13 +28,13 @@ export class NavigationComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.errorSubscription = this.errorHandlerService.apiError$.subscribe(
-      errorMessage => {
+      (errorMessage) => {
         if (errorMessage) {
           this.snackBar.open(errorMessage, 'Close', {
             duration: 5000,
           });
         }
-      }
+      },
     );
   }
 

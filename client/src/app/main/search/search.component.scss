@@ -1,55 +1,55 @@
-@import './../main.module.scss';
+@import "./../main.module.scss";
 
 .top-div {
-   margin: 30px;
-   display: flex;
-   justify-content: center;
-   height: auto;
+  margin: 30px;
+  display: flex;
+  justify-content: center;
+  height: auto;
 }
 
 .title {
-   font-size: larger;
+  font-size: larger;
 }
 
 .mat-card-content form {
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: space-between;
-   align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.label{
-   font-weight: bold;
-   font-size: 14px;
-   font-style: oblique;
+.label {
+  font-weight: bold;
+  font-size: 14px;
+  font-style: oblique;
 }
 
 .label2 {
-   flex: 1 0 calc(20% - 10px);
-   margin: 5px;
+  flex: 1 0 calc(20% - 10px);
+  margin: 5px;
 }
 
 button {
-   width: 150px;
-   margin: 5px;
+  width: 150px;
+  margin: 5px;
 }
 
 .mat-form-field {
-   width: 100%;
- }
+  width: 100%;
+}
 
 .stars {
-   display: flex;
-   align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .results-container {
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: space-between;
- }
- 
- .results-container > div {
-   flex-basis: calc(33% - 20px); /* adjust as needed */
-   margin-bottom: 20px; /* adjust as needed */
- }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.results-container > div {
+  flex-basis: calc(33% - 20px); /* adjust as needed */
+  margin-bottom: 20px; /* adjust as needed */
+}

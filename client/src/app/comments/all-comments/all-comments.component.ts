@@ -46,13 +46,13 @@ export class AllCommentsComponent implements OnInit, OnDestroy {
     this.loadTotalComments();
 
     this.errorSubscription = this.errorHandlerService.apiError$.subscribe(
-      errorMessage => {
+      (errorMessage) => {
         if (errorMessage) {
           this.snackBar.open(errorMessage, 'Close', {
             duration: 5000,
           });
         }
-      }
+      },
     );
 
     setTimeout(() => {

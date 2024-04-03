@@ -32,7 +32,10 @@ export class ViewBookComponent implements OnInit, OnDestroy {
 
   private errorSubscription!: Subscription;
   private paramsSubscription: Subscription = new Subscription();
-  @Output() currentBookData = new EventEmitter<{hasRated: boolean, bookId: string}>();
+  @Output() currentBookData = new EventEmitter<{
+    hasRated: boolean;
+    bookId: string;
+  }>();
 
   constructor(
     private userApi: UserService,
@@ -41,7 +44,7 @@ export class ViewBookComponent implements OnInit, OnDestroy {
     private activeRoute: ActivatedRoute,
     private router: Router,
     private location: Location,
-    private errorHandlerService: ErrorHandlerService
+    private errorHandlerService: ErrorHandlerService,
   ) {}
 
   get loggedIn(): boolean {
@@ -86,21 +89,20 @@ export class ViewBookComponent implements OnInit, OnDestroy {
           const userHasRated = book.usersWhoRated?.some(
             (userId) => userId.toString() === this.currentUserId,
           );
-          if(userHasRated){
-            this.hasRatedBook = true
-          }        
+          if (userHasRated) {
+            this.hasRatedBook = true;
+          }
 
           setTimeout(() => {
             this.isLoading = false;
           }, 1000);
         },
         error: (error) => {
-
           this.errorHandlerService.handleError(
             error,
             'An error occurred while fetching the book. Please try again.',
           );
-          this.router.navigate(['/404'])
+          this.router.navigate(['/404']);
         },
       });
     });
@@ -129,13 +131,9 @@ export class ViewBookComponent implements OnInit, OnDestroy {
     if (userId) {
       this.bookApi.requestBook(id, userId, isRented).subscribe({
         next: (response) => {
-          this.snackBar.open(
-            'Your requested the book successfully!',
-            'Close',
-            {
-              duration: 5000,
-            },
-          );
+          this.snackBar.open('Your requested the book successfully!', 'Close', {
+            duration: 5000,
+          });
           this.router.navigate(['/catalog']);
         },
         error: (error) => {
@@ -191,7 +189,10 @@ export class ViewBookComponent implements OnInit, OnDestroy {
   sendBookData() {
     this.paramsSubscription = this.activeRoute.params.subscribe((data) => {
       this.bookId = data['bookId'];
-      this.currentBookData.emit({hasRated: this.hasRatedBook, bookId: this.bookId});
+      this.currentBookData.emit({
+        hasRated: this.hasRatedBook,
+        bookId: this.bookId,
+      });
     });
   }
 

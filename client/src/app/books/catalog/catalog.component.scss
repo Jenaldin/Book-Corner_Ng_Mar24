@@ -1,34 +1,34 @@
-@import './../books.module.scss';
+@import "./../books.module.scss";
 
-.header{
-   margin-top: 30px;
-   font-weight: bold;
-   font-size: 30px;
-   display: flex;
-    justify-content: center;
-    align-items: center;
+.header {
+  margin-top: 30px;
+  font-weight: bold;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.pagin-font{
-   font-size: 15px;
+.pagin-font {
+  font-size: 15px;
 }
 
 .catalog-grid-tile {
-   margin: 5px;
- }
+  margin: 5px;
+}
 
-.label{
-   font-weight: bold;
-   font-size: 14px;
-   font-style: oblique;
+.label {
+  font-weight: bold;
+  font-size: 14px;
+  font-style: oblique;
 }
 
 .title {
-   font-size: xx-large;
+  font-size: xx-large;
 }
 
 .home-mat-card {
-   margin: 75px;
-   display: flex;
-   align-items: center;
+  margin: 75px;
+  display: flex;
+  align-items: center;
 }

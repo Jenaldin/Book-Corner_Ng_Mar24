@@ -2,7 +2,9 @@
   <mat-spinner></mat-spinner>
 </div>
 <div class="top-div" *ngIf="!isLoading">
-  <button mat-raised-button (click)="goBack()"><mat-icon>arrow_back</mat-icon>Back</button>
+  <button mat-raised-button (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon>Back
+  </button>
   <mat-card>
     <mat-card-header>
       <mat-card-title-group>
@@ -84,10 +86,14 @@
               formControlName="averageRating"
               matTooltip="Please select the value for initial rating. You will be able to do it just here and not change it later."
             >
-              <mat-error *ngIf="bookForm.get('averageRating')?.errors?.['required']"
+              <mat-error
+                *ngIf="bookForm.get('averageRating')?.errors?.['required']"
                 >Rating is required.</mat-error
               >
-              <mat-option *ngFor="let number of [1, 2, 3, 4, 5]" [value]="number">
+              <mat-option
+                *ngFor="let number of [1, 2, 3, 4, 5]"
+                [value]="number"
+              >
                 {{ number }}
               </mat-option>
             </mat-select>

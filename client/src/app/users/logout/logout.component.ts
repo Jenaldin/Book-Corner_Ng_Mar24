@@ -8,12 +8,11 @@ import { UserService } from 'src/app/core/services/user.service';
 @Component({
   selector: 'app-logout',
   templateUrl: './logout.component.html',
-  styleUrls: ['./logout.component.scss']
+  styleUrls: ['./logout.component.scss'],
 })
-export class LogoutComponent implements OnInit, OnDestroy{
-
+export class LogoutComponent implements OnInit, OnDestroy {
   private errorSubscription!: Subscription;
-  
+
   constructor(
     private userApi: UserService,
     private router: Router,
@@ -23,13 +22,13 @@ export class LogoutComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.errorSubscription = this.errorHandlerService.apiError$.subscribe(
-      errorMessage => {
+      (errorMessage) => {
         if (errorMessage) {
           this.snackBar.open(errorMessage, 'Close', {
             duration: 5000,
           });
         }
-      }
+      },
     );
 
     this.userApi.logout().subscribe({
@@ -52,9 +51,7 @@ export class LogoutComponent implements OnInit, OnDestroy{
     });
   }
 
-  logout() {
-    
-  }
+  logout() {}
 
   ngOnDestroy(): void {
     this.errorSubscription.unsubscribe();

@@ -13,7 +13,11 @@ const routes: Routes = [
     path: '',
     children: [
       { path: '', pathMatch: 'full', redirectTo: '/users/profile' },
-      { path: 'login', component: LoginComponent, canActivate: [guestActive()] },
+      {
+        path: 'login',
+        component: LoginComponent,
+        canActivate: [guestActive()],
+      },
       {
         path: 'register',
         component: RegisterComponent,

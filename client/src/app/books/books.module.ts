@@ -22,13 +22,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
-
 @NgModule({
   declarations: [
     CatalogComponent,
     ViewBookComponent,
     AddBookComponent,
-    EditBookComponent
+    EditBookComponent,
   ],
   imports: [
     MatSlideToggleModule,
@@ -49,8 +48,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     CommentsModule,
     BooksRoutingModule,
   ],
-  exports: [
-  ],
-  providers:[DatePipe]
+  exports: [],
+  providers: [DatePipe],
 })
-export class BooksModule { }
+export class BooksModule {}

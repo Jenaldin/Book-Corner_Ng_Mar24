@@ -76,7 +76,7 @@ export class AddBookComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private router: Router,
     private location: Location,
-    private errorHandlerService: ErrorHandlerService
+    private errorHandlerService: ErrorHandlerService,
   ) {}
 
   ngOnInit(): void {
@@ -106,7 +106,15 @@ export class AddBookComponent implements OnInit, OnDestroy {
       const description = this.bookForm.value.description || '';
 
       this.bookApi
-        .addBook(title, author, genre, averageRating, coverUrl, bookLang, description)
+        .addBook(
+          title,
+          author,
+          genre,
+          averageRating,
+          coverUrl,
+          bookLang,
+          description,
+        )
         .subscribe({
           next: (response) => {
             this.snackBar.open('Book added successfully!', 'Close', {

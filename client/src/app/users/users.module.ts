@@ -28,7 +28,7 @@ import { LogoutComponent } from './logout/logout.component';
     LoginComponent,
     ProfileComponent,
     ViewProfileComponent,
-    LogoutComponent
+    LogoutComponent,
   ],
   imports: [
     MatSlideToggleModule,
@@ -46,9 +46,8 @@ import { LogoutComponent } from './logout/logout.component';
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
-    UsersRoutingModule
+    UsersRoutingModule,
   ],
-  exports: [
-  ]
+  exports: [],
 })
-export class UsersModule { }
+export class UsersModule {}

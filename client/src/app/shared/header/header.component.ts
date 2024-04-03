@@ -5,10 +5,13 @@ import { UserService } from 'src/app/core/services/user.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  constructor(private userApi: UserService, private router: Router) {}
+  constructor(
+    private userApi: UserService,
+    private router: Router,
+  ) {}
 
   get isLoggedIn(): boolean {
     return this.userApi.isLoggedIn;

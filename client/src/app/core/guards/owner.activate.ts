@@ -36,7 +36,7 @@ export class OwnerActive implements CanActivate {
           observer.next(false);
           observer.complete();
         } else {
-         this.bookApi.getBook(itemId).subscribe((item) => {
+          this.bookApi.getBook(itemId).subscribe((item) => {
             if (item.owner._id === this.userApi.currentUserId) {
               observer.next(true);
             } else {

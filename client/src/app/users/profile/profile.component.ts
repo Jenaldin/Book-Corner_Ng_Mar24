@@ -14,9 +14,8 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
 })
-
 export class ProfileComponent implements OnInit, OnDestroy {
   isLoading: boolean = true;
   showEditMode: boolean = false;
@@ -26,11 +25,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   get currentUser(): string | undefined {
     return this.userApi.currentUsername;
-  };
+  }
 
   get currentUserId(): string | undefined {
     return this.userApi.currentUserId;
-  };
+  }
 
   constructor(
     private userApi: UserService,
@@ -39,13 +38,40 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private router: Router,
     private location: Location,
     private errorHandlerService: ErrorHandlerService,
-  ) { };
+  ) {}
 
   editUserForm = this.fb.group({
-    firstName: ['', [Validators.required, Validators.minLength(2), Validators.pattern('^[a-zA-Z\u00C0-\u017F\'\u0400-\u04FF]+(-[a-zA-Z\u00C0-\u017F\'\u0400-\u04FF]+)*$')]],
-    lastName: ['', [Validators.required, Validators.minLength(2), Validators.pattern('^[a-zA-Z\u00C0-\u017F\'\u0400-\u04FF]+(-[a-zA-Z\u00C0-\u017F\'\u0400-\u04FF]+)*$')]],
-    email: ['', [Validators.required, Validators.minLength(10), emailValidator()]],
-    avatar: ['', [Validators.required, Validators.pattern(/https?:\/\/.+\.(jpg|jpeg|png|gif)/i)]],
+    firstName: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.pattern(
+          "^[a-zA-Z\u00C0-\u017F'\u0400-\u04FF]+(-[a-zA-Z\u00C0-\u017F'\u0400-\u04FF]+)*$",
+        ),
+      ],
+    ],
+    lastName: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.pattern(
+          "^[a-zA-Z\u00C0-\u017F'\u0400-\u04FF]+(-[a-zA-Z\u00C0-\u017F'\u0400-\u04FF]+)*$",
+        ),
+      ],
+    ],
+    email: [
+      '',
+      [Validators.required, Validators.minLength(10), emailValidator()],
+    ],
+    avatar: [
+      '',
+      [
+        Validators.required,
+        Validators.pattern(/https?:\/\/.+\.(jpg|jpeg|png|gif)/i),
+      ],
+    ],
     aboutMe: ['', [Validators.maxLength(2000)]],
   });
 
@@ -66,9 +92,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.userApi.getMyUser(userId).subscribe({
         next: (user) => {
           this.user = user;
-          const { firstName, lastName, email, avatar, aboutMe } = this.user
+          const { firstName, lastName, email, avatar, aboutMe } = this.user;
 
-          this.editUserForm.setValue({ firstName, lastName, email, avatar, aboutMe });
+          this.editUserForm.setValue({
+            firstName,
+            lastName,
+            email,
+            avatar,
+            aboutMe,
+          });
 
           setTimeout(() => {
             this.isLoading = false;
@@ -79,10 +111,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
             error,
             'An error occurred while fetching the user. Please try again.',
           );
-        }
+        },
       });
     }
-  };
+  }
 
   onEditUser(): void {
     if (this.editUserForm.invalid) {
@@ -90,7 +122,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
 
     const userId = this.currentUserId;
-    const updatedFields = this.getUpdatedFields(this.user, this.editUserForm.value);
+    const updatedFields = this.getUpdatedFields(
+      this.user,
+      this.editUserForm.value,
+    );
 
     if (userId) {
       this.userApi.editMyUser(userId, updatedFields).subscribe({
@@ -105,14 +140,18 @@ export class ProfileComponent implements OnInit, OnDestroy {
             error,
             'An error occurred while updating your profile. Please try again.',
           );
-        }
-      })
-    } else {
-      this.snackBar.open(`Looks like something broke and your profile is unavailable! Please try again later`, 'Close', {
-        duration: 10000,
+        },
       });
-    };
-  };
+    } else {
+      this.snackBar.open(
+        `Looks like something broke and your profile is unavailable! Please try again later`,
+        'Close',
+        {
+          duration: 10000,
+        },
+      );
+    }
+  }
 
   getUpdatedFields(original: any, updated: any) {
     const updatedFields: any = {};
@@ -122,7 +161,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       }
     }
     return updatedFields;
-  };
+  }
 
   goBack() {
     this.location.back();

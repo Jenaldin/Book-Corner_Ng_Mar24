@@ -11,7 +11,7 @@ import { ErrorHandlerService } from 'src/app/core/services/error.service';
   templateUrl: './edit-comment.component.html',
   styleUrls: ['./edit-comment.component.scss'],
 })
-export class EditCommentComponent implements OnInit, OnDestroy{
+export class EditCommentComponent implements OnInit, OnDestroy {
   private errorSubscription!: Subscription;
 
   constructor(
@@ -30,13 +30,13 @@ export class EditCommentComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.errorSubscription = this.errorHandlerService.apiError$.subscribe(
-      errorMessage => {
+      (errorMessage) => {
         if (errorMessage) {
           this.snackBar.open(errorMessage, 'Close', {
             duration: 5000,
           });
         }
-      }
+      },
     );
   }
 

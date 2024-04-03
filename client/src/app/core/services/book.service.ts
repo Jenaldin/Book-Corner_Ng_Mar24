@@ -55,7 +55,15 @@ export class BookService {
     description: string,
   ) {
     const { apiUrl } = environment;
-    const payload = { title, author, genre, averageRating, coverUrl, bookLang, description };
+    const payload = {
+      title,
+      author,
+      genre,
+      averageRating,
+      coverUrl,
+      bookLang,
+      description,
+    };
 
     return this.http.post<Book>(`${apiUrl}/catalog`, payload, {
       withCredentials: true,

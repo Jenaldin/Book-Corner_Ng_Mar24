@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-view-profile',
   templateUrl: './view-profile.component.html',
-  styleUrls: ['./view-profile.component.scss']
+  styleUrls: ['./view-profile.component.scss'],
 })
 export class ViewProfileComponent implements OnInit, OnDestroy {
   isLoading: boolean = true;
@@ -22,11 +22,11 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
 
   get currentUser(): string | undefined {
     return this.userApi.currentUsername;
-  };
+  }
 
   get currentUserId(): string | undefined {
     return this.userApi.currentUserId;
-  };
+  }
 
   constructor(
     private userApi: UserService,
@@ -34,7 +34,7 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
     private location: Location,
     private errorHandlerService: ErrorHandlerService,
     private snackBar: MatSnackBar,
-  ) { };
+  ) {}
 
   ngOnInit(): void {
     this.errorSubscription = this.errorHandlerService.apiError$.subscribe(
@@ -63,7 +63,7 @@ export class ViewProfileComponent implements OnInit, OnDestroy {
             error,
             'An error occurred while fetching the user. Please try again.',
           );
-        }
+        },
       });
     });
   }

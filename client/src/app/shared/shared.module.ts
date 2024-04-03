@@ -12,24 +12,15 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
-  declarations: [
-    HeaderComponent,
-    FooterComponent,
-    NavigationComponent,
-    
-  ],
+  declarations: [HeaderComponent, FooterComponent, NavigationComponent],
   imports: [
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
     FlexLayoutModule,
     CommonModule,
-    RouterModule
+    RouterModule,
   ],
-  exports: [
-    HeaderComponent,
-    FooterComponent,
-    NavigationComponent
-  ]
+  exports: [HeaderComponent, FooterComponent, NavigationComponent],
 })
-export class SharedModule { }
+export class SharedModule {}

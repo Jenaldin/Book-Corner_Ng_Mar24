@@ -12,13 +12,13 @@
 }
 
 .header {
-   margin-top: 20px;
-   font-weight: bold;
-   font-size: 24px;
-   display: flex;
-   justify-content: center;
-   align-items: center;
- }
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .top-div-comments {
   margin: 30px;
@@ -27,14 +27,14 @@
 }
 
 .panel-header {
-   display: flex;
-   justify-content: space-between;
- }
- 
- .panel-title {
-   flex: 1 1;
- }
- 
- .panel-description {
-   flex: 0 auto;
- }
+  display: flex;
+  justify-content: space-between;
+}
+
+.panel-title {
+  flex: 1 1;
+}
+
+.panel-description {
+  flex: 0 auto;
+}

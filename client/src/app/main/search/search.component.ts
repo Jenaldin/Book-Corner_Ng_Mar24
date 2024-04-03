@@ -21,13 +21,13 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.errorSubscription = this.errorHandlerService.apiError$.subscribe(
-      errorMessage => {
+      (errorMessage) => {
         if (errorMessage) {
           this.snackBar.open(errorMessage, 'Close', {
             duration: 5000,
           });
         }
-      }
+      },
     );
 
     if (this.searchService.searchParams) {
@@ -47,7 +47,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       this.isLoading = false;
     }, 1000);
   }
-  
+
   genres = [
     'Fantasy',
     'Sci-Fi',
@@ -100,7 +100,6 @@ export class SearchComponent implements OnInit, OnDestroy {
               duration: 5000,
             });
           }
-
         },
         error: (error) => {
           this.errorHandlerService.handleError(
