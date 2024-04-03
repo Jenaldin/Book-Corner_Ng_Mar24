@@ -1,4 +1,4 @@
-# The Book Corner by Jenny Guteva (README.md is WIP)
+# The Book Corner by Jenny Guteva
 The Book Corner is initially designed as an Angular Exam Project for SoftUni's April 2024 examination session. However, with the author's evolving commitments and availability, it holds the potential to blossom into a passion project, having additional features in the future.
 
 The essence of The Book Corner lies in its ability to foster a virtual, blog-like space for small communities - be it a neighborhood or any small group of individuals. It serves as a platform where book enthusiasts can lend and borrow books, fostering a culture of shared reading experiences. This process involves no financial transactions and operates purely on mutual agreements. The primary objective is to cultivate stronger community bonds, facilitate better understanding among members, and indulge in a shared hobby. It's a solution for those who love books but are constrained by space at home for book storage.
@@ -21,7 +21,7 @@ Angular Material (HTML, SCSS) | BCrypt, Cookie-parser, JSON Web Token
 1. Download or clone the repository.
 2. Run `npm install` to install the necessary dependencies.
 3. The application has ‘concurrently’ installed. To start both the frontend and backend simultaneously, run `npm start`.
-4. <<***optional***>> If you wish to seed data to MongoDB, use following command: `<INSERT LATER AFTER SEED FILES ARE MADE>`.
+4. <<***optional***>> If you wish to seed data to MongoDB, use following command: `npm run seed`. Alternatively, if you have MongoDB Compass, you can download the files from /server/seed and import them via it.
 5. <<***optional***>> Create your own .env file in /server for the following variables if you prefer not to use the provided project "OR" alternatives: ```DB_URI```, ```DB_PORT```, ```SECRET``` and ```SALT```.
 6. <<***optional***>> If you have modified the DB_PORT, navigate to /client/environments and update the apiUrl.
 
